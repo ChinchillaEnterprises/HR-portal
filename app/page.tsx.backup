@@ -113,6 +113,17 @@ function Dashboard({ user }: { user: any }) {
     enabled: boolean;
   }>>([]);
 
+  useEffect(() => {
+    fetchDashboardData();
+    
+    // Log page view
+    logActivity({
+      action: ACTIVITY_TYPES.PAGE_VIEW,
+      resource: 'dashboard',
+      details: { userRole }
+    });
+  }, [fetchDashboardData, logActivity, userRole]);
+
   const fetchDashboardData = useCallback(async (forceRefresh = false) => {
     try {
       const now = Date.now();
@@ -214,96 +225,201 @@ function Dashboard({ user }: { user: any }) {
         return new Date(t.dueDate) < new Date();
       });
       
-      // Update stats
+      // Calculate additional analytics
+      const now = new Date();
+      const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+      
+      // New users this month
+      const newUsersThisMonth = usersData.data.filter(u => {
+        const startDate = new Date(u.startDate || u.createdAt);
+        return startDate > thirtyDaysAgo;
+      }).length;
+      
+      // User growth rate
+      const usersLastMonth = usersData.data.filter(u => {
+        const startDate = new Date(u.startDate || u.createdAt);
+        const sixtyDaysAgo = new Date(now.getTime() - 60 * 24 * 60 * 60 * 1000);
+        return startDate > sixtyDaysAgo && startDate <= thirtyDaysAgo;
+      }).length;
+      const userGrowthRate = usersLastMonth > 0 
+        ? ((newUsersThisMonth - usersLastMonth) / usersLastMonth * 100).toFixed(1)
+        : 0;
+      
+      // Average onboarding time
+      const completedOnboardings = usersData.data.filter(u => u.onboardingCompleted);
+      let avgOnboardingTime = 14; // default
+      if (completedOnboardings.length > 0) {
+        const totalDays = completedOnboardings.reduce((acc, u) => {
+          if (u.startDate && u.onboardingCompleted) {
+            const start = new Date(u.startDate);
+            const completed = new Date(u.onboardingCompleted);
+            const days = Math.floor((completed.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+            return acc + days;
+          }
+          return acc;
+        }, 0);
+        avgOnboardingTime = Math.round(totalDays / completedOnboardings.length);
+      }
+      
+      // Task completion rate
+      const totalTasks = tasksData.data.length;
+      const completedTasksCount = tasksData.data.filter(t => t.status === "completed").length;
+      const taskCompletionRate = totalTasks > 0 
+        ? Math.round((completedTasksCount / totalTasks) * 100)
+        : 0;
+      
+      // Applicant conversion rate
+      const hiredApplicants = applicantsData.data.filter(a => a.status === "hired").length;
+      const totalApplicants = applicantsData.data.length;
+      const applicantConversionRate = totalApplicants > 0
+        ? Math.round((hiredApplicants / totalApplicants) * 100)
+        : 0;
+      
+      // Communications sent today
+      const communicationsSentToday = communicationsData.data.filter(c => {
+        const sentDate = new Date(c.sentDate || c.createdAt);
+        return sentDate.toDateString() === now.toDateString();
+      }).length;
+      
+      // Department distribution
+      const departmentDistribution: Record<string, number> = {};
+      usersData.data.forEach(u => {
+        if (u.department) {
+          departmentDistribution[u.department] = (departmentDistribution[u.department] || 0) + 1;
+        }
+      });
+      
+      // Monthly stats for the last 6 months
+      const monthlyStats = [];
+      for (let i = 5; i >= 0; i--) {
+        const monthStart = new Date(now.getFullYear(), now.getMonth() - i, 1);
+        const monthEnd = new Date(now.getFullYear(), now.getMonth() - i + 1, 0);
+        const monthName = monthStart.toLocaleDateString('en-US', { month: 'short' });
+        
+        const monthUsers = usersData.data.filter(u => {
+          const date = new Date(u.startDate || u.createdAt);
+          return date >= monthStart && date <= monthEnd;
+        }).length;
+        
+        const monthTasks = tasksData.data.filter(t => {
+          const date = new Date(t.createdAt);
+          return date >= monthStart && date <= monthEnd;
+        }).length;
+        
+        const monthApplicants = applicantsData.data.filter(a => {
+          const date = new Date(a.appliedDate);
+          return date >= monthStart && date <= monthEnd;
+        }).length;
+        
+        monthlyStats.push({
+          month: monthName,
+          users: monthUsers,
+          tasks: monthTasks,
+          applicants: monthApplicants,
+        });
+      }
+      
+      // Set all stats
       setStats({
         totalUsers: usersData.data.length,
         pendingOnboarding: pendingTasks.length,
-        activeApplicants: activeApplicants.length,
+        activeApplicants: isManager ? activeApplicants.length : 0,
         recentDocuments: recentDocs.length,
         myTasks: myTasks.length,
         completedTasks: myTasks.filter(t => t.status === "completed").length,
         overdueTasks: overdueTasks.length,
-        pendingApprovals: documentsData.data.filter(d => d.signatureStatus === "pending").length,
-        newUsersThisMonth: usersData.data.filter(u => {
-          const createdDate = new Date(u.createdAt);
-          const thisMonth = new Date();
-          return createdDate.getMonth() === thisMonth.getMonth() && 
-                 createdDate.getFullYear() === thisMonth.getFullYear();
-        }).length,
-        userGrowthRate: Math.floor(Math.random() * 20) + 5, // Mock growth rate
-        avgOnboardingTime: Math.floor(Math.random() * 10) + 10, // Mock avg time
-        taskCompletionRate: myTasks.length > 0 ? Math.round((myTasks.filter(t => t.status === "completed").length / myTasks.length) * 100) : 0,
-        applicantConversionRate: Math.floor(Math.random() * 30) + 20, // Mock conversion
-        communicationsSentToday: communicationsData.data.filter(c => {
-          if (!c.sentDate) return false;
-          const sentDate = new Date(c.sentDate);
-          const today = new Date();
-          return sentDate.toDateString() === today.toDateString();
-        }).length,
-        departmentDistribution: usersData.data.reduce((acc, user) => {
-          if (user.department) {
-            acc[user.department] = (acc[user.department] || 0) + 1;
-          }
-          return acc;
-        }, {} as Record<string, number>),
-        monthlyStats: [
-          { month: "Jan", users: 12, tasks: 45, applicants: 8 },
-          { month: "Feb", users: 15, tasks: 52, applicants: 12 },
-          { month: "Mar", users: 18, tasks: 61, applicants: 15 },
-          { month: "Apr", users: 22, tasks: 73, applicants: 18 },
-          { month: "May", users: 20, tasks: 68, applicants: 14 },
-          { month: "Jun", users: 25, tasks: 82, applicants: 20 },
-        ],
+        pendingApprovals: isManager ? documentsData.data.filter(d => d.signatureStatus === "pending").length : 0,
+        // New analytics stats
+        newUsersThisMonth,
+        userGrowthRate: Number(userGrowthRate),
+        avgOnboardingTime,
+        taskCompletionRate,
+        applicantConversionRate,
+        communicationsSentToday,
+        departmentDistribution,
+        monthlyStats,
       });
-
+      
       // Set upcoming tasks
       const upcoming = pendingTasks
         .filter(t => t.dueDate)
         .sort((a, b) => new Date(a.dueDate!).getTime() - new Date(b.dueDate!).getTime())
         .slice(0, 5);
       setUpcomingTasks(upcoming);
-
-      // Generate recent activity
+      
+      // Generate notifications
+      const newNotifications: Notification[] = [];
+      
+      if (overdueTasks.length > 0) {
+        newNotifications.push({
+          id: "overdue",
+          title: "Overdue Tasks",
+          message: `You have ${overdueTasks.length} overdue task${overdueTasks.length > 1 ? 's' : ''}`,
+          type: "warning",
+          time: new Date(),
+          read: false,
+        });
+      }
+      
+      if (isManager && activeApplicants.length > 5) {
+        newNotifications.push({
+          id: "applicants",
+          title: "High Application Volume",
+          message: `${activeApplicants.length} active applicants in the pipeline`,
+          type: "info",
+          time: new Date(),
+          read: false,
+        });
+      }
+      
+      if (myTasks.length > 0 && myTasks.filter(t => t.status === "completed").length === myTasks.length) {
+        newNotifications.push({
+          id: "onboarding-complete",
+          title: "Onboarding Complete!",
+          message: "Congratulations! You've completed all onboarding tasks",
+          type: "success",
+          time: new Date(),
+          read: false,
+        });
+      }
+      
+      setNotifications(newNotifications);
+      
+      // Build recent activity
       const activities: any[] = [];
       
-      // Add user activities
-      usersData.data.forEach(user => {
-        if (new Date(user.createdAt).getTime() > Date.now() - 7 * 24 * 60 * 60 * 1000) {
+      // Recent task completions
+      tasksData.data
+        .filter(t => t.status === "completed" && t.completedDate)
+        .sort((a, b) => new Date(b.completedDate!).getTime() - new Date(a.completedDate!).getTime())
+        .slice(0, 3)
+        .forEach(task => {
           activities.push({
-            id: `user-${user.id}`,
-            title: `${user.firstName} ${user.lastName} joined the team`,
-            time: user.createdAt,
-            icon: Users,
-            color: 'text-blue-600'
-          });
-        }
-      });
-
-      // Add task activities
-      tasksData.data.forEach(task => {
-        if (task.status === "completed" && task.updatedAt) {
-          activities.push({
-            id: `task-${task.id}`,
-            title: `Task "${task.title}" was completed`,
-            time: task.updatedAt,
+            id: task.id,
+            type: "task",
+            title: `Task completed: ${task.title}`,
+            time: task.completedDate,
             icon: CheckCircle,
-            color: 'text-green-600'
+            color: "text-green-500",
           });
-        }
-      });
-
-      // Add communication activities
-      communicationsData.data.forEach(comm => {
-        if (comm.sentDate && new Date(comm.sentDate).getTime() > Date.now() - 24 * 60 * 60 * 1000) {
-          activities.push({
-            id: `comm-${comm.id}`,
-            title: `Message sent: ${comm.subject}`,
-            time: comm.sentDate,
-            icon: Mail,
-            color: 'text-purple-600'
+        });
+      
+      // Recent communications
+      if (isManager) {
+        communicationsData.data
+          .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+          .slice(0, 2)
+          .forEach(comm => {
+            activities.push({
+              id: comm.id,
+              type: "communication",
+              title: `Message sent: ${comm.subject}`,
+              time: comm.sentDate || comm.createdAt,
+              icon: Mail,
+              color: "text-blue-500",
+            });
           });
-        }
-      });
+      }
       
       // Sort activities by time
       activities.sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
@@ -316,18 +432,6 @@ function Dashboard({ user }: { user: any }) {
       setRefreshing(false);
     }
   }, [dataCache, userRole]);
-
-  useEffect(() => {
-    fetchDashboardData();
-    
-    // Log page view
-    logActivity({
-      action: ACTIVITY_TYPES.PAGE_VIEW,
-      resource: 'dashboard',
-      details: { userRole }
-    });
-  }, [fetchDashboardData, logActivity, userRole]);
-
 
   const exportAnalyticsData = (format: 'csv' | 'json') => {
     // Log export activity
@@ -401,19 +505,19 @@ function Dashboard({ user }: { user: any }) {
     format: 'csv' | 'json' | 'pdf';
   }) => {
     const getNextRunDate = (frequency: string) => {
-      const nextRunDate = new Date();
+      const now = new Date();
       switch (frequency) {
         case 'daily':
-          nextRunDate.setDate(nextRunDate.getDate() + 1);
+          now.setDate(now.getDate() + 1);
           break;
         case 'weekly':
-          nextRunDate.setDate(nextRunDate.getDate() + 7);
+          now.setDate(now.getDate() + 7);
           break;
         case 'monthly':
-          nextRunDate.setMonth(nextRunDate.getMonth() + 1);
+          now.setMonth(now.getMonth() + 1);
           break;
       }
-      return nextRunDate.toISOString();
+      return now.toISOString();
     };
 
     const newReport = {
@@ -806,7 +910,6 @@ function Dashboard({ user }: { user: any }) {
             </div>
           </div>
         </div>
-      </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -1254,83 +1357,83 @@ function Dashboard({ user }: { user: any }) {
             )}
           </div>
         )}
-      </div>
 
-      {/* Schedule Report Modal */}
-      {showScheduleModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <h2 className="text-xl font-bold mb-4">Schedule Automated Report</h2>
-            <form onSubmit={(e) => {
-              e.preventDefault();
-              const formData = new FormData(e.target as HTMLFormElement);
-              scheduleReport({
-                name: formData.get('name') as string,
-                frequency: formData.get('frequency') as 'daily' | 'weekly' | 'monthly',
-                format: formData.get('format') as 'csv' | 'json' | 'pdf',
-              });
-            }}>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Report Name
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="e.g., Weekly Analytics Summary"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
-                    required
-                  />
+        {/* Schedule Report Modal */}
+        {showScheduleModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 w-full max-w-md">
+              <h2 className="text-xl font-bold mb-4">Schedule Automated Report</h2>
+              <form onSubmit={(e) => {
+                e.preventDefault();
+                const formData = new FormData(e.target as HTMLFormElement);
+                scheduleReport({
+                  name: formData.get('name') as string,
+                  frequency: formData.get('frequency') as 'daily' | 'weekly' | 'monthly',
+                  format: formData.get('format') as 'csv' | 'json' | 'pdf',
+                });
+              }}>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Report Name
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="e.g., Weekly Analytics Summary"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Frequency
+                    </label>
+                    <select
+                      name="frequency"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                      required
+                    >
+                      <option value="daily">Daily</option>
+                      <option value="weekly">Weekly</option>
+                      <option value="monthly">Monthly</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Format
+                    </label>
+                    <select
+                      name="format"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                      required
+                    >
+                      <option value="csv">CSV</option>
+                      <option value="json">JSON</option>
+                      <option value="pdf">PDF</option>
+                    </select>
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Frequency
-                  </label>
-                  <select
-                    name="frequency"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
-                    required
+                <div className="flex justify-end space-x-4 mt-6">
+                  <button
+                    type="button"
+                    onClick={() => setShowScheduleModal(false)}
+                    className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                   >
-                    <option value="daily">Daily</option>
-                    <option value="weekly">Weekly</option>
-                    <option value="monthly">Monthly</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Format
-                  </label>
-                  <select
-                    name="format"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
-                    required
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
                   >
-                    <option value="csv">CSV</option>
-                    <option value="json">JSON</option>
-                    <option value="pdf">PDF</option>
-                  </select>
+                    Schedule Report
+                  </button>
                 </div>
-              </div>
-              <div className="flex justify-end space-x-4 mt-6">
-                <button
-                  type="button"
-                  onClick={() => setShowScheduleModal(false)}
-                  className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
-                >
-                  Schedule Report
-                </button>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </Layout>
   );
 }
@@ -1422,7 +1525,7 @@ export default function App() {
   return (
     <Authenticator>
       {({ signOut, user }) => (
-        user ? <Dashboard user={user} /> : <div>Loading...</div>
+        user ? <Dashboard user={user} /> : null
       )}
     </Authenticator>
   );

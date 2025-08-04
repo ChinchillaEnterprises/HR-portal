@@ -1,17 +1,135 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
 
-/*== STEP 1 ===============================================================
-The section below creates a Todo database table with a "content" field. Try
-adding a new "isDone" field as a boolean. The authorization rule below
-specifies that any user authenticated via an API key can "create", "read",
-"update", and "delete" any "Todo" records.
-=========================================================================*/
 const schema = a.schema({
-  Todo: a
+  User: a
     .model({
-      content: a.string(),
+      email: a.string().required(),
+      firstName: a.string().required(),
+      lastName: a.string().required(),
+      phoneNumber: a.string(),
+      profilePicture: a.string(),
+      role: a.enum(["admin", "mentor", "team_lead", "intern", "staff"]),
+      status: a.enum(["active", "inactive", "pending"]),
+      department: a.string(),
+      position: a.string(),
+      startDate: a.date(),
+      onboardingCompleted: a.date(),
+      linkedinUrl: a.string(),
+      cohortId: a.string(),
     })
-    .authorization((allow) => [allow.publicApiKey()]),
+    .authorization((allow) => [
+      allow.authenticated().to(["create", "read", "update", "delete"]),
+      allow.owner(),
+    ]),
+
+  OnboardingTask: a
+    .model({
+      userId: a.string().required(),
+      title: a.string().required(),
+      description: a.string(),
+      status: a.enum(["pending", "in_progress", "completed", "overdue"]),
+      dueDate: a.date(),
+      completedDate: a.date(),
+      category: a.enum(["documentation", "training", "setup", "meeting", "other"]),
+      assignedBy: a.string(),
+      attachmentUrl: a.string(),
+      notes: a.string(),
+    })
+    .authorization((allow) => [
+      allow.owner(),
+      allow.groups(["Admin", "Mentor", "TeamLead"]).to(["read", "update"]),
+    ]),
+
+  Document: a
+    .model({
+      name: a.string().required(),
+      type: a.enum(["offer_letter", "nda", "contract", "policy", "form", "guide"]),
+      category: a.string(),
+      fileUrl: a.string().required(),
+      uploadedBy: a.string().required(),
+      uploadDate: a.datetime(),
+      description: a.string(),
+      tags: a.string().array(),
+      signatureRequired: a.boolean(),
+      signatureStatus: a.enum(["pending", "signed", "expired"]),
+      dropboxSignId: a.string(),
+      userId: a.string(),
+    })
+    .authorization((allow) => [
+      allow.authenticated().to(["read"]),
+      allow.groups(["Admin"]).to(["create", "read", "update", "delete"]),
+      allow.owner(),
+    ]),
+
+  Applicant: a
+    .model({
+      email: a.string().required(),
+      firstName: a.string().required(),
+      lastName: a.string().required(),
+      phoneNumber: a.string(),
+      linkedinUrl: a.string(),
+      resumeUrl: a.string(),
+      coverLetterUrl: a.string(),
+      status: a.enum(["applied", "screening", "interview", "offer", "rejected", "hired"]),
+      stage: a.string(),
+      appliedDate: a.date().required(),
+      notes: a.string(),
+      rating: a.integer(),
+      assignedRecruiter: a.string(),
+      position: a.string().required(),
+      source: a.string(),
+    })
+    .authorization((allow) => [
+      allow.groups(["Admin", "Mentor", "TeamLead"]).to(["create", "read", "update", "delete"]),
+    ]),
+
+  Communication: a
+    .model({
+      type: a.enum(["email", "slack", "notification"]),
+      subject: a.string().required(),
+      content: a.string().required(),
+      recipientId: a.string().required(),
+      recipientEmail: a.string(),
+      senderId: a.string().required(),
+      status: a.enum(["sent", "delivered", "failed", "scheduled"]),
+      scheduledDate: a.datetime(),
+      sentDate: a.datetime(),
+      templateId: a.string(),
+      attachments: a.string().array(),
+    })
+    .authorization((allow) => [
+      allow.groups(["Admin", "Mentor", "TeamLead"]).to(["create", "read", "update", "delete"]),
+      allow.owner().to(["read"]),
+    ]),
+
+  Cohort: a
+    .model({
+      name: a.string().required(),
+      startDate: a.date().required(),
+      endDate: a.date(),
+      status: a.enum(["planning", "active", "completed"]),
+      description: a.string(),
+      mentorIds: a.string().array(),
+      participantCount: a.integer(),
+    })
+    .authorization((allow) => [
+      allow.authenticated().to(["read"]),
+      allow.groups(["Admin"]).to(["create", "read", "update", "delete"]),
+    ]),
+
+  Report: a
+    .model({
+      title: a.string().required(),
+      type: a.enum(["onboarding_progress", "applicant_conversion", "team_performance", "custom"]),
+      generatedBy: a.string().required(),
+      generatedDate: a.datetime().required(),
+      data: a.json(),
+      filters: a.json(),
+      cohortId: a.string(),
+    })
+    .authorization((allow) => [
+      allow.groups(["Admin", "Mentor", "TeamLead"]).to(["create", "read", "update", "delete"]),
+    ]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -19,7 +137,7 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: "apiKey",
+    defaultAuthorizationMode: "userPool",
     apiKeyAuthorizationMode: {
       expiresInDays: 30,
     },
