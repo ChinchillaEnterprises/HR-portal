@@ -4,8 +4,8 @@ backend:
     build:
       commands:
         - npm ci --cache .npm --prefer-offline
-        - echo "Downloading amplify_outputs.json from sandbox..."
-        - npx ampx generate outputs --branch main --app-id d1p0rrnyh73t78
+        - echo "Generating amplify_outputs.json..."
+        - npx ampx generate outputs --stack amplify-awsamplifygen2-ricardo-sandbox-48da62a2c8
 frontend:
   phases:
     build:
