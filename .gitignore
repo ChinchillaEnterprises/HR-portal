@@ -39,3 +39,16 @@ next-env.d.ts
 .amplify
 amplify_outputs*
 amplifyconfiguration*
+
+# Security - Never commit secrets
+*.pem
+*.key
+*.p12
+*.pfx
+*secret*
+*credential*
+*.env
+.env*
+
+# Build scripts with secrets
+amplify-build.sh

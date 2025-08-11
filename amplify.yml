@@ -3,10 +3,11 @@ frontend:
   phases:
     preBuild:
       commands:
-        - ./amplify-build.sh
+        - npm install --cache .npm --loglevel=error --progress=false
+        - echo "Note: amplify_outputs.json will be created from SSM parameters or environment"
     build:
       commands:
-        - echo "Build artifacts already generated in preBuild phase"
+        - CI=false NODE_ENV=production npm run build
   artifacts:
     baseDirectory: .next
     files:
