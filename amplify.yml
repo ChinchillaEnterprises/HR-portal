@@ -4,7 +4,7 @@ frontend:
     preBuild:
       commands:
         - npm install --cache .npm --loglevel=error --progress=false
-        - echo "Note: amplify_outputs.json will be created from SSM parameters or environment"
+        - echo "Build will proceed without amplify_outputs.json - configure via environment or SSM"
     build:
       commands:
         - CI=false NODE_ENV=production npm run build
