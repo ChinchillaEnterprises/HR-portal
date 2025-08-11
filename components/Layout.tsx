@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { signOut } from "aws-amplify/auth";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Home,
   Users,
@@ -22,6 +23,10 @@ import {
   BarChart3,
   UserCheck,
   BookOpen,
+  Sparkles,
+  Layers,
+  Rocket,
+  ChevronRight,
 } from "lucide-react";
 import { getAuthenticatedUser, type UserRole } from "@/lib/auth";
 import GlobalSearch from "./GlobalSearch";
@@ -52,15 +57,15 @@ export default function Layout({ children, user }: LayoutProps) {
   };
 
   const navigation = [
-    { name: "Dashboard", href: "/", icon: Home, roles: ["admin", "mentor", "team_lead", "intern", "staff"] },
-    { name: "Onboarding", href: "/onboarding", icon: UserCheck, roles: ["admin", "mentor", "team_lead", "intern", "staff"] },
-    { name: "Templates", href: "/templates", icon: BookOpen, roles: ["admin", "mentor", "team_lead"] },
-    { name: "Document Vault", href: "/documents", icon: FileText, roles: ["admin", "mentor", "team_lead", "intern", "staff"] },
-    { name: "Communications", href: "/communications", icon: Mail, roles: ["admin", "mentor", "team_lead"] },
-    { name: "Applicants", href: "/applicants", icon: Briefcase, roles: ["admin", "mentor", "team_lead"] },
-    { name: "Team Directory", href: "/team", icon: Users, roles: ["admin", "mentor", "team_lead", "staff"] },
-    { name: "Reports", href: "/reports", icon: BarChart3, roles: ["admin", "mentor", "team_lead"] },
-    { name: "Admin Panel", href: "/admin", icon: Shield, roles: ["admin"] },
+    { name: "Dashboard", href: "/", icon: Home, roles: ["admin", "mentor", "team_lead", "intern", "staff"], gradient: "from-blue-500 to-indigo-600" },
+    { name: "Onboarding", href: "/onboarding", icon: UserCheck, roles: ["admin", "mentor", "team_lead", "intern", "staff"], gradient: "from-emerald-500 to-teal-600" },
+    { name: "Templates", href: "/templates", icon: BookOpen, roles: ["admin", "mentor", "team_lead"], gradient: "from-purple-500 to-pink-600" },
+    { name: "Document Vault", href: "/documents", icon: FileText, roles: ["admin", "mentor", "team_lead", "intern", "staff"], gradient: "from-amber-500 to-orange-600" },
+    { name: "Communications", href: "/communications", icon: Mail, roles: ["admin", "mentor", "team_lead"], gradient: "from-red-500 to-rose-600" },
+    { name: "Applicants", href: "/applicants", icon: Briefcase, roles: ["admin", "mentor", "team_lead"], gradient: "from-cyan-500 to-blue-600" },
+    { name: "Team Directory", href: "/team", icon: Users, roles: ["admin", "mentor", "team_lead", "staff"], gradient: "from-violet-500 to-purple-600" },
+    { name: "Reports", href: "/reports", icon: BarChart3, roles: ["admin", "mentor", "team_lead"], gradient: "from-green-500 to-emerald-600" },
+    { name: "Admin Panel", href: "/admin", icon: Shield, roles: ["admin"], gradient: "from-gray-600 to-gray-900" },
   ].filter(item => item.roles.includes(userRole));
 
   const handleSignOut = async () => {
@@ -75,22 +80,29 @@ export default function Layout({ children, user }: LayoutProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Mobile sidebar overlay */}
-      {sidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
+      <AnimatePresence>
+        {sidebarOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 lg:hidden"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Mobile header bar */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 bg-white shadow-sm z-40 h-16">
+      <div className="lg:hidden fixed top-0 left-0 right-0 glass z-40 h-16 border-b border-gray-200/50">
         <div className="flex items-center justify-between h-full px-4">
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-2 rounded-md hover:bg-gray-100 transition-colors"
+            className="p-2 rounded-xl hover:bg-gray-100 transition-all"
           >
             {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          </motion.button>
           <h1 className="text-lg font-semibold text-gray-900 truncate">
             {navigation.find((item) => item.href === pathname)?.name || "Dashboard"}
           </h1>
@@ -104,103 +116,172 @@ export default function Layout({ children, user }: LayoutProps) {
       </div>
 
       {/* Sidebar */}
-      <div
-        className={`fixed inset-y-0 left-0 z-40 w-64 bg-black shadow-lg transform transition-transform duration-300 ease-in-out ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0`}
+      <motion.div
+        initial={false}
+        animate={{
+          x: sidebarOpen || window.innerWidth >= 1024 ? 0 : -280,
+        }}
+        transition={{ type: "spring", damping: 30, stiffness: 300 }}
+        className="fixed inset-y-0 left-0 z-40 w-72 glass-dark shadow-2xl lg:translate-x-0"
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="flex items-center justify-center h-20 border-b border-gray-800">
-            <h1 className="text-2xl font-bold text-white">Chinchilla Flow</h1>
+          <div className="flex items-center justify-center h-20 border-b border-gray-700/50">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex items-center gap-3"
+            >
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl blur-lg opacity-75 animate-pulse-slow" />
+                <div className="relative bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl p-2">
+                  <Sparkles className="w-8 h-8 text-white" />
+                </div>
+              </div>
+              <h1 className="text-2xl font-bold text-white">Chinchilla Flow</h1>
+            </motion.div>
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 px-4 py-6 space-y-2">
-            {navigation.map((item) => {
+          <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+            {navigation.map((item, index) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
               return (
-                <Link
+                <motion.div
                   key={item.name}
-                  href={item.href}
-                  className={`flex items-center px-4 py-3 rounded-lg transition-colors ${
-                    isActive
-                      ? "bg-white text-black"
-                      : "text-gray-300 hover:bg-gray-900 hover:text-white"
-                  }`}
-                  onClick={() => setSidebarOpen(false)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05 }}
                 >
-                  <Icon className="w-5 h-5 mr-3" />
-                  <span className="font-medium">{item.name}</span>
-                </Link>
+                  <Link
+                    href={item.href}
+                    className={`group flex items-center px-4 py-3 rounded-xl transition-all ${
+                      isActive
+                        ? "bg-white text-gray-900 shadow-lg"
+                        : "text-gray-300 hover:bg-white/10 hover:text-white"
+                    }`}
+                    onClick={() => setSidebarOpen(false)}
+                  >
+                    <div className={`p-2 rounded-lg ${
+                      isActive 
+                        ? `bg-gradient-to-br ${item.gradient}` 
+                        : "bg-gray-700/50 group-hover:bg-gray-600/50"
+                    } transition-all`}>
+                      <Icon className={`w-5 h-5 ${isActive ? "text-white" : "text-gray-300"}`} />
+                    </div>
+                    <span className="ml-3 font-medium flex-1">{item.name}</span>
+                    {isActive && (
+                      <ChevronRight className="w-5 h-5 opacity-50" />
+                    )}
+                  </Link>
+                </motion.div>
               );
             })}
           </nav>
 
           {/* User section */}
-          <div className="p-4 border-t border-gray-800">
-            <div className="flex items-center mb-4">
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                <User className="w-6 h-6 text-black" />
+          <div className="p-4 border-t border-gray-700/50">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-white/10 backdrop-blur-xl rounded-xl p-4 mb-4"
+            >
+              <div className="flex items-center mb-3">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full blur-md opacity-75" />
+                  <div className="relative w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center">
+                    <User className="w-6 h-6 text-white" />
+                  </div>
+                </div>
+                <div className="ml-3 min-w-0 flex-1">
+                  <p className="text-sm font-medium text-white truncate">
+                    {userInfo?.firstName || user?.attributes?.given_name} {userInfo?.lastName || user?.attributes?.family_name}
+                  </p>
+                  <p className="text-xs text-gray-400 truncate">{userInfo?.email || user?.attributes?.email}</p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-white/20 text-white">
+                      <Layers className="w-3 h-3 mr-1" />
+                      {userRole.replace("_", " ")}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div className="ml-3 min-w-0 flex-1">
-                <p className="text-sm font-medium text-white truncate">
-                  {userInfo?.firstName || user?.attributes?.given_name} {userInfo?.lastName || user?.attributes?.family_name}
-                </p>
-                <p className="text-xs text-gray-400 truncate">{userInfo?.email || user?.attributes?.email}</p>
-                <p className="text-xs text-gray-400 capitalize">{userRole.replace("_", " ")}</p>
-              </div>
-            </div>
+            </motion.div>
             <div className="space-y-2">
               <Link
                 href="/profile"
-                className="flex items-center w-full px-4 py-2 text-sm text-gray-300 rounded-lg hover:bg-gray-900 hover:text-white transition-colors"
+                className="flex items-center w-full px-4 py-2 text-sm text-gray-300 rounded-lg hover:bg-white/10 hover:text-white transition-all"
                 onClick={() => setSidebarOpen(false)}
               >
-                <User className="w-4 h-4 mr-2" />
-                Profile
+                <User className="w-4 h-4 mr-3" />
+                Profile Settings
               </Link>
               <button
                 onClick={handleSignOut}
-                className="flex items-center w-full px-4 py-2 text-sm text-gray-300 rounded-lg hover:bg-gray-900 hover:text-white transition-colors"
+                className="flex items-center w-full px-4 py-2 text-sm text-gray-300 rounded-lg hover:bg-white/10 hover:text-white transition-all group"
               >
-                <LogOut className="w-4 h-4 mr-2" />
+                <LogOut className="w-4 h-4 mr-3 group-hover:text-red-400 transition-colors" />
                 Sign out
               </button>
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Main content */}
-      <div className="lg:pl-64 min-h-screen bg-gray-50 pt-16 lg:pt-0">
+      <div className="lg:pl-72 min-h-screen bg-gray-50 pt-16 lg:pt-0">
         {/* Desktop header */}
-        <header className="hidden lg:block bg-white shadow-sm sticky top-0 z-30">
+        <header className="hidden lg:block glass sticky top-0 z-30 border-b border-gray-200/50">
           <div className="px-4 sm:px-6 lg:px-8 py-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-semibold text-gray-900">
-                {navigation.find((item) => item.href === pathname)?.name || "Dashboard"}
-              </h2>
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-3"
+              >
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {navigation.find((item) => item.href === pathname)?.name || "Dashboard"}
+                </h2>
+                <Rocket className="w-6 h-6 text-indigo-600 animate-pulse" />
+              </motion.div>
               <div className="flex items-center space-x-4">
                 <GlobalSearch />
                 <div className="relative">
                   <NotificationCenter />
                 </div>
-                <Link href="/profile" className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
-                  <User className="w-6 h-6" />
-                </Link>
-                <button className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
-                  <Settings className="w-6 h-6" />
-                </button>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link 
+                    href="/profile" 
+                    className="p-2.5 text-gray-600 hover:text-indigo-600 rounded-xl hover:bg-indigo-50 transition-all"
+                  >
+                    <User className="w-5 h-5" />
+                  </Link>
+                </motion.div>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="p-2.5 text-gray-600 hover:text-indigo-600 rounded-xl hover:bg-indigo-50 transition-all"
+                >
+                  <Settings className="w-5 h-5" />
+                </motion.button>
               </div>
             </div>
           </div>
         </header>
 
-        {/* Page content */}
+        {/* Page content with animations */}
         <main className="p-3 sm:p-4 md:p-6 lg:p-8">
-          {children}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {children}
+          </motion.div>
         </main>
       </div>
     </div>

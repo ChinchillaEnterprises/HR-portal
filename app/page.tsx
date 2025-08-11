@@ -9,6 +9,7 @@ import "@aws-amplify/ui-react/styles.css";
 import { Authenticator } from "@aws-amplify/ui-react";
 import Layout from "@/components/Layout";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Users,
   Calendar,
@@ -46,6 +47,12 @@ import {
   Download,
   X,
   RefreshCw,
+  Sparkles,
+  Rocket,
+  Heart,
+  Globe,
+  Cpu,
+  Layers,
 } from "lucide-react";
 import { getAuthenticatedUser, hasPermission, type UserRole } from "@/lib/auth";
 import { useActivityLogger, ACTIVITY_TYPES } from "@/hooks/useActivityLogger";
@@ -274,7 +281,7 @@ function Dashboard({ user }: { user: any }) {
             title: `${user.firstName} ${user.lastName} joined the team`,
             time: user.createdAt,
             icon: Users,
-            color: 'text-blue-600'
+            color: 'text-indigo-600'
           });
         }
       });
@@ -287,7 +294,7 @@ function Dashboard({ user }: { user: any }) {
             title: `Task "${task.title}" was completed`,
             time: task.updatedAt,
             icon: CheckCircle,
-            color: 'text-green-600'
+            color: 'text-emerald-600'
           });
         }
       });
@@ -471,32 +478,36 @@ function Dashboard({ user }: { user: any }) {
             title: "Total Team Members",
             value: stats.totalUsers,
             icon: Users,
-            color: "bg-blue-500",
+            gradient: "from-blue-500 to-indigo-600",
             trend: `+${stats.newUsersThisMonth} this month`,
+            trendUp: true,
             link: "/admin",
           },
           {
-            title: "System Health Score",
-            value: Math.round(((stats.totalUsers - stats.overdueTasks) / stats.totalUsers) * 100) || 100,
-            icon: Activity,
-            color: "bg-green-500",
+            title: "System Health",
+            value: `${Math.round(((stats.totalUsers - stats.overdueTasks) / stats.totalUsers) * 100) || 100}%`,
+            icon: Cpu,
+            gradient: "from-emerald-500 to-teal-600",
             trend: "Excellent",
+            trendUp: true,
             link: "/reports",
           },
           {
             title: "Active Applicants",
             value: stats.activeApplicants,
             icon: UserCheck,
-            color: "bg-purple-500",
+            gradient: "from-purple-500 to-pink-600",
             trend: `${stats.applicantConversionRate}% conversion`,
+            trendUp: true,
             link: "/applicants",
           },
           {
             title: "Pending Approvals",
             value: stats.pendingApprovals,
             icon: Shield,
-            color: "bg-red-500",
-            trend: "Needs attention",
+            gradient: "from-amber-500 to-orange-600",
+            trend: stats.pendingApprovals > 0 ? "Needs attention" : "All clear",
+            trendUp: false,
             link: "/documents",
           },
         ];
@@ -506,32 +517,36 @@ function Dashboard({ user }: { user: any }) {
             title: "My Mentees",
             value: stats.pendingOnboarding,
             icon: Users,
-            color: "bg-blue-500",
+            gradient: "from-blue-500 to-indigo-600",
             trend: "Active onboarding",
+            trendUp: true,
             link: "/onboarding",
           },
           {
             title: "Completion Rate",
             value: `${stats.taskCompletionRate}%`,
             icon: Target,
-            color: "bg-green-500",
+            gradient: "from-emerald-500 to-teal-600",
             trend: "Team performance",
+            trendUp: stats.taskCompletionRate > 80,
             link: "/reports",
           },
           {
             title: "Training Sessions",
             value: Math.floor(stats.communicationsSentToday / 2) || 0,
             icon: BookOpen,
-            color: "bg-purple-500",
+            gradient: "from-purple-500 to-pink-600",
             trend: "This week",
+            trendUp: true,
             link: "/communications",
           },
           {
             title: "Support Tickets",
             value: stats.overdueTasks,
             icon: AlertCircle,
-            color: stats.overdueTasks > 0 ? "bg-yellow-500" : "bg-gray-500",
+            gradient: stats.overdueTasks > 0 ? "from-amber-500 to-orange-600" : "from-gray-400 to-gray-600",
             trend: stats.overdueTasks > 0 ? "Needs review" : "All resolved",
+            trendUp: false,
             link: "/onboarding",
           },
         ];
@@ -541,32 +556,36 @@ function Dashboard({ user }: { user: any }) {
             title: "Team Members",
             value: Math.floor(stats.totalUsers / 3) || 1,
             icon: Users,
-            color: "bg-blue-500",
+            gradient: "from-blue-500 to-indigo-600",
             trend: "Direct reports",
+            trendUp: true,
             link: "/team",
           },
           {
             title: "Team Tasks",
             value: stats.pendingOnboarding,
             icon: ClipboardList,
-            color: "bg-yellow-500",
+            gradient: "from-yellow-500 to-amber-600",
             trend: "In progress",
+            trendUp: false,
             link: "/onboarding",
           },
           {
             title: "Project Progress",
             value: `${Math.min(stats.taskCompletionRate + 10, 100)}%`,
             icon: TrendingUp,
-            color: "bg-green-500",
+            gradient: "from-emerald-500 to-teal-600",
             trend: "On track",
+            trendUp: true,
             link: "/reports",
           },
           {
-            title: "Team Communications",
+            title: "Team Messages",
             value: stats.communicationsSentToday,
             icon: MessageSquare,
-            color: "bg-purple-500",
+            gradient: "from-purple-500 to-pink-600",
             trend: "Today",
+            trendUp: true,
             link: "/communications",
           },
         ];
@@ -576,32 +595,36 @@ function Dashboard({ user }: { user: any }) {
             title: "Learning Progress",
             value: `${Math.round((stats.completedTasks / Math.max(stats.myTasks, 1)) * 100)}%`,
             icon: BookOpen,
-            color: "bg-blue-500",
+            gradient: "from-blue-500 to-indigo-600",
             trend: `${stats.completedTasks}/${stats.myTasks} completed`,
+            trendUp: true,
             link: "/onboarding",
           },
           {
             title: "Completed Tasks",
             value: stats.completedTasks,
             icon: CheckCircle,
-            color: "bg-green-500",
+            gradient: "from-emerald-500 to-teal-600",
             trend: "Great progress!",
+            trendUp: true,
             link: "/onboarding",
           },
           {
             title: "Next Milestone",
             value: stats.myTasks - stats.completedTasks,
             icon: Target,
-            color: "bg-purple-500",
+            gradient: "from-purple-500 to-pink-600",
             trend: "Tasks remaining",
+            trendUp: false,
             link: "/onboarding",
           },
           {
             title: "Mentor Sessions",
             value: Math.floor(Math.random() * 3) + 1,
             icon: Users,
-            color: "bg-yellow-500",
+            gradient: "from-yellow-500 to-amber-600",
             trend: "This week",
+            trendUp: true,
             link: "/team",
           },
         ];
@@ -612,32 +635,36 @@ function Dashboard({ user }: { user: any }) {
             title: "My Tasks",
             value: stats.myTasks,
             icon: CheckSquare,
-            color: "bg-blue-500",
+            gradient: "from-blue-500 to-indigo-600",
             trend: `${stats.completedTasks}/${stats.myTasks} done`,
+            trendUp: true,
             link: "/onboarding",
           },
           {
             title: "Recent Activity",
             value: stats.completedTasks,
             icon: Activity,
-            color: "bg-green-500",
+            gradient: "from-emerald-500 to-teal-600",
             trend: "Tasks completed",
+            trendUp: true,
             link: "/onboarding",
           },
           {
             title: "Urgent Items",
             value: stats.overdueTasks,
             icon: AlertCircle,
-            color: stats.overdueTasks > 0 ? "bg-red-500" : "bg-gray-500",
+            gradient: stats.overdueTasks > 0 ? "from-red-500 to-rose-600" : "from-gray-400 to-gray-600",
             trend: stats.overdueTasks > 0 ? "Action needed" : "All caught up",
+            trendUp: false,
             link: "/onboarding",
           },
           {
             title: "Resources",
             value: stats.recentDocuments,
             icon: FileText,
-            color: "bg-purple-500",
+            gradient: "from-purple-500 to-pink-600",
             trend: "Available",
+            trendUp: true,
             link: "/documents",
           },
         ];
@@ -650,39 +677,39 @@ function Dashboard({ user }: { user: any }) {
     switch (userRole) {
       case "admin":
         return [
-          { title: "Admin Panel", icon: Shield, link: "/admin", color: "text-red-600" },
-          { title: "System Reports", icon: BarChart3, link: "/reports", color: "text-blue-600" },
-          { title: "Manage Users", icon: Users, link: "/admin", color: "text-green-600" },
-          { title: "Global Settings", icon: Settings, link: "/admin", color: "text-purple-600" },
+          { title: "Admin Panel", icon: Shield, link: "/admin", gradient: "from-red-500 to-rose-600" },
+          { title: "System Reports", icon: BarChart3, link: "/reports", gradient: "from-blue-500 to-indigo-600" },
+          { title: "Manage Users", icon: Users, link: "/admin", gradient: "from-emerald-500 to-teal-600" },
+          { title: "Global Settings", icon: Settings, link: "/admin", gradient: "from-purple-500 to-pink-600" },
         ];
       case "mentor":
         return [
-          { title: "My Mentees", icon: Users, link: "/onboarding", color: "text-blue-600" },
-          { title: "Create Training", icon: BookOpen, link: "/communications", color: "text-green-600" },
-          { title: "Progress Review", icon: Target, link: "/reports", color: "text-purple-600" },
-          { title: "Schedule Session", icon: Calendar, link: "/communications", color: "text-orange-600" },
+          { title: "My Mentees", icon: Users, link: "/onboarding", gradient: "from-blue-500 to-indigo-600" },
+          { title: "Create Training", icon: BookOpen, link: "/communications", gradient: "from-emerald-500 to-teal-600" },
+          { title: "Progress Review", icon: Target, link: "/reports", gradient: "from-purple-500 to-pink-600" },
+          { title: "Schedule Session", icon: Calendar, link: "/communications", gradient: "from-amber-500 to-orange-600" },
         ];
       case "team_lead":
         return [
-          { title: "Team Tasks", icon: ClipboardList, link: "/onboarding", color: "text-blue-600" },
-          { title: "Team Messages", icon: MessageSquare, link: "/communications", color: "text-green-600" },
-          { title: "Project Status", icon: TrendingUp, link: "/reports", color: "text-purple-600" },
-          { title: "Review Applicants", icon: Briefcase, link: "/applicants", color: "text-orange-600" },
+          { title: "Team Tasks", icon: ClipboardList, link: "/onboarding", gradient: "from-blue-500 to-indigo-600" },
+          { title: "Team Messages", icon: MessageSquare, link: "/communications", gradient: "from-emerald-500 to-teal-600" },
+          { title: "Project Status", icon: TrendingUp, link: "/reports", gradient: "from-purple-500 to-pink-600" },
+          { title: "Review Applicants", icon: Briefcase, link: "/applicants", gradient: "from-amber-500 to-orange-600" },
         ];
       case "intern":
         return [
-          { title: "Learning Path", icon: BookOpen, link: "/onboarding", color: "text-blue-600" },
-          { title: "Study Materials", icon: FileText, link: "/documents", color: "text-green-600" },
-          { title: "Ask Mentor", icon: Users, link: "/team", color: "text-purple-600" },
-          { title: "Progress Check", icon: Target, link: "/onboarding", color: "text-orange-600" },
+          { title: "Learning Path", icon: BookOpen, link: "/onboarding", gradient: "from-blue-500 to-indigo-600" },
+          { title: "Study Materials", icon: FileText, link: "/documents", gradient: "from-emerald-500 to-teal-600" },
+          { title: "Ask Mentor", icon: Users, link: "/team", gradient: "from-purple-500 to-pink-600" },
+          { title: "Progress Check", icon: Target, link: "/onboarding", gradient: "from-amber-500 to-orange-600" },
         ];
       case "staff":
       default:
         return [
-          { title: "My Tasks", icon: CheckSquare, link: "/onboarding", color: "text-blue-600" },
-          { title: "My Documents", icon: FileText, link: "/documents", color: "text-green-600" },
-          { title: "Team Directory", icon: Users, link: "/team", color: "text-purple-600" },
-          { title: "Request Help", icon: Mail, link: "/communications", color: "text-orange-600" },
+          { title: "My Tasks", icon: CheckSquare, link: "/onboarding", gradient: "from-blue-500 to-indigo-600" },
+          { title: "My Documents", icon: FileText, link: "/documents", gradient: "from-emerald-500 to-teal-600" },
+          { title: "Team Directory", icon: Users, link: "/team", gradient: "from-purple-500 to-pink-600" },
+          { title: "Request Help", icon: Mail, link: "/communications", gradient: "from-amber-500 to-orange-600" },
         ];
     }
   }, [userRole]);
@@ -693,7 +720,11 @@ function Dashboard({ user }: { user: any }) {
     return (
       <Layout user={user}>
         <div className="flex items-center justify-center h-96">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+            className="rounded-full h-12 w-12 border-b-2 border-indigo-600"
+          />
         </div>
       </Layout>
     );
@@ -701,42 +732,64 @@ function Dashboard({ user }: { user: any }) {
 
   return (
     <Layout user={user}>
-      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
-        {/* Welcome Section with Notifications */}
-        <div className="bg-black rounded-2xl p-4 sm:p-6 lg:p-8 text-white relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 sm:w-64 sm:h-64 bg-white opacity-5 rounded-full -mr-16 sm:-mr-32 -mt-16 sm:-mt-32"></div>
+      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8 page-transition">
+        {/* Modern Hero Section */}
+        <div className="relative overflow-hidden rounded-3xl gradient-primary p-8 sm:p-12 text-white">
+          {/* Animated background elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse-slow" />
+            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse-slow animation-delay-2000" />
+          </div>
+          
           <div className="relative z-10">
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start space-y-4 sm:space-y-0">
+            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6">
               <div className="flex-1">
-                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2">
+                <motion.h1 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-3xl sm:text-4xl font-bold mb-3 flex items-center gap-3"
+                >
                   Welcome back, {userProfile?.firstName || user?.attributes?.given_name}!
-                </h1>
-                <p className="text-gray-300 mb-4">
+                  <Sparkles className="w-8 h-8 animate-pulse" />
+                </motion.h1>
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="text-lg text-white/90 mb-6"
+                >
                   {userRole === "admin" 
-                    ? "Monitor system health, manage users, and oversee all HR operations"
+                    ? "Your command center for HR excellence and team success"
                     : userRole === "mentor"
-                    ? `Guide your ${stats.pendingOnboarding} mentees through their onboarding journey`
+                    ? `Empowering ${stats.pendingOnboarding} professionals on their journey`
                     : userRole === "team_lead"
-                    ? `Lead your team of ${Math.floor(stats.totalUsers / 3) || 1} members to success`
+                    ? `Leading ${Math.floor(stats.totalUsers / 3) || 1} amazing team members`
                     : userRole === "intern"
-                    ? `You're ${Math.round((stats.completedTasks / Math.max(stats.myTasks, 1)) * 100) || 0}% through your learning journey`
-                    : "Stay organized and connected with your team"}
-                </p>
-                <div className="flex items-center space-x-4">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white bg-opacity-20 text-white">
+                    ? `${Math.round((stats.completedTasks / Math.max(stats.myTasks, 1)) * 100) || 0}% through your exciting journey`
+                    : "Your hub for productivity and collaboration"}
+                </motion.p>
+                <div className="flex flex-wrap items-center gap-4">
+                  <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/20 backdrop-blur-xl border border-white/30">
                     {getRoleIcon(userRole)}
-                    <span className="ml-1 capitalize">{userRole.replace("_", " ")}</span>
+                    <span className="ml-2 capitalize">{userRole.replace("_", " ")}</span>
                   </span>
                   {userProfile?.department && (
-                    <span className="text-sm text-gray-300">
-                      {userProfile.department} Department
+                    <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/20 backdrop-blur-xl border border-white/30">
+                      <Layers className="w-4 h-4 mr-2" />
+                      {userProfile.department}
                     </span>
                   )}
+                  <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/20 backdrop-blur-xl border border-white/30">
+                    <Globe className="w-4 h-4 mr-2" />
+                    {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
+                  </span>
                 </div>
               </div>
               
-              <div className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
-                <button
+              <div className="flex items-center gap-3">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => {
                     logActivity({
                       action: ACTIVITY_TYPES.SYSTEM_REFRESH,
@@ -746,89 +799,112 @@ function Dashboard({ user }: { user: any }) {
                     fetchDashboardData(true);
                   }}
                   disabled={refreshing}
-                  className="p-2 rounded-lg bg-white bg-opacity-20 hover:bg-opacity-30 transition-colors disabled:opacity-50 touch-target"
+                  className="p-3 rounded-xl bg-white/20 backdrop-blur-xl border border-white/30 hover:bg-white/30 transition-all disabled:opacity-50"
                   title="Refresh dashboard data"
                 >
-                  <RefreshCw className={`w-4 h-4 sm:w-5 sm:h-5 ${refreshing ? 'animate-spin' : ''}`} />
-                </button>
+                  <RefreshCw className={`w-5 h-5 ${refreshing ? 'animate-spin' : ''}`} />
+                </motion.button>
                 <div className="relative">
-                  <button 
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => setShowNotifications(!showNotifications)}
-                    className="p-2 rounded-lg bg-white bg-opacity-20 hover:bg-opacity-30 transition-colors relative touch-target"
+                    className="p-3 rounded-xl bg-white/20 backdrop-blur-xl border border-white/30 hover:bg-white/30 transition-all relative"
                   >
-                    <Bell className="w-4 h-4 sm:w-6 sm:h-6" />
+                    <Bell className="w-5 h-5" />
                     {notifications.filter(n => !n.read).length > 0 && (
-                      <span className="absolute top-0 right-0 w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></span>
+                      <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse" />
                     )}
-                  </button>
+                  </motion.button>
                 
-                {showNotifications && (
-                  <div className="absolute right-0 mt-2 w-72 sm:w-80 bg-white rounded-lg shadow-xl z-50 text-gray-900 modal-mobile">
-                    <div className="p-3 sm:p-4 border-b border-gray-200">
-                      <h3 className="font-semibold text-sm sm:text-base">Notifications</h3>
-                    </div>
-                    <div className="max-h-64 sm:max-h-96 overflow-y-auto touch-scroll">
-                      {notifications.length > 0 ? (
-                        notifications.map((notif) => (
-                          <div key={notif.id} className="p-4 border-b border-gray-100 hover:bg-gray-50">
-                            <div className="flex items-start space-x-3">
-                              <div className={`p-2 rounded-lg ${
-                                notif.type === "warning" ? "bg-yellow-100" :
-                                notif.type === "error" ? "bg-red-100" :
-                                notif.type === "success" ? "bg-green-100" :
-                                "bg-blue-100"
-                              }`}>
-                                {notif.type === "warning" ? <AlertCircle className="w-4 h-4 text-yellow-600" /> :
-                                 notif.type === "error" ? <XCircle className="w-4 h-4 text-red-600" /> :
-                                 notif.type === "success" ? <CheckCircle className="w-4 h-4 text-green-600" /> :
-                                 <Info className="w-4 h-4 text-blue-600" />}
-                              </div>
-                              <div className="flex-1">
-                                <p className="font-medium text-sm">{notif.title}</p>
-                                <p className="text-sm text-gray-600 mt-1">{notif.message}</p>
-                                <p className="text-xs text-gray-400 mt-2">
-                                  {new Date(notif.time).toLocaleTimeString()}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        ))
-                      ) : (
-                        <div className="p-8 text-center text-gray-500">
-                          <Bell className="w-8 h-8 mx-auto mb-2 text-gray-300" />
-                          <p>No new notifications</p>
+                  <AnimatePresence>
+                    {showNotifications && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        className="absolute right-0 mt-2 w-80 glass rounded-2xl shadow-2xl z-50 overflow-hidden"
+                      >
+                        <div className="p-4 border-b border-gray-200/50">
+                          <h3 className="font-semibold text-gray-900">Notifications</h3>
                         </div>
-                      )}
-                    </div>
-                  </div>
-                )}
+                        <div className="max-h-96 overflow-y-auto">
+                          {notifications.length > 0 ? (
+                            notifications.map((notif) => (
+                              <div key={notif.id} className="p-4 border-b border-gray-100 hover:bg-gray-50/50 transition-colors">
+                                <div className="flex items-start gap-3">
+                                  <div className={`p-2 rounded-xl ${
+                                    notif.type === "warning" ? "bg-amber-100" :
+                                    notif.type === "error" ? "bg-red-100" :
+                                    notif.type === "success" ? "bg-emerald-100" :
+                                    "bg-blue-100"
+                                  }`}>
+                                    {notif.type === "warning" ? <AlertCircle className="w-4 h-4 text-amber-600" /> :
+                                     notif.type === "error" ? <XCircle className="w-4 h-4 text-red-600" /> :
+                                     notif.type === "success" ? <CheckCircle className="w-4 h-4 text-emerald-600" /> :
+                                     <Info className="w-4 h-4 text-blue-600" />}
+                                  </div>
+                                  <div className="flex-1">
+                                    <p className="font-medium text-sm text-gray-900">{notif.title}</p>
+                                    <p className="text-sm text-gray-600 mt-1">{notif.message}</p>
+                                    <p className="text-xs text-gray-400 mt-2">
+                                      {new Date(notif.time).toLocaleTimeString()}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            ))
+                          ) : (
+                            <div className="p-8 text-center text-gray-500">
+                              <Bell className="w-8 h-8 mx-auto mb-2 text-gray-300" />
+                              <p>No new notifications</p>
+                            </div>
+                          )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-        {/* Stats Grid */}
+        {/* Modern Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {getRoleSpecificStats().map((stat, index) => {
             const Icon = stat.icon;
             return (
-              <Link
+              <motion.div
                 key={index}
-                href={stat.link}
-                className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-all transform hover:-translate-y-1"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
               >
-                <div className="flex items-center justify-between mb-4">
-                  <div className={`p-3 rounded-lg ${stat.color} bg-opacity-10`}>
-                    <Icon className={`w-6 h-6 ${stat.color.replace('bg-', 'text-')}`} />
+                <Link
+                  href={stat.link}
+                  className="block group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                >
+                  <div className="absolute inset-0 opacity-10">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient}`} />
                   </div>
-                  <span className="text-sm font-medium text-gray-500 flex items-center">
-                    {stat.trend}
-                  </span>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900">{stat.value}</h3>
-                <p className="text-sm text-gray-600 mt-1">{stat.title}</p>
-              </Link>
+                  <div className="relative p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.gradient} shadow-lg group-hover:scale-110 transition-transform`}>
+                        <Icon className="w-6 h-6 text-white" />
+                      </div>
+                      <span className={`text-sm font-medium flex items-center gap-1 ${
+                        stat.trendUp ? 'text-emerald-600' : 'text-gray-600'
+                      }`}>
+                        {stat.trendUp ? <ArrowUpRight className="w-4 h-4" /> : null}
+                        {stat.trend}
+                      </span>
+                    </div>
+                    <h3 className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</h3>
+                    <p className="text-sm text-gray-600">{stat.title}</p>
+                  </div>
+                </Link>
+              </motion.div>
             );
           })}
         </div>
@@ -836,210 +912,280 @@ function Dashboard({ user }: { user: any }) {
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {/* Tasks/Activity Column */}
-          <div className="lg:col-span-2 space-y-6 lg:space-y-8">
-            {/* Upcoming Tasks */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Upcoming Tasks with Modern Design */}
             {upcomingTasks.length > 0 && (
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-semibold text-gray-900">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="glass rounded-2xl p-6"
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+                    <Rocket className="w-6 h-6 text-indigo-600" />
                     {userRole === "admin" || userRole === "mentor" || userRole === "team_lead" 
-                      ? "Pending Tasks Overview" 
+                      ? "Team Tasks Overview" 
                       : "My Upcoming Tasks"}
                   </h2>
-                  <Link href="/onboarding" className="text-black hover:text-gray-700 text-sm font-medium flex items-center">
+                  <Link href="/onboarding" className="text-indigo-600 hover:text-indigo-700 text-sm font-medium flex items-center group">
                     View All
-                    <ArrowRight className="w-4 h-4 ml-1" />
+                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
                 <div className="space-y-3">
                   {upcomingTasks.map((task) => (
-                    <div key={task.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <div className="flex items-center space-x-3">
-                        <div className={`p-2 rounded-lg ${
+                    <motion.div
+                      key={task.id}
+                      whileHover={{ x: 4 }}
+                      className="flex items-center justify-between p-4 bg-gray-50/50 hover:bg-gray-100/50 rounded-xl transition-all group"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className={`p-3 rounded-xl ${
                           task.status === "overdue" ? "bg-red-100" :
-                          task.status === "in_progress" ? "bg-yellow-100" :
+                          task.status === "in_progress" ? "bg-amber-100" :
                           "bg-gray-100"
                         }`}>
-                          {task.status === "overdue" ? <AlertCircle className="w-4 h-4 text-red-600" /> :
-                           task.status === "in_progress" ? <Clock className="w-4 h-4 text-yellow-600" /> :
-                           <Circle className="w-4 h-4 text-gray-600" />}
+                          {task.status === "overdue" ? <AlertCircle className="w-5 h-5 text-red-600" /> :
+                           task.status === "in_progress" ? <Clock className="w-5 h-5 text-amber-600" /> :
+                           <Circle className="w-5 h-5 text-gray-600" />}
                         </div>
                         <div>
-                          <p className="font-medium text-gray-900">{task.title}</p>
+                          <p className="font-medium text-gray-900 group-hover:text-indigo-600 transition-colors">{task.title}</p>
                           <p className="text-sm text-gray-500">
                             Due: {task.dueDate ? new Date(task.dueDate).toLocaleDateString() : "No due date"}
                           </p>
                         </div>
                       </div>
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                         task.status === "overdue" ? "bg-red-100 text-red-700" :
-                        task.status === "in_progress" ? "bg-yellow-100 text-yellow-700" :
+                        task.status === "in_progress" ? "bg-amber-100 text-amber-700" :
                         "bg-gray-100 text-gray-700"
                       }`}>
                         {task.status}
                       </span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             )}
 
-            {/* Recent Activity */}
-            <div className="bg-white rounded-xl shadow-sm p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h2>
+            {/* Recent Activity with Timeline */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="glass rounded-2xl p-6"
+            >
+              <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <Activity className="w-6 h-6 text-indigo-600" />
+                Recent Activity
+              </h2>
               <div className="space-y-4">
                 {recentActivity.length > 0 ? (
-                  recentActivity.map((activity) => {
+                  recentActivity.map((activity, index) => {
                     const Icon = activity.icon;
                     return (
-                      <div key={activity.id} className="flex items-start space-x-3">
-                        <div className={`p-2 rounded-lg bg-gray-100`}>
-                          <Icon className={`w-4 h-4 ${activity.color}`} />
+                      <motion.div
+                        key={activity.id}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        className="flex items-start gap-4 group"
+                      >
+                        <div className="relative">
+                          <div className={`p-3 rounded-xl bg-gradient-to-br ${
+                            activity.color === 'text-indigo-600' ? 'from-indigo-500 to-blue-600' :
+                            activity.color === 'text-emerald-600' ? 'from-emerald-500 to-teal-600' :
+                            activity.color === 'text-purple-600' ? 'from-purple-500 to-pink-600' :
+                            'from-gray-500 to-gray-600'
+                          } shadow-lg group-hover:scale-110 transition-transform`}>
+                            <Icon className="w-4 h-4 text-white" />
+                          </div>
+                          {index < recentActivity.length - 1 && (
+                            <div className="absolute top-12 left-1/2 -translate-x-1/2 w-0.5 h-16 bg-gray-200" />
+                          )}
                         </div>
                         <div className="flex-1">
-                          <p className="text-gray-900">{activity.title}</p>
-                          <p className="text-sm text-gray-500">
+                          <p className="text-gray-900 group-hover:text-indigo-600 transition-colors">{activity.title}</p>
+                          <p className="text-sm text-gray-500 mt-1">
                             {new Date(activity.time).toLocaleDateString()}
                           </p>
                         </div>
-                      </div>
+                      </motion.div>
                     );
                   })
                 ) : (
                   <p className="text-gray-500 text-center py-8">No recent activity</p>
                 )}
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Quick Actions */}
-          <div className="space-y-8">
-            <div className="bg-white rounded-xl shadow-sm p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h2>
+          {/* Quick Actions & Progress */}
+          <div className="space-y-6">
+            {/* Quick Actions with Gradient Cards */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="glass rounded-2xl p-6"
+            >
+              <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <Zap className="w-6 h-6 text-indigo-600" />
+                Quick Actions
+              </h2>
               <div className="grid grid-cols-2 gap-4">
                 {getQuickActions().map((action, index) => {
                   const Icon = action.icon;
                   return (
-                    <Link
+                    <motion.div
                       key={index}
-                      href={action.link}
-                      className="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors group"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      <Icon className={`w-8 h-8 ${action.color} mb-2 group-hover:scale-110 transition-transform`} />
-                      <span className="text-sm font-medium text-center">{action.title}</span>
-                    </Link>
+                      <Link
+                        href={action.link}
+                        className={`flex flex-col items-center justify-center p-6 rounded-xl bg-gradient-to-br ${action.gradient} text-white shadow-lg hover:shadow-xl transition-all group`}
+                      >
+                        <Icon className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform" />
+                        <span className="text-sm font-medium text-center">{action.title}</span>
+                      </Link>
+                    </motion.div>
                   );
                 })}
               </div>
-            </div>
+            </motion.div>
 
             {/* Progress Card for Non-Managers */}
             {(userRole === "intern" || userRole === "staff") && stats.myTasks > 0 && (
-              <div className="bg-gradient-to-br from-gray-900 to-gray-700 rounded-xl p-6 text-white">
-                <h3 className="text-lg font-semibold mb-4">Your Progress</h3>
-                <div className="mb-4">
-                  <div className="flex justify-between text-sm mb-2">
-                    <span>Onboarding Completion</span>
-                    <span>{Math.round((stats.completedTasks / stats.myTasks) * 100)}%</span>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="relative overflow-hidden rounded-2xl gradient-primary p-6 text-white"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl" />
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                    <Target className="w-6 h-6" />
+                    Your Progress
+                  </h3>
+                  <div className="mb-6">
+                    <div className="flex justify-between text-sm mb-2">
+                      <span>Onboarding Journey</span>
+                      <span className="font-bold">{Math.round((stats.completedTasks / stats.myTasks) * 100)}%</span>
+                    </div>
+                    <div className="w-full bg-white/20 rounded-full h-4 overflow-hidden">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        animate={{ width: `${(stats.completedTasks / stats.myTasks) * 100}%` }}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        className="h-full bg-white rounded-full shadow-lg"
+                      />
+                    </div>
                   </div>
-                  <div className="w-full bg-gray-600 rounded-full h-3">
-                    <div 
-                      className="bg-white h-3 rounded-full transition-all duration-300"
-                      style={{ width: `${(stats.completedTasks / stats.myTasks) * 100}%` }}
-                    />
+                  <div className="grid grid-cols-2 gap-4 text-center">
+                    <div className="bg-white/20 backdrop-blur-xl rounded-xl p-3">
+                      <p className="text-2xl font-bold">{stats.completedTasks}</p>
+                      <p className="text-sm opacity-90">Completed</p>
+                    </div>
+                    <div className="bg-white/20 backdrop-blur-xl rounded-xl p-3">
+                      <p className="text-2xl font-bold">{stats.myTasks - stats.completedTasks}</p>
+                      <p className="text-sm opacity-90">Remaining</p>
+                    </div>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4 text-center">
-                  <div>
-                    <p className="text-2xl font-bold">{stats.completedTasks}</p>
-                    <p className="text-sm text-gray-300">Completed</p>
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold">{stats.myTasks - stats.completedTasks}</p>
-                    <p className="text-sm text-gray-300">Remaining</p>
-                  </div>
-                </div>
-              </div>
+              </motion.div>
             )}
 
-            {/* Admin Quick Stats */}
+            {/* Admin System Health */}
             {userRole === "admin" && (
-              <div className="space-y-6">
-                <div className="bg-white rounded-xl shadow-sm p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">System Health</h3>
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Active Users</span>
-                      <span className="font-medium">{stats.totalUsers}</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Pending Tasks</span>
-                      <span className="font-medium text-yellow-600">{stats.pendingOnboarding}</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Open Applications</span>
-                      <span className="font-medium text-blue-600">{stats.activeApplicants}</span>
-                    </div>
-                    <Link 
-                      href="/admin"
-                      className="block w-full mt-4 text-center px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
-                    >
-                      Admin Panel
-                    </Link>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="glass rounded-2xl p-6"
+              >
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <Heart className="w-6 h-6 text-red-500" />
+                  System Health
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                    <span className="text-sm text-gray-600">Active Users</span>
+                    <span className="font-bold text-gray-900">{stats.totalUsers}</span>
                   </div>
+                  <div className="flex items-center justify-between p-3 bg-amber-50 rounded-xl">
+                    <span className="text-sm text-gray-600">Pending Tasks</span>
+                    <span className="font-bold text-amber-600">{stats.pendingOnboarding}</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-blue-50 rounded-xl">
+                    <span className="text-sm text-gray-600">Open Applications</span>
+                    <span className="font-bold text-blue-600">{stats.activeApplicants}</span>
+                  </div>
+                  <Link 
+                    href="/admin"
+                    className="block w-full mt-4 text-center btn-primary"
+                  >
+                    Open Admin Panel
+                  </Link>
                 </div>
-
-                {/* Activity Log Preview */}
-                <AdminActivityLogPreview />
-              </div>
+              </motion.div>
             )}
           </div>
         </div>
 
         {/* Analytics Section - For Admin/Managers */}
         {(userRole === "admin" || userRole === "mentor" || userRole === "team_lead") && (
-          <div className="mt-8 space-y-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="space-y-8"
+          >
             {/* Analytics Header */}
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-bold text-gray-900">Analytics & Insights</h2>
-              <div className="flex items-center space-x-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+                <BarChart3 className="w-8 h-8 text-indigo-600" />
+                Analytics & Insights
+              </h2>
+              <div className="flex flex-wrap items-center gap-3">
                 <button
                   onClick={() => exportAnalyticsData('csv')}
-                  className="flex items-center px-3 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                  className="btn-secondary text-sm"
                 >
                   <Download className="w-4 h-4 mr-2" />
                   Export CSV
                 </button>
                 <button
                   onClick={() => exportAnalyticsData('json')}
-                  className="flex items-center px-3 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                  className="btn-secondary text-sm"
                 >
                   <Download className="w-4 h-4 mr-2" />
                   Export JSON
                 </button>
                 <button
                   onClick={() => setShowScheduleModal(true)}
-                  className="flex items-center px-3 py-2 text-sm bg-black text-white hover:bg-gray-800 rounded-lg transition-colors"
+                  className="btn-primary text-sm"
                 >
                   <Calendar className="w-4 h-4 mr-2" />
                   Schedule Report
                 </button>
-                <Link href="/reports" className="text-black hover:text-gray-700 text-sm font-medium flex items-center">
-                  View Detailed Reports
-                  <ArrowRight className="w-4 h-4 ml-1" />
-                </Link>
               </div>
             </div>
 
-            {/* Key Metrics */}
+            {/* Key Metrics Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-white rounded-xl shadow-sm p-6">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="glass rounded-2xl p-6"
+              >
                 <div className="flex items-center justify-between mb-4">
-                  <div className="p-3 rounded-lg bg-green-100">
-                    <TrendingUp className="w-6 h-6 text-green-600" />
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg">
+                    <TrendingUp className="w-6 h-6 text-white" />
                   </div>
                   <span className={`flex items-center text-sm font-medium ${
-                    stats.userGrowthRate > 0 ? "text-green-600" : "text-red-600"
+                    stats.userGrowthRate > 0 ? "text-emerald-600" : "text-red-600"
                   }`}>
                     {stats.userGrowthRate > 0 ? <ArrowUpRight className="w-4 h-4 mr-1" /> : <ArrowDownRight className="w-4 h-4 mr-1" />}
                     {Math.abs(stats.userGrowthRate)}%
@@ -1047,12 +1193,15 @@ function Dashboard({ user }: { user: any }) {
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900">{stats.newUsersThisMonth}</h3>
                 <p className="text-sm text-gray-600 mt-1">New Users This Month</p>
-              </div>
+              </motion.div>
 
-              <div className="bg-white rounded-xl shadow-sm p-6">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="glass rounded-2xl p-6"
+              >
                 <div className="flex items-center justify-between mb-4">
-                  <div className="p-3 rounded-lg bg-blue-100">
-                    <Clock className="w-6 h-6 text-blue-600" />
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg">
+                    <Clock className="w-6 h-6 text-white" />
                   </div>
                   <span className="text-sm font-medium text-gray-500">
                     days avg
@@ -1060,12 +1209,15 @@ function Dashboard({ user }: { user: any }) {
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900">{stats.avgOnboardingTime}</h3>
                 <p className="text-sm text-gray-600 mt-1">Avg Onboarding Time</p>
-              </div>
+              </motion.div>
 
-              <div className="bg-white rounded-xl shadow-sm p-6">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="glass rounded-2xl p-6"
+              >
                 <div className="flex items-center justify-between mb-4">
-                  <div className="p-3 rounded-lg bg-purple-100">
-                    <CheckCircle className="w-6 h-6 text-purple-600" />
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 shadow-lg">
+                    <CheckCircle className="w-6 h-6 text-white" />
                   </div>
                   <span className="text-sm font-medium text-gray-500">
                     completion
@@ -1073,12 +1225,15 @@ function Dashboard({ user }: { user: any }) {
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900">{stats.taskCompletionRate}%</h3>
                 <p className="text-sm text-gray-600 mt-1">Task Completion Rate</p>
-              </div>
+              </motion.div>
 
-              <div className="bg-white rounded-xl shadow-sm p-6">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="glass rounded-2xl p-6"
+              >
                 <div className="flex items-center justify-between mb-4">
-                  <div className="p-3 rounded-lg bg-yellow-100">
-                    <Briefcase className="w-6 h-6 text-yellow-600" />
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 shadow-lg">
+                    <Briefcase className="w-6 h-6 text-white" />
                   </div>
                   <span className="text-sm font-medium text-gray-500">
                     hired
@@ -1086,251 +1241,242 @@ function Dashboard({ user }: { user: any }) {
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900">{stats.applicantConversionRate}%</h3>
                 <p className="text-sm text-gray-600 mt-1">Applicant Conversion</p>
-              </div>
+              </motion.div>
             </div>
 
             {/* Charts Row */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Monthly Trends Chart */}
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-6">Monthly Trends</h3>
-                <div className="space-y-4">
+              <motion.div
+                whileHover={{ scale: 1.01 }}
+                className="glass rounded-2xl p-6"
+              >
+                <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                  <LineChart className="w-6 h-6 text-indigo-600" />
+                  Monthly Trends
+                </h3>
+                <div className="space-y-6">
                   {stats.monthlyStats.map((month, index) => {
                     const maxValue = Math.max(...stats.monthlyStats.map(m => 
                       Math.max(m.users, m.tasks, m.applicants)
                     ));
                     return (
-                      <div key={month.month} className="space-y-2">
+                      <motion.div
+                        key={month.month}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        className="space-y-3"
+                      >
                         <div className="flex items-center justify-between text-sm">
                           <span className="font-medium text-gray-700">{month.month}</span>
-                          <div className="flex items-center space-x-4 text-xs">
-                            <span className="text-blue-600">{month.users} users</span>
-                            <span className="text-green-600">{month.tasks} tasks</span>
-                            <span className="text-purple-600">{month.applicants} applicants</span>
+                          <div className="flex items-center gap-4 text-xs">
+                            <span className="text-indigo-600 font-medium">{month.users} users</span>
+                            <span className="text-emerald-600 font-medium">{month.tasks} tasks</span>
+                            <span className="text-purple-600 font-medium">{month.applicants} apps</span>
                           </div>
                         </div>
-                        <div className="relative">
-                          <div className="flex space-x-1">
+                        <div className="space-y-2">
+                          <div className="relative">
                             <div 
-                              className="h-6 bg-blue-200 rounded transition-all duration-300"
+                              className="h-2 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full transition-all duration-300"
                               style={{ width: `${(month.users / maxValue) * 100}%` }}
-                              title={`${month.users} users`}
                             />
                           </div>
-                          <div className="flex space-x-1 mt-1">
+                          <div className="relative">
                             <div 
-                              className="h-6 bg-green-200 rounded transition-all duration-300"
+                              className="h-2 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full transition-all duration-300"
                               style={{ width: `${(month.tasks / maxValue) * 100}%` }}
-                              title={`${month.tasks} tasks`}
                             />
                           </div>
-                          <div className="flex space-x-1 mt-1">
+                          <div className="relative">
                             <div 
-                              className="h-6 bg-purple-200 rounded transition-all duration-300"
+                              className="h-2 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full transition-all duration-300"
                               style={{ width: `${(month.applicants / maxValue) * 100}%` }}
-                              title={`${month.applicants} applicants`}
                             />
                           </div>
                         </div>
-                      </div>
+                      </motion.div>
                     );
                   })}
-                  <div className="flex items-center justify-center space-x-6 mt-4 text-xs">
-                    <span className="flex items-center">
-                      <div className="w-3 h-3 bg-blue-200 rounded mr-2"></div>
-                      Users
-                    </span>
-                    <span className="flex items-center">
-                      <div className="w-3 h-3 bg-green-200 rounded mr-2"></div>
-                      Tasks
-                    </span>
-                    <span className="flex items-center">
-                      <div className="w-3 h-3 bg-purple-200 rounded mr-2"></div>
-                      Applicants
-                    </span>
-                  </div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Department Distribution */}
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-6">Department Distribution</h3>
+              <motion.div
+                whileHover={{ scale: 1.01 }}
+                className="glass rounded-2xl p-6"
+              >
+                <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                  <PieChart className="w-6 h-6 text-indigo-600" />
+                  Department Distribution
+                </h3>
                 <div className="space-y-4">
                   {Object.entries(stats.departmentDistribution)
                     .sort((a, b) => b[1] - a[1])
                     .slice(0, 5)
                     .map(([dept, count], index) => {
                       const percentage = Math.round((count / stats.totalUsers) * 100);
-                      const colors = [
-                        "bg-blue-500",
-                        "bg-green-500",
-                        "bg-purple-500",
-                        "bg-yellow-500",
-                        "bg-pink-500",
+                      const gradients = [
+                        "from-blue-500 to-indigo-600",
+                        "from-emerald-500 to-teal-600",
+                        "from-purple-500 to-pink-600",
+                        "from-amber-500 to-orange-600",
+                        "from-red-500 to-rose-600",
                       ];
                       return (
-                        <div key={dept} className="space-y-2">
+                        <motion.div
+                          key={dept}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                          className="space-y-2"
+                        >
                           <div className="flex items-center justify-between">
                             <span className="text-sm font-medium text-gray-700">{dept}</span>
-                            <span className="text-sm text-gray-500">{count} ({percentage}%)</span>
+                            <span className="text-sm font-bold text-gray-900">{count} ({percentage}%)</span>
                           </div>
-                          <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div
-                              className={`${colors[index]} h-2 rounded-full transition-all duration-300`}
-                              style={{ width: `${percentage}%` }}
+                          <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                            <motion.div
+                              initial={{ width: 0 }}
+                              animate={{ width: `${percentage}%` }}
+                              transition={{ duration: 1, ease: "easeOut", delay: index * 0.1 }}
+                              className={`h-full bg-gradient-to-r ${gradients[index]} rounded-full`}
                             />
                           </div>
-                        </div>
+                        </motion.div>
                       );
                     })}
                   {Object.keys(stats.departmentDistribution).length === 0 && (
                     <p className="text-center text-gray-500 py-8">No department data available</p>
                   )}
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             {/* Activity Summary */}
-            <div className="bg-gradient-to-r from-black to-gray-800 rounded-xl p-8 text-white">
-              <h3 className="text-xl font-bold mb-6">Today's Activity Summary</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold">{stats.communicationsSentToday}</p>
-                  <p className="text-gray-300 mt-1">Messages Sent</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-3xl font-bold">{stats.overdueTasks}</p>
-                  <p className="text-gray-300 mt-1">Overdue Tasks</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-3xl font-bold">{stats.pendingApprovals}</p>
-                  <p className="text-gray-300 mt-1">Pending Approvals</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Scheduled Reports */}
-            {scheduledReports.length > 0 && (
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Scheduled Reports</h3>
-                <div className="space-y-3">
-                  {scheduledReports.map((report) => (
-                    <div key={report.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <div className="flex items-center space-x-3">
-                        <div className={`p-2 rounded-lg ${report.enabled ? 'bg-green-100' : 'bg-gray-100'}`}>
-                          <Calendar className={`w-4 h-4 ${report.enabled ? 'text-green-600' : 'text-gray-400'}`} />
-                        </div>
-                        <div>
-                          <p className="font-medium text-gray-900">{report.name}</p>
-                          <p className="text-sm text-gray-500">
-                            {report.frequency} • {report.format.toUpperCase()} • Next: {new Date(report.nextRun).toLocaleDateString()}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <button
-                          onClick={() => toggleScheduledReport(report.id)}
-                          className={`p-2 rounded-lg transition-colors ${
-                            report.enabled 
-                              ? 'text-green-600 hover:bg-green-100' 
-                              : 'text-gray-400 hover:bg-gray-100'
-                          }`}
-                          title={report.enabled ? 'Disable' : 'Enable'}
-                        >
-                          <CheckCircle className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => deleteScheduledReport(report.id)}
-                          className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors"
-                          title="Delete"
-                        >
-                          <X className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
+            <motion.div
+              whileHover={{ scale: 1.01 }}
+              className="relative overflow-hidden rounded-2xl gradient-primary p-8 text-white"
+            >
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl" />
+              <div className="relative z-10">
+                <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                  <Sparkles className="w-8 h-8" />
+                  Today's Activity Summary
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="text-center bg-white/20 backdrop-blur-xl rounded-xl p-6">
+                    <p className="text-4xl font-bold mb-2">{stats.communicationsSentToday}</p>
+                    <p className="text-white/90">Messages Sent</p>
+                  </div>
+                  <div className="text-center bg-white/20 backdrop-blur-xl rounded-xl p-6">
+                    <p className="text-4xl font-bold mb-2">{stats.overdueTasks}</p>
+                    <p className="text-white/90">Overdue Tasks</p>
+                  </div>
+                  <div className="text-center bg-white/20 backdrop-blur-xl rounded-xl p-6">
+                    <p className="text-4xl font-bold mb-2">{stats.pendingApprovals}</p>
+                    <p className="text-white/90">Pending Approvals</p>
+                  </div>
                 </div>
               </div>
-            )}
-          </div>
+            </motion.div>
+          </motion.div>
         )}
       </div>
 
       {/* Schedule Report Modal */}
-      {showScheduleModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <h2 className="text-xl font-bold mb-4">Schedule Automated Report</h2>
-            <form onSubmit={(e) => {
-              e.preventDefault();
-              const formData = new FormData(e.target as HTMLFormElement);
-              scheduleReport({
-                name: formData.get('name') as string,
-                frequency: formData.get('frequency') as 'daily' | 'weekly' | 'monthly',
-                format: formData.get('format') as 'csv' | 'json' | 'pdf',
-              });
-            }}>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Report Name
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="e.g., Weekly Analytics Summary"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
-                    required
-                  />
+      <AnimatePresence>
+        {showScheduleModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+            onClick={() => setShowScheduleModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <Calendar className="w-8 h-8 text-indigo-600" />
+                Schedule Automated Report
+              </h2>
+              <form onSubmit={(e) => {
+                e.preventDefault();
+                const formData = new FormData(e.target as HTMLFormElement);
+                scheduleReport({
+                  name: formData.get('name') as string,
+                  frequency: formData.get('frequency') as 'daily' | 'weekly' | 'monthly',
+                  format: formData.get('format') as 'csv' | 'json' | 'pdf',
+                });
+              }}>
+                <div className="space-y-5">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Report Name
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="e.g., Weekly Analytics Summary"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Frequency
+                    </label>
+                    <select
+                      name="frequency"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                      required
+                    >
+                      <option value="daily">Daily</option>
+                      <option value="weekly">Weekly</option>
+                      <option value="monthly">Monthly</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Format
+                    </label>
+                    <select
+                      name="format"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                      required
+                    >
+                      <option value="csv">CSV</option>
+                      <option value="json">JSON</option>
+                      <option value="pdf">PDF</option>
+                    </select>
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Frequency
-                  </label>
-                  <select
-                    name="frequency"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
-                    required
+                <div className="flex gap-4 mt-8">
+                  <button
+                    type="button"
+                    onClick={() => setShowScheduleModal(false)}
+                    className="flex-1 btn-secondary"
                   >
-                    <option value="daily">Daily</option>
-                    <option value="weekly">Weekly</option>
-                    <option value="monthly">Monthly</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Format
-                  </label>
-                  <select
-                    name="format"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
-                    required
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex-1 btn-primary"
                   >
-                    <option value="csv">CSV</option>
-                    <option value="json">JSON</option>
-                    <option value="pdf">PDF</option>
-                  </select>
+                    Schedule Report
+                  </button>
                 </div>
-              </div>
-              <div className="flex justify-end space-x-4 mt-6">
-                <button
-                  type="button"
-                  onClick={() => setShowScheduleModal(false)}
-                  className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
-                >
-                  Schedule Report
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Layout>
   );
 }
@@ -1360,15 +1506,22 @@ function AdminActivityLogPreview() {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="glass rounded-2xl p-6"
+    >
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-900">Recent Activity</h3>
+        <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+          <Activity className="w-6 h-6 text-indigo-600" />
+          System Activity
+        </h3>
         <button 
           onClick={() => {
             const allLogs = getActivityLogs();
             console.table(allLogs);
           }}
-          className="text-sm text-gray-600 hover:text-gray-900"
+          className="text-sm text-indigo-600 hover:text-indigo-700 font-medium"
         >
           View All
         </button>
@@ -1376,7 +1529,13 @@ function AdminActivityLogPreview() {
       <div className="space-y-3 max-h-64 overflow-y-auto">
         {logs.length > 0 ? (
           logs.map((log, index) => (
-            <div key={index} className="flex items-start space-x-3 p-2 hover:bg-gray-50 rounded-lg">
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.05 }}
+              className="flex items-start gap-3 p-3 hover:bg-gray-50/50 rounded-xl transition-colors"
+            >
               <div className="mt-1">
                 {getActionIcon(log.action)}
               </div>
@@ -1393,13 +1552,13 @@ function AdminActivityLogPreview() {
                   </p>
                 )}
               </div>
-            </div>
+            </motion.div>
           ))
         ) : (
           <p className="text-sm text-gray-500 text-center py-4">No activity logs yet</p>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
