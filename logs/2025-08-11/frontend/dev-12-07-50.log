@@ -244,3 +244,4 @@ Amplify has not been configured. Please call Amplify.configure() before using th
 [2025-08-12T20:51:19.114Z] [nextjs-dev]  GET /_next/static/chunks/app/error.js 404 in 68ms
 [2025-08-12T20:51:19.114Z] [nextjs-dev]  GET /_next/static/chunks/app-pages-internals.js 404 in 73ms
  GET /_next/static/chunks/app/not-found.js 404 in 61ms
+[2025-08-12T21:33:21.846Z] [nextjs-dev]  ✓ Compiled in 2.3s (5072 modules)
