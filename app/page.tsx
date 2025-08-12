@@ -871,7 +871,7 @@ function Dashboard({ user }: { user: any }) {
         </div>
 
         {/* Modern Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {getRoleSpecificStats().map((stat, index) => {
             const Icon = stat.icon;
             return (
@@ -883,25 +883,47 @@ function Dashboard({ user }: { user: any }) {
               >
                 <Link
                   href={stat.link}
-                  className="block group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                  className="block group relative overflow-hidden rounded-3xl glass-card hover-lift"
                 >
-                  <div className="absolute inset-0 opacity-10">
+                  <div className="absolute inset-0 opacity-5">
                     <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient}`} />
                   </div>
+                  
+                  {/* Animated background gradient */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur-lg opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
+                  
                   <div className="relative p-6">
                     <div className="flex items-center justify-between mb-4">
-                      <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.gradient} shadow-lg group-hover:scale-110 transition-transform`}>
+                      <div className={`p-3.5 rounded-2xl bg-gradient-to-br ${stat.gradient} shadow-glow group-hover:scale-110 transition-transform duration-300`}>
                         <Icon className="w-6 h-6 text-white" />
                       </div>
-                      <span className={`text-sm font-medium flex items-center gap-1 ${
-                        stat.trendUp ? 'text-emerald-600' : 'text-gray-600'
-                      }`}>
-                        {stat.trendUp ? <ArrowUpRight className="w-4 h-4" /> : null}
-                        {stat.trend}
-                      </span>
+                      <motion.span
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 + 0.2 }}
+                        className={`text-sm font-medium flex items-center gap-1 ${
+                          stat.trendUp ? 'text-emerald-600' : 'text-gray-600'
+                        }`}
+                      >
+                        {stat.trendUp ? (
+                          <div className="flex items-center gap-1">
+                            <ArrowUpRight className="w-4 h-4" />
+                            <span className="text-xs bg-emerald-50 px-2 py-1 rounded-full">{stat.trend}</span>
+                          </div>
+                        ) : (
+                          <span className="text-xs bg-gray-100 px-2 py-1 rounded-full">{stat.trend}</span>
+                        )}
+                      </motion.span>
                     </div>
-                    <h3 className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</h3>
-                    <p className="text-sm text-gray-600">{stat.title}</p>
+                    <motion.h3
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: index * 0.1 + 0.3 }}
+                      className="text-4xl font-bold text-gradient mb-2"
+                    >
+                      {stat.value}
+                    </motion.h3>
+                    <p className="text-sm text-gray-600 font-medium">{stat.title}</p>
                   </div>
                 </Link>
               </motion.div>
@@ -918,35 +940,40 @@ function Dashboard({ user }: { user: any }) {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="glass rounded-2xl p-6"
+                className="glass-card rounded-3xl p-8"
               >
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                    <Rocket className="w-6 h-6 text-indigo-600" />
+                  <h2 className="text-2xl font-bold text-gradient flex items-center gap-3">
+                    <div className="p-2 rounded-xl gradient-primary animate-pulse-glow">
+                      <Rocket className="w-6 h-6 text-white" />
+                    </div>
                     {userRole === "admin" || userRole === "mentor" || userRole === "team_lead" 
                       ? "Team Tasks Overview" 
                       : "My Upcoming Tasks"}
                   </h2>
-                  <Link href="/onboarding" className="text-indigo-600 hover:text-indigo-700 text-sm font-medium flex items-center group">
+                  <Link href="/onboarding" className="btn-modern px-4 py-2 rounded-xl text-white text-sm font-medium flex items-center group">
                     View All
                     <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
-                <div className="space-y-3">
-                  {upcomingTasks.map((task) => (
+                <div className="space-y-4">
+                  {upcomingTasks.map((task, taskIndex) => (
                     <motion.div
                       key={task.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: taskIndex * 0.05 }}
                       whileHover={{ x: 4 }}
-                      className="flex items-center justify-between p-4 bg-gray-50/50 hover:bg-gray-100/50 rounded-xl transition-all group"
+                      className="flex items-center justify-between p-5 bg-white/60 hover:bg-white/80 rounded-2xl transition-all group hover-lift"
                     >
                       <div className="flex items-center gap-4">
-                        <div className={`p-3 rounded-xl ${
-                          task.status === "overdue" ? "bg-red-100" :
-                          task.status === "in_progress" ? "bg-amber-100" :
+                        <div className={`p-3 rounded-2xl ${
+                          task.status === "overdue" ? "gradient-secondary" :
+                          task.status === "in_progress" ? "gradient-accent" :
                           "bg-gray-100"
-                        }`}>
-                          {task.status === "overdue" ? <AlertCircle className="w-5 h-5 text-red-600" /> :
-                           task.status === "in_progress" ? <Clock className="w-5 h-5 text-amber-600" /> :
+                        } shadow-soft`}>
+                          {task.status === "overdue" ? <AlertCircle className="w-5 h-5 text-white" /> :
+                           task.status === "in_progress" ? <Clock className="w-5 h-5 text-white" /> :
                            <Circle className="w-5 h-5 text-gray-600" />}
                         </div>
                         <div>
@@ -1028,10 +1055,12 @@ function Dashboard({ user }: { user: any }) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="glass rounded-2xl p-6"
+              className="glass-card rounded-3xl p-8"
             >
-              <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                <Zap className="w-6 h-6 text-indigo-600" />
+              <h2 className="text-2xl font-bold text-gradient mb-6 flex items-center gap-3">
+                <div className="p-2 rounded-xl gradient-accent animate-float">
+                  <Zap className="w-6 h-6 text-white" />
+                </div>
                 Quick Actions
               </h2>
               <div className="grid grid-cols-2 gap-4">
@@ -1040,15 +1069,20 @@ function Dashboard({ user }: { user: any }) {
                   return (
                     <motion.div
                       key={index}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: index * 0.1 + 0.3 }}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
                       <Link
                         href={action.link}
-                        className={`flex flex-col items-center justify-center p-6 rounded-xl bg-gradient-to-br ${action.gradient} text-white shadow-lg hover:shadow-xl transition-all group`}
+                        className={`relative flex flex-col items-center justify-center p-6 rounded-2xl bg-gradient-to-br ${action.gradient} text-white shadow-soft hover:shadow-glow transition-all group overflow-hidden`}
                       >
-                        <Icon className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform" />
-                        <span className="text-sm font-medium text-center">{action.title}</span>
+                        {/* Animated background effect */}
+                        <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300" />
+                        <Icon className="w-10 h-10 mb-3 group-hover:scale-110 transition-transform relative z-10" />
+                        <span className="text-sm font-semibold text-center relative z-10">{action.title}</span>
                       </Link>
                     </motion.div>
                   );

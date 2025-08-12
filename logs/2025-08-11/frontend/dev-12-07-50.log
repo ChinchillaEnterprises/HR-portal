@@ -1,0 +1,246 @@
+[2025-08-11T17:07:50.334Z] Starting: npm run dev (Process ID: nextjs-dev)
+[2025-08-11T17:07:50.488Z] [nextjs-dev] 
+> aws-amplify-gen2@0.1.0 dev
+> next dev
+
+[2025-08-11T17:07:50.873Z] [nextjs-dev]   ▲ Next.js 14.2.10
+[2025-08-11T17:07:50.873Z] [nextjs-dev]   - Local:        http://localhost:3000
+
+ ✓ Starting...
+[2025-08-11T17:07:52.203Z] [nextjs-dev]  ✓ Ready in 1407ms
+[2025-08-11T18:11:36.333Z] [nextjs-dev]  ○ Compiling / ...
+[2025-08-11T18:11:43.182Z] [nextjs-dev]  ✓ Compiled / in 7.3s (5122 modules)
+[2025-08-11T18:11:43.531Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-11T18:11:43.532Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-11T18:11:43.533Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-11T18:11:43.534Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-11T18:11:43.541Z] [nextjs-dev] [ERROR]  ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata themeColor is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[2025-08-11T18:11:43.603Z] [nextjs-dev] [ERROR]  ⨯ Error: Event handlers cannot be passed to Client Component props.
+  <button onClick={function onClick} className=... children=...>
+                  ^^^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at stringify (<anonymous>)
+    at stringify (<anonymous>)
+    at stringify (<anonymous>)
+digest: "67891855"
+[2025-08-11T18:11:43.774Z] [nextjs-dev]  GET / 200 in 7971ms
+[2025-08-11T18:11:43.908Z] [nextjs-dev]  ✓ Compiled in 549ms (2495 modules)
+[2025-08-11T18:11:45.418Z] [nextjs-dev]  ○ Compiling /favicon.ico ...
+[2025-08-11T18:11:46.757Z] [nextjs-dev]  ✓ Compiled /favicon.ico in 1847ms (2623 modules)
+[2025-08-11T18:11:46.810Z] [nextjs-dev]  GET /favicon.ico 200 in 1906ms
+[2025-08-11T18:17:13.444Z] [nextjs-dev] [ERROR]  ⨯ ./amplify_outputs.json
+Module parse failed: Cannot parse JSON: Unexpected non-whitespace character after JSON at position 989 (line 30 column 1) while parsing '{
+  "auth": {
+    "user_pool_id": "us-ea'
+You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
+Error: Cannot parse JSON: Unexpected non-whitespace character after JSON at position 989 (line 30 column 1) while parsing '{
+  "auth": {
+    "user_pool_id": "us-ea'
+Import trace for requested module:
+./amplify_outputs.json
+./app/page.tsx
+[2025-08-11T18:17:19.780Z] [nextjs-dev] [ERROR]  ⨯ ./amplify_outputs.json
+Module parse failed: Cannot parse JSON: Unexpected non-whitespace character after JSON at position 989 (line 30 column 1) while parsing '{
+  "auth": {
+    "user_pool_id": "us-ea'
+You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
+Error: Cannot parse JSON: Unexpected non-whitespace character after JSON at position 989 (line 30 column 1) while parsing '{
+  "auth": {
+    "user_pool_id": "us-ea'
+Import trace for requested module:
+./amplify_outputs.json
+./app/page.tsx
+[2025-08-11T18:17:28.288Z] [nextjs-dev]  ✓ Compiled in 267ms (5073 modules)
+[2025-08-11T18:17:28.349Z] [nextjs-dev] [ERROR]  ⨯ Error: Event handlers cannot be passed to Client Component props.
+  <button onClick={function onClick} className=... children=...>
+                  ^^^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at stringify (<anonymous>)
+    at stringify (<anonymous>)
+    at stringify (<anonymous>)
+digest: "702129766"
+[2025-08-11T18:20:40.031Z] [nextjs-dev]  ✓ Compiled in 1639ms (5085 modules)
+[2025-08-11T18:29:35.419Z] [nextjs-dev]  ✓ Compiled in 804ms (5071 modules)
+[2025-08-11T19:01:46.657Z] [nextjs-dev] [ERROR]  ⨯ ./amplify_outputs.json
+Module build failed: Error: ENOENT: no such file or directory, open '/Users/ricardo/Documents/Dev/CHI/HR-portal/amplify_outputs.json'
+
+Import trace for requested module:
+./amplify_outputs.json
+./app/page.tsx
+[2025-08-11T19:01:47.019Z] [nextjs-dev] [ERROR]  ⨯ ./amplify_outputs.json
+Module build failed: Error: ENOENT: no such file or directory, open '/Users/ricardo/Documents/Dev/CHI/HR-portal/amplify_outputs.json'
+
+Import trace for requested module:
+./amplify_outputs.json
+./app/page.tsx
+[2025-08-11T19:02:01.972Z] [nextjs-dev] [ERROR]  ⨯ ./amplify_outputs.json
+Module parse failed: Cannot parse JSON: Unexpected non-whitespace character after JSON at position 946 (line 30 column 1) while parsing '{
+  "auth": {
+    "user_pool_id": "PLACE'
+You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
+Error: Cannot parse JSON: Unexpected non-whitespace character after JSON at position 946 (line 30 column 1) while parsing '{
+  "auth": {
+    "user_pool_id": "PLACE'
+Import trace for requested module:
+./amplify_outputs.json
+./app/page.tsx
+[2025-08-11T19:02:06.474Z] [nextjs-dev]  ✓ Compiled in 430ms (5071 modules)
+[2025-08-11T21:09:41.774Z] [nextjs-dev]  ✓ Compiled in 2.3s (5085 modules)
+[2025-08-11T21:09:42.432Z] [nextjs-dev]  ○ Compiling /_not-found ...
+[2025-08-11T21:09:42.640Z] [nextjs-dev]  ✓ Compiled /_not-found in 710ms (5074 modules)
+[2025-08-11T21:09:42.721Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754946581873 404 in 791ms
+[2025-08-11T21:10:19.589Z] [nextjs-dev]  ✓ Compiled in 736ms (5088 modules)
+[2025-08-11T21:10:19.725Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754946619635 404 in 67ms
+[2025-08-11T21:11:16.690Z] [nextjs-dev]  ✓ Compiled in 902ms (5088 modules)
+[2025-08-11T21:11:16.783Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754946676715 404 in 44ms
+[2025-08-11T21:12:00.239Z] [nextjs-dev]  ✓ Compiled in 660ms (5088 modules)
+[2025-08-11T21:12:00.364Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754946720292 404 in 42ms
+[2025-08-11T21:12:43.021Z] [nextjs-dev]  ✓ Compiled in 761ms (5088 modules)
+[2025-08-11T21:12:43.146Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754946763070 404 in 54ms
+[2025-08-11T21:13:02.122Z] [nextjs-dev]  ✓ Compiled in 721ms (5088 modules)
+[2025-08-11T21:13:02.205Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754946782153 404 in 33ms
+[2025-08-11T21:14:05.781Z] [nextjs-dev]  ✓ Compiled in 2s (5086 modules)
+[2025-08-11T21:14:05.968Z] [nextjs-dev]  ✓ Compiled /_not-found in 121ms (2588 modules)
+[2025-08-11T21:14:06.031Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754946845814 404 in 187ms
+[2025-08-11T21:14:35.802Z] [nextjs-dev]  ✓ Compiled in 986ms (5088 modules)
+[2025-08-11T21:14:35.986Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754946875896 404 in 27ms
+[2025-08-11T21:15:20.974Z] [nextjs-dev]  ✓ Compiled in 740ms (5088 modules)
+[2025-08-11T21:15:21.073Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754946921015 404 in 40ms
+[2025-08-11T21:17:23.163Z] [nextjs-dev]  ✓ Compiled in 757ms (2500 modules)
+[2025-08-11T21:17:23.216Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754947043179 404 in 20ms
+[2025-08-11T21:21:04.317Z] [nextjs-dev]  ✓ Compiled in 640ms (2500 modules)
+[2025-08-11T21:21:04.364Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754947264335 404 in 18ms
+[2025-08-11T21:21:56.720Z] [nextjs-dev]  ✓ Compiled in 480ms (2500 modules)
+[2025-08-11T21:21:56.772Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754947316739 404 in 16ms
+[2025-08-11T21:24:39.154Z] [nextjs-dev]  ✓ Compiled in 706ms (2500 modules)
+[2025-08-11T21:24:39.211Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754947479176 404 in 22ms
+[2025-08-11T21:26:26.855Z] [nextjs-dev]  ✓ Compiled in 674ms (2500 modules)
+[2025-08-11T21:26:26.896Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754947586870 404 in 13ms
+[2025-08-12T11:41:57.663Z] [nextjs-dev]  ✓ Compiled in 1223ms (2500 modules)
+[2025-08-12T11:41:57.737Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754998917689 404 in 15ms
+[2025-08-12T11:42:05.336Z] [nextjs-dev]  ✓ Compiled in 1692ms (5088 modules)
+[2025-08-12T11:42:05.458Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754998925382 404 in 56ms
+[2025-08-12T11:42:39.736Z] [nextjs-dev]  ✓ Compiled in 1195ms (5102 modules)
+[2025-08-12T11:42:39.817Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754998959765 404 in 34ms
+[2025-08-12T11:44:15.915Z] [nextjs-dev]  ✓ Compiled in 464ms (2507 modules)
+[2025-08-12T11:44:15.961Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754999055929 404 in 19ms
+[2025-08-12T11:44:37.723Z] [nextjs-dev]  ✓ Compiled in 247ms (2507 modules)
+[2025-08-12T11:44:37.752Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754999077733 404 in 12ms
+[2025-08-12T11:45:36.551Z] [nextjs-dev]  ✓ Compiled in 508ms (2507 modules)
+[2025-08-12T11:45:36.669Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754999136620 404 in 19ms
+[2025-08-12T11:46:38.835Z] [nextjs-dev]  ✓ Compiled in 444ms (2507 modules)
+[2025-08-12T11:46:38.879Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754999198850 404 in 15ms
+[2025-08-12T11:58:56.943Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T11:58:56.945Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T11:58:56.946Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T11:58:56.947Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T11:58:56.970Z] [nextjs-dev]  GET / 200 in 314ms
+[2025-08-12T11:58:57.011Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754999936693 404 in 19ms
+[2025-08-12T11:58:57.069Z] [nextjs-dev]  GET /_next/static/chunks/app/not-found.js 404 in 42ms
+[2025-08-12T11:58:57.069Z] [nextjs-dev]  GET /_next/static/chunks/app-pages-internals.js 404 in 45ms
+[2025-08-12T11:58:57.070Z] [nextjs-dev]  GET /_next/static/chunks/main-app.js?v=1754999936693 404 in 49ms
+[2025-08-12T11:58:57.070Z] [nextjs-dev]  GET /_next/static/chunks/app/error.js 404 in 45ms
+[2025-08-12T11:58:58.006Z] [nextjs-dev]  ○ Compiling /favicon.ico ...
+[2025-08-12T11:58:58.199Z] [nextjs-dev]  ✓ Compiled /favicon.ico in 912ms (2626 modules)
+[2025-08-12T11:58:58.247Z] [nextjs-dev]  GET /favicon.ico 200 in 964ms
+[2025-08-12T11:59:16.229Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T11:59:16.230Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+Amplify has not been configured. Please call Amplify.configure() before using this service.
+Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T11:59:16.231Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T11:59:16.276Z] [nextjs-dev]  GET / 200 in 200ms
+[2025-08-12T11:59:16.335Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1754999956103 404 in 38ms
+[2025-08-12T11:59:16.349Z] [nextjs-dev]  GET /_next/static/chunks/app-pages-internals.js 404 in 48ms
+[2025-08-12T11:59:16.351Z] [nextjs-dev]  GET /_next/static/chunks/main-app.js?v=1754999956103 404 in 50ms
+[2025-08-12T11:59:16.351Z] [nextjs-dev]  GET /_next/static/chunks/app/error.js 404 in 47ms
+[2025-08-12T11:59:16.352Z] [nextjs-dev]  GET /_next/static/chunks/app/not-found.js 404 in 46ms
+[2025-08-12T11:59:16.516Z] [nextjs-dev]  GET /favicon.ico 200 in 5ms
+[2025-08-12T12:28:01.472Z] [nextjs-dev]  GET / 200 in 164ms
+[2025-08-12T12:28:01.642Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1755001681359 404 in 82ms
+[2025-08-12T12:28:01.664Z] [nextjs-dev]  GET /_next/static/chunks/main-app.js?v=1755001681359 404 in 67ms
+[2025-08-12T12:28:01.672Z] [nextjs-dev]  GET /_next/static/chunks/app-pages-internals.js 404 in 65ms
+[2025-08-12T12:28:01.705Z] [nextjs-dev]  GET /_next/static/chunks/app/error.js 404 in 34ms
+[2025-08-12T12:28:01.706Z] [nextjs-dev]  GET /_next/static/chunks/app/not-found.js 404 in 29ms
+[2025-08-12T12:28:01.887Z] [nextjs-dev]  GET /favicon.ico 200 in 8ms
+[2025-08-12T15:30:27.660Z] [nextjs-dev]  GET / 200 in 106ms
+[2025-08-12T15:30:27.767Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1755012627612 404 in 57ms
+[2025-08-12T15:30:27.801Z] [nextjs-dev]  GET /_next/static/chunks/main-app.js?v=1755012627612 404 in 75ms
+[2025-08-12T15:30:27.802Z] [nextjs-dev]  GET /_next/static/chunks/app/error.js 404 in 67ms
+[2025-08-12T15:30:27.803Z] [nextjs-dev]  GET /_next/static/chunks/app-pages-internals.js 404 in 71ms
+[2025-08-12T15:30:27.803Z] [nextjs-dev]  GET /_next/static/chunks/app/not-found.js 404 in 68ms
+[2025-08-12T15:30:27.990Z] [nextjs-dev]  GET /favicon.ico 200 in 8ms
+[2025-08-12T20:27:22.750Z] [nextjs-dev]  GET / 200 in 163ms
+[2025-08-12T20:27:31.480Z] [nextjs-dev]  GET / 200 in 61ms
+[2025-08-12T20:27:32.005Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1755030451440 404 in 91ms
+[2025-08-12T20:27:32.096Z] [nextjs-dev]  GET /_next/static/chunks/main-app.js?v=1755030451440 404 in 79ms
+[2025-08-12T20:27:32.097Z] [nextjs-dev]  GET /_next/static/chunks/app-pages-internals.js 404 in 76ms
+[2025-08-12T20:27:32.098Z] [nextjs-dev]  GET /_next/static/chunks/app/error.js 404 in 76ms
+[2025-08-12T20:27:32.099Z] [nextjs-dev]  GET /_next/static/chunks/app/not-found.js 404 in 76ms
+[2025-08-12T20:30:33.725Z] [nextjs-dev]  GET / 200 in 83ms
+[2025-08-12T20:30:33.853Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1755030633681 404 in 75ms
+[2025-08-12T20:30:33.885Z] [nextjs-dev]  GET /_next/static/chunks/main-app.js?v=1755030633681 404 in 102ms
+[2025-08-12T20:30:33.887Z] [nextjs-dev]  GET /_next/static/chunks/app/error.js 404 in 76ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 78ms
+[2025-08-12T20:30:33.887Z] [nextjs-dev]  GET /_next/static/chunks/app/not-found.js 404 in 76ms
+[2025-08-12T20:30:34.069Z] [nextjs-dev]  GET /favicon.ico 200 in 14ms
+[2025-08-12T20:31:31.789Z] [nextjs-dev]  GET / 200 in 55ms
+[2025-08-12T20:31:31.877Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1755030691759 404 in 59ms
+[2025-08-12T20:31:31.885Z] [nextjs-dev]  GET /_next/static/chunks/app-pages-internals.js 404 in 57ms
+[2025-08-12T20:31:31.885Z] [nextjs-dev]  GET /_next/static/chunks/app/error.js 404 in 55ms
+[2025-08-12T20:31:31.885Z] [nextjs-dev]  GET /_next/static/chunks/main-app.js?v=1755030691759 404 in 64ms
+[2025-08-12T20:31:31.886Z] [nextjs-dev]  GET /_next/static/chunks/app/not-found.js 404 in 55ms
+[2025-08-12T20:31:32.132Z] [nextjs-dev]  GET /favicon.ico 200 in 6ms
+[2025-08-12T20:32:30.830Z] [nextjs-dev]  GET / 200 in 70ms
+[2025-08-12T20:32:30.908Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1755030750774 404 in 64ms
+[2025-08-12T20:32:30.964Z] [nextjs-dev]  GET /_next/static/chunks/main-app.js?v=1755030750774 404 in 75ms
+[2025-08-12T20:32:30.965Z] [nextjs-dev]  GET /_next/static/chunks/app-pages-internals.js 404 in 76ms
+[2025-08-12T20:32:30.966Z] [nextjs-dev]  GET /_next/static/chunks/app/not-found.js 404 in 56ms
+ GET /_next/static/chunks/app/error.js 404 in 68ms
+[2025-08-12T20:32:31.200Z] [nextjs-dev]  GET /favicon.ico 200 in 4ms
+[2025-08-12T20:32:49.582Z] [nextjs-dev]  ✓ Compiled in 3.1s (5119 modules)
+[2025-08-12T20:33:41.479Z] [nextjs-dev]  ✓ Compiled in 1179ms (5086 modules)
+[2025-08-12T20:35:41.130Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T20:35:41.136Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T20:35:41.138Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T20:35:41.149Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T20:35:41.453Z] [nextjs-dev]  GET / 200 in 1256ms
+[2025-08-12T20:35:41.996Z] [nextjs-dev]  ○ Compiling /_not-found ...
+[2025-08-12T20:35:42.920Z] [nextjs-dev]  ✓ Compiled /_not-found in 1443ms (2588 modules)
+[2025-08-12T20:35:44.748Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T20:35:44.750Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T20:35:44.752Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T20:35:44.754Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T20:35:45.020Z] [nextjs-dev]  GET / 200 in 589ms
+[2025-08-12T20:35:45.123Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1755030944460 404 in 109ms
+[2025-08-12T20:35:45.173Z] [nextjs-dev]  GET /_next/static/chunks/app-pages-internals.js 404 in 148ms
+ GET /_next/static/chunks/main-app.js?v=1755030944460 404 in 150ms
+[2025-08-12T20:35:45.193Z] [nextjs-dev]  GET /_next/static/chunks/app/error.js 404 in 143ms
+[2025-08-12T20:35:45.199Z] [nextjs-dev]  GET /_next/static/chunks/app/not-found.js 404 in 147ms
+[2025-08-12T20:38:46.545Z] [nextjs-dev]  ✓ Compiled in 2.1s (5072 modules)
+[2025-08-12T20:40:08.047Z] [nextjs-dev]  ✓ Compiled in 1027ms (5086 modules)
+[2025-08-12T20:45:46.024Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T20:45:46.031Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+Amplify has not been configured. Please call Amplify.configure() before using this service.
+Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T20:45:46.087Z] [nextjs-dev]  GET / 200 in 447ms
+[2025-08-12T20:45:46.810Z] [nextjs-dev]  ○ Compiling /_not-found ...
+[2025-08-12T20:45:46.823Z] [nextjs-dev]  ✓ Compiled /_not-found in 636ms (2588 modules)
+[2025-08-12T20:45:46.877Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1755031545763 404 in 711ms
+[2025-08-12T20:45:46.882Z] [nextjs-dev]  GET /_next/static/chunks/main-app.js?v=1755031545763 404 in 702ms
+[2025-08-12T20:45:46.882Z] [nextjs-dev]  GET /_next/static/chunks/app-pages-internals.js 404 in 671ms
+[2025-08-12T20:45:46.883Z] [nextjs-dev]  GET /_next/static/chunks/app/error.js 404 in 669ms
+[2025-08-12T20:45:46.883Z] [nextjs-dev]  GET /_next/static/chunks/app/not-found.js 404 in 667ms
+[2025-08-12T20:51:18.828Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T20:51:18.838Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T20:51:18.845Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T20:51:18.846Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T20:51:18.868Z] [nextjs-dev]  GET / 200 in 379ms
+[2025-08-12T20:51:18.976Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1755031878601 404 in 22ms
+[2025-08-12T20:51:19.112Z] [nextjs-dev]  GET /_next/static/chunks/main-app.js?v=1755031878601 404 in 107ms
+[2025-08-12T20:51:19.114Z] [nextjs-dev]  GET /_next/static/chunks/app/error.js 404 in 68ms
+[2025-08-12T20:51:19.114Z] [nextjs-dev]  GET /_next/static/chunks/app-pages-internals.js 404 in 73ms
+ GET /_next/static/chunks/app/not-found.js 404 in 61ms

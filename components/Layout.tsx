@@ -58,6 +58,7 @@ export default function Layout({ children, user }: LayoutProps) {
 
   const navigation = [
     { name: "Dashboard", href: "/", icon: Home, roles: ["admin", "mentor", "team_lead", "intern", "staff"], gradient: "from-blue-500 to-indigo-600" },
+    { name: "AI Assistant", href: "/ai-assistant", icon: Sparkles, roles: ["admin", "mentor", "team_lead", "intern", "staff"], gradient: "from-indigo-500 to-purple-600" },
     { name: "Onboarding", href: "/onboarding", icon: UserCheck, roles: ["admin", "mentor", "team_lead", "intern", "staff"], gradient: "from-emerald-500 to-teal-600" },
     { name: "Templates", href: "/templates", icon: BookOpen, roles: ["admin", "mentor", "team_lead"], gradient: "from-purple-500 to-pink-600" },
     { name: "Document Vault", href: "/documents", icon: FileText, roles: ["admin", "mentor", "team_lead", "intern", "staff"], gradient: "from-amber-500 to-orange-600" },
@@ -78,7 +79,10 @@ export default function Layout({ children, user }: LayoutProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50">
+      {/* Animated background mesh */}
+      <div className="fixed inset-0 bg-gradient-mesh opacity-5 pointer-events-none" />
+      
       {/* Mobile sidebar overlay */}
       <AnimatePresence>
         {sidebarOpen && (
@@ -86,20 +90,20 @@ export default function Layout({ children, user }: LayoutProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 lg:hidden"
+            className="fixed inset-0 bg-black/60 backdrop-blur-md z-30 lg:hidden"
             onClick={() => setSidebarOpen(false)}
           />
         )}
       </AnimatePresence>
 
       {/* Mobile header bar */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 glass z-40 h-16 border-b border-gray-200/50">
+      <div className="lg:hidden fixed top-0 left-0 right-0 glass-card z-40 h-16 border-b border-white/50">
         <div className="flex items-center justify-between h-full px-4">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-2 rounded-xl hover:bg-gray-100 transition-all"
+            className="p-2 rounded-xl hover:bg-white/50 transition-all hover-lift"
           >
             {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
           </motion.button>
@@ -119,14 +123,17 @@ export default function Layout({ children, user }: LayoutProps) {
       <motion.div
         initial={false}
         animate={{
-          x: sidebarOpen || window.innerWidth >= 1024 ? 0 : -280,
+          x: sidebarOpen || (typeof window !== 'undefined' && window.innerWidth >= 1024) ? 0 : -280,
         }}
         transition={{ type: "spring", damping: 30, stiffness: 300 }}
-        className="fixed inset-y-0 left-0 z-40 w-72 glass-dark shadow-2xl lg:translate-x-0"
+        className="fixed inset-y-0 left-0 z-40 w-72 glass-card shadow-2xl lg:translate-x-0 overflow-hidden"
       >
-        <div className="flex flex-col h-full">
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-violet-600/10 via-purple-600/10 to-pink-600/10 pointer-events-none" />
+        
+        <div className="flex flex-col h-full relative">
           {/* Logo */}
-          <div className="flex items-center justify-center h-20 border-b border-gray-700/50">
+          <div className="flex items-center justify-center h-20 border-b border-white/20">
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -156,23 +163,28 @@ export default function Layout({ children, user }: LayoutProps) {
                 >
                   <Link
                     href={item.href}
-                    className={`group flex items-center px-4 py-3 rounded-xl transition-all ${
+                    className={`group flex items-center px-4 py-3 rounded-2xl transition-all duration-300 hover-lift ${
                       isActive
-                        ? "bg-white text-gray-900 shadow-lg"
-                        : "text-gray-300 hover:bg-white/10 hover:text-white"
+                        ? "bg-white/90 text-gray-900 shadow-soft"
+                        : "text-gray-700 hover:bg-white/50 hover:text-gray-900"
                     }`}
                     onClick={() => setSidebarOpen(false)}
                   >
-                    <div className={`p-2 rounded-lg ${
+                    <div className={`p-2.5 rounded-xl transition-all duration-300 ${
                       isActive 
-                        ? `bg-gradient-to-br ${item.gradient}` 
-                        : "bg-gray-700/50 group-hover:bg-gray-600/50"
-                    } transition-all`}>
-                      <Icon className={`w-5 h-5 ${isActive ? "text-white" : "text-gray-300"}`} />
+                        ? `bg-gradient-to-br ${item.gradient} shadow-glow` 
+                        : "bg-gray-200/50 group-hover:bg-gray-200/70"
+                    }`}>
+                      <Icon className={`w-5 h-5 ${isActive ? "text-white" : "text-gray-600 group-hover:text-gray-800"}`} />
                     </div>
                     <span className="ml-3 font-medium flex-1">{item.name}</span>
                     {isActive && (
-                      <ChevronRight className="w-5 h-5 opacity-50" />
+                      <motion.div
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                      >
+                        <ChevronRight className="w-5 h-5 opacity-50" />
+                      </motion.div>
                     )}
                   </Link>
                 </motion.div>
@@ -181,27 +193,27 @@ export default function Layout({ children, user }: LayoutProps) {
           </nav>
 
           {/* User section */}
-          <div className="p-4 border-t border-gray-700/50">
+          <div className="p-4 border-t border-white/20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white/10 backdrop-blur-xl rounded-xl p-4 mb-4"
+              className="glass-card rounded-2xl p-4 mb-4"
             >
               <div className="flex items-center mb-3">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full blur-md opacity-75" />
-                  <div className="relative w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center">
+                <div className="relative animate-float">
+                  <div className="absolute inset-0 bg-gradient-primary rounded-full blur-lg opacity-60" />
+                  <div className="relative w-12 h-12 rounded-full gradient-primary flex items-center justify-center shadow-glow">
                     <User className="w-6 h-6 text-white" />
                   </div>
                 </div>
                 <div className="ml-3 min-w-0 flex-1">
-                  <p className="text-sm font-medium text-white truncate">
+                  <p className="text-sm font-semibold text-gray-900 truncate">
                     {userInfo?.firstName || user?.attributes?.given_name} {userInfo?.lastName || user?.attributes?.family_name}
                   </p>
-                  <p className="text-xs text-gray-400 truncate">{userInfo?.email || user?.attributes?.email}</p>
+                  <p className="text-xs text-gray-600 truncate">{userInfo?.email || user?.attributes?.email}</p>
                   <div className="flex items-center gap-2 mt-1">
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-white/20 text-white">
-                      <Layers className="w-3 h-3 mr-1" />
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium gradient-secondary text-white shadow-sm">
+                      <Sparkles className="w-3 h-3 mr-1" />
                       {userRole.replace("_", " ")}
                     </span>
                   </div>
@@ -211,17 +223,17 @@ export default function Layout({ children, user }: LayoutProps) {
             <div className="space-y-2">
               <Link
                 href="/profile"
-                className="flex items-center w-full px-4 py-2 text-sm text-gray-300 rounded-lg hover:bg-white/10 hover:text-white transition-all"
+                className="flex items-center w-full px-4 py-2.5 text-sm text-gray-700 rounded-xl hover:bg-white/60 transition-all hover-lift font-medium"
                 onClick={() => setSidebarOpen(false)}
               >
-                <User className="w-4 h-4 mr-3" />
+                <User className="w-4 h-4 mr-3 text-gray-600" />
                 Profile Settings
               </Link>
               <button
                 onClick={handleSignOut}
-                className="flex items-center w-full px-4 py-2 text-sm text-gray-300 rounded-lg hover:bg-white/10 hover:text-white transition-all group"
+                className="flex items-center w-full px-4 py-2.5 text-sm text-gray-700 rounded-xl hover:bg-red-50 hover:text-red-600 transition-all group hover-lift font-medium"
               >
-                <LogOut className="w-4 h-4 mr-3 group-hover:text-red-400 transition-colors" />
+                <LogOut className="w-4 h-4 mr-3 group-hover:text-red-500 transition-colors" />
                 Sign out
               </button>
             </div>
@@ -230,9 +242,9 @@ export default function Layout({ children, user }: LayoutProps) {
       </motion.div>
 
       {/* Main content */}
-      <div className="lg:pl-72 min-h-screen bg-gray-50 pt-16 lg:pt-0">
+      <div className="lg:pl-72 min-h-screen pt-16 lg:pt-0">
         {/* Desktop header */}
-        <header className="hidden lg:block glass sticky top-0 z-30 border-b border-gray-200/50">
+        <header className="hidden lg:block glass-card sticky top-0 z-30 border-b border-white/50">
           <div className="px-4 sm:px-6 lg:px-8 py-4">
             <div className="flex items-center justify-between">
               <motion.div
@@ -240,7 +252,7 @@ export default function Layout({ children, user }: LayoutProps) {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex items-center gap-3"
               >
-                <h2 className="text-2xl font-bold text-gray-900">
+                <h2 className="text-2xl font-bold text-gradient">
                   {navigation.find((item) => item.href === pathname)?.name || "Dashboard"}
                 </h2>
                 <Rocket className="w-6 h-6 text-indigo-600 animate-pulse" />

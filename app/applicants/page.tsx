@@ -6,6 +6,9 @@ import type { Schema } from "@/amplify/data/resource";
 import { Authenticator } from "@aws-amplify/ui-react";
 import Layout from "@/components/Layout";
 import { getAuthenticatedUser, hasPermission, type UserRole } from "@/lib/auth";
+import AIResumeAnalyzer from "@/components/AIResumeAnalyzer";
+import { aiService } from "@/lib/ai-service";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Users,
   Search,
@@ -42,6 +45,10 @@ import {
   Zap,
   Eye,
   Circle,
+  Brain,
+  Sparkles,
+  BarChart3,
+  TrendingUp,
 } from "lucide-react";
 
 const client = generateClient<Schema>();
@@ -96,6 +103,8 @@ function ApplicantsPage({ user }: { user: any }) {
   const [currentUserId, setCurrentUserId] = useState("");
   const [notes, setNotes] = useState<NoteData[]>([]);
   const [newNote, setNewNote] = useState("");
+  const [showAIAnalysis, setShowAIAnalysis] = useState(false);
+  const [aiAnalysisResults, setAiAnalysisResults] = useState<any>(null);
   const [formData, setFormData] = useState<ApplicantFormData>({
     firstName: "",
     lastName: "",
@@ -255,20 +264,25 @@ ${interviewData.notes ? `Notes: ${interviewData.notes}` : ''}`;
   const getStatusColor = (status?: string) => {
     switch (status) {
       case "applied":
-        return "bg-gray-100 text-gray-800";
+        return "from-gray-500 to-gray-600";
       case "screening":
-        return "bg-blue-100 text-blue-800";
+        return "from-blue-500 to-indigo-600";
       case "interview":
-        return "bg-purple-100 text-purple-800";
+        return "from-purple-500 to-pink-600";
       case "offer":
-        return "bg-green-100 text-green-800";
+        return "from-green-500 to-emerald-600";
       case "rejected":
-        return "bg-red-100 text-red-800";
+        return "from-red-500 to-rose-600";
       case "hired":
-        return "bg-green-500 text-white";
+        return "from-green-600 to-teal-600";
       default:
-        return "bg-gray-100 text-gray-800";
+        return "from-gray-500 to-gray-600";
     }
+  };
+
+  const handleAIAnalysis = async (applicant: Schema["Applicant"]["type"]) => {
+    setSelectedApplicant(applicant);
+    setShowAIAnalysis(true);
   };
 
   const getStageProgress = (status?: string) => {
@@ -301,19 +315,33 @@ ${interviewData.notes ? `Notes: ${interviewData.notes}` : ''}`;
   return (
     <Layout user={user}>
       <div className="max-w-7xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-900">Applicant Tracker</h1>
+        {/* Header with AI features */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex justify-between items-center"
+        >
+          <div className="flex items-center gap-4">
+            <div className="p-3 rounded-2xl gradient-primary shadow-glow">
+              <Users className="w-8 h-8 text-white" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold text-gradient">AI-Powered Applicant Tracker</h1>
+              <p className="text-gray-600 mt-1">Smart candidate screening and analysis</p>
+            </div>
+          </div>
           {hasPermission(userRole, "canManageApplicants") && (
-            <button 
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setShowAddModal(true)}
-              className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors flex items-center"
+              className="btn-primary flex items-center gap-2"
             >
-              <Plus className="w-5 h-5 mr-2" />
+              <UserPlus className="w-5 h-5" />
               Add Applicant
-            </button>
+            </motion.button>
           )}
-        </div>
+        </motion.div>
 
         {/* Pipeline Stats */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -369,7 +397,12 @@ ${interviewData.notes ? `Notes: ${interviewData.notes}` : ''}`;
         ) : (
           <div className="space-y-4">
             {filteredApplicants.map((applicant) => (
-              <div key={applicant.id} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all">
+              <motion.div 
+                key={applicant.id} 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="glass-card rounded-2xl hover-lift"
+              >
                 <div className="p-6">
                   <div className="flex items-start justify-between">
                     <div className="flex items-start space-x-4 flex-1">
@@ -385,9 +418,12 @@ ${interviewData.notes ? `Notes: ${interviewData.notes}` : ''}`;
                             <p className="text-gray-600">{applicant.position}</p>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(applicant.status || undefined)}`}>
+                            <motion.span 
+                              whileHover={{ scale: 1.05 }}
+                              className={`px-4 py-1.5 rounded-xl text-sm font-medium bg-gradient-to-r ${getStatusColor(applicant.status || undefined)} text-white shadow-soft`}
+                            >
                               {applicant.status}
-                            </span>
+                            </motion.span>
                             <div className="relative group">
                               <button className="text-gray-400 hover:text-gray-600">
                                 <MoreVertical className="w-5 h-5" />
@@ -404,6 +440,13 @@ ${interviewData.notes ? `Notes: ${interviewData.notes}` : ''}`;
                                     >
                                       <Eye className="w-4 h-4 mr-2" />
                                       View Details
+                                    </button>
+                                    <button
+                                      onClick={() => handleAIAnalysis(applicant)}
+                                      className="w-full text-left px-4 py-2 hover:bg-gray-50 flex items-center text-indigo-600"
+                                    >
+                                      <Brain className="w-4 h-4 mr-2" />
+                                      AI Analysis
                                     </button>
                                     <button
                                       onClick={() => {
@@ -524,6 +567,26 @@ ${interviewData.notes ? `Notes: ${interviewData.notes}` : ''}`;
                   </div>
                 </div>
               </div>
+            ))}
+                    {/* AI Match Score if analyzed */}
+                    {applicant.aiAnalyzed && applicant.aiMatchScore !== null && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="absolute top-4 right-4 flex items-center gap-2"
+                      >
+                        <div className="text-right">
+                          <p className="text-xs text-gray-500">AI Match</p>
+                          <p className="text-2xl font-bold text-indigo-600">{applicant.aiMatchScore}%</p>
+                        </div>
+                        <div className="p-2 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-glow">
+                          <Sparkles className="w-5 h-5 text-white" />
+                        </div>
+                      </motion.div>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
         )}
@@ -1064,6 +1127,140 @@ ${interviewData.notes ? `Notes: ${interviewData.notes}` : ''}`;
             </div>
           </div>
         )}
+
+        {/* AI Analysis Modal */}
+        <AnimatePresence>
+          {showAIAnalysis && selectedApplicant && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+              onClick={() => setShowAIAnalysis(false)}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                transition={{ type: "spring", damping: 25 }}
+                className="bg-white rounded-3xl p-8 w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex justify-between items-center mb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 rounded-xl gradient-primary shadow-glow">
+                      <Brain className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-gray-900">AI Candidate Analysis</h2>
+                      <p className="text-gray-600">
+                        {selectedApplicant.firstName} {selectedApplicant.lastName} - {selectedApplicant.position}
+                      </p>
+                    </div>
+                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.1, rotate: 90 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => setShowAIAnalysis(false)}
+                    className="p-2 rounded-xl hover:bg-gray-100 transition-colors"
+                  >
+                    <X className="w-6 h-6 text-gray-500" />
+                  </motion.button>
+                </div>
+
+                <AIResumeAnalyzer
+                  applicantId={selectedApplicant.id}
+                  position={selectedApplicant.position || ""}
+                  onAnalysisComplete={async (analysis) => {
+                    // Update applicant with AI analysis results
+                    await client.models.Applicant.update({
+                      id: selectedApplicant.id,
+                      aiAnalyzed: true,
+                      aiMatchScore: analysis.matchScore,
+                      aiRecommendation: 
+                        analysis.matchScore >= 80 ? "strong_yes" :
+                        analysis.matchScore >= 70 ? "yes" :
+                        analysis.matchScore >= 60 ? "maybe" :
+                        analysis.matchScore >= 50 ? "no" : "strong_no",
+                      aiInsights: {
+                        extractedData: analysis.extractedData,
+                        strengths: analysis.strengths,
+                        weaknesses: analysis.weaknesses,
+                        recommendations: analysis.recommendations
+                      }
+                    });
+                    
+                    fetchApplicants(); // Refresh the list
+                    setAiAnalysisResults(analysis);
+                  }}
+                />
+
+                {/* Quick Actions based on AI Analysis */}
+                {aiAnalysisResults && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="mt-6 p-6 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl"
+                  >
+                    <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                      <Zap className="w-5 h-5 text-indigo-600" />
+                      AI-Powered Actions
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                      {aiAnalysisResults.matchScore >= 70 && (
+                        <motion.button
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => {
+                            setShowAIAnalysis(false);
+                            setShowInterviewModal(true);
+                          }}
+                          className="p-4 bg-white rounded-xl shadow-soft hover:shadow-md transition-all flex items-center gap-3"
+                        >
+                          <Video className="w-5 h-5 text-green-600" />
+                          <div className="text-left">
+                            <p className="font-medium text-gray-900">Schedule Interview</p>
+                            <p className="text-xs text-gray-600">Strong candidate match</p>
+                          </div>
+                        </motion.button>
+                      )}
+                      
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => moveToNextStage(selectedApplicant)}
+                        className="p-4 bg-white rounded-xl shadow-soft hover:shadow-md transition-all flex items-center gap-3"
+                      >
+                        <ArrowRight className="w-5 h-5 text-indigo-600" />
+                        <div className="text-left">
+                          <p className="font-medium text-gray-900">Move to Screening</p>
+                          <p className="text-xs text-gray-600">Begin evaluation process</p>
+                        </div>
+                      </motion.button>
+
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => {
+                          // Generate AI-powered email
+                          alert("AI-generated email feature coming soon!");
+                        }}
+                        className="p-4 bg-white rounded-xl shadow-soft hover:shadow-md transition-all flex items-center gap-3"
+                      >
+                        <Mail className="w-5 h-5 text-purple-600" />
+                        <div className="text-left">
+                          <p className="font-medium text-gray-900">Send AI Email</p>
+                          <p className="text-xs text-gray-600">Personalized response</p>
+                        </div>
+                      </motion.button>
+                    </div>
+                  </motion.div>
+                )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </Layout>
   );

@@ -8,6 +8,7 @@ import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
 import { Authenticator } from "@aws-amplify/ui-react";
 import Layout from "@/components/Layout";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   CheckCircle,
   Circle,
@@ -853,13 +854,13 @@ function OnboardingPage({ user }: { user: any }) {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "completed":
-        return "bg-green-100 text-green-800";
+        return "from-green-500 to-emerald-600";
       case "in_progress":
-        return "bg-yellow-100 text-yellow-800";
+        return "from-yellow-500 to-amber-600";
       case "overdue":
-        return "bg-red-100 text-red-800";
+        return "from-red-500 to-rose-600";
       default:
-        return "bg-gray-100 text-gray-800";
+        return "from-gray-500 to-gray-600";
     }
   };
 
@@ -906,17 +907,29 @@ function OnboardingPage({ user }: { user: any }) {
 
   return (
     <Layout user={user}>
-      <div className="space-y-6">
-        {/* Enhanced Header */}
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
-          <div>
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Onboarding Management</h1>
-            <p className="mt-1 text-sm sm:text-base text-gray-600">Advanced task assignment and workflow automation</p>
+      <div className="space-y-8">
+        {/* Enhanced Header with animations */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0"
+        >
+          <div className="flex items-center gap-4">
+            <div className="p-3 rounded-2xl gradient-primary shadow-glow">
+              <UserCheck className="w-8 h-8 text-white" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold text-gradient">Onboarding Management</h1>
+              <p className="mt-1 text-gray-600">Advanced task assignment and workflow automation</p>
+            </div>
           </div>
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-            <div className="flex items-center gap-2">
-              <Bot className="h-5 w-5 text-blue-600" />
-              <span className="text-sm text-gray-600">Automation:</span>
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              className="glass-card rounded-xl px-4 py-2 flex items-center gap-3"
+            >
+              <Bot className="h-5 w-5 text-indigo-600" />
+              <span className="text-sm font-medium text-gray-700">Automation:</span>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
@@ -924,283 +937,349 @@ function OnboardingPage({ user }: { user: any }) {
                   onChange={(e) => setAutomationEnabled(e.target.checked)}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-indigo-500 peer-checked:to-purple-600"></div>
               </label>
-            </div>
+            </motion.div>
             {canManageTasks && (
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => setShowWorkflowModal(true)}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center justify-center gap-2 text-sm"
+                  className="btn-primary flex items-center justify-center gap-2"
                 >
-                  <Workflow className="h-4 w-4" />
-                  <span className="hidden sm:inline">Apply Workflow</span>
-                  <span className="sm:hidden">Workflow</span>
-                </button>
-                <button 
+                  <Workflow className="h-5 w-5" />
+                  <span>Apply Workflow</span>
+                </motion.button>
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => setShowAssignModal(true)}
-                  className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 text-sm"
+                  className="btn-secondary flex items-center justify-center gap-2"
                 >
-                  <UserPlus className="w-4 h-4" />
-                  <span className="hidden sm:inline">Assign Tasks</span>
-                  <span className="sm:hidden">Assign</span>
-                </button>
+                  <UserPlus className="w-5 h-5" />
+                  <span>Assign Tasks</span>
+                </motion.button>
               </div>
             )}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Tab Navigation */}
+        {/* Tab Navigation with glass morphism */}
         {canManageTasks && (
-          <div className="border-b border-gray-200">
-            <nav className="-mb-px flex overflow-x-auto scrollbar-hide space-x-6 sm:space-x-8 px-1">
-              <button
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="glass-card rounded-2xl p-2"
+          >
+            <nav className="flex overflow-x-auto scrollbar-hide gap-2">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setActiveTab("tasks")}
-                className={`py-2 px-2 border-b-2 font-medium text-sm whitespace-nowrap flex-shrink-0 ${
+                className={`py-3 px-5 rounded-xl font-medium text-sm whitespace-nowrap transition-all ${
                   activeTab === "tasks"
-                    ? "border-blue-500 text-blue-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                    ? "gradient-primary text-white shadow-soft"
+                    : "text-gray-600 hover:bg-white/50 hover:text-gray-900"
                 }`}
               >
                 <div className="flex items-center gap-2">
                   <CheckSquare className="h-4 w-4" />
-                  <span className="hidden sm:inline">Tasks & Progress</span>
-                  <span className="sm:hidden">Tasks</span>
+                  <span>Tasks & Progress</span>
                 </div>
-              </button>
-              <button
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setActiveTab("workflows")}
-                className={`py-2 px-2 border-b-2 font-medium text-sm whitespace-nowrap flex-shrink-0 ${
+                className={`py-3 px-5 rounded-xl font-medium text-sm whitespace-nowrap transition-all ${
                   activeTab === "workflows"
-                    ? "border-blue-500 text-blue-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                    ? "gradient-primary text-white shadow-soft"
+                    : "text-gray-600 hover:bg-white/50 hover:text-gray-900"
                 }`}
               >
                 <div className="flex items-center gap-2">
                   <Workflow className="h-4 w-4" />
-                  <span className="hidden sm:inline">Workflow Templates</span>
-                  <span className="sm:hidden">Workflows</span>
+                  <span>Workflow Templates</span>
                 </div>
-              </button>
-              <button
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setActiveTab("automation")}
-                className={`py-2 px-2 border-b-2 font-medium text-sm whitespace-nowrap flex-shrink-0 ${
+                className={`py-3 px-5 rounded-xl font-medium text-sm whitespace-nowrap transition-all ${
                   activeTab === "automation"
-                    ? "border-blue-500 text-blue-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                    ? "gradient-primary text-white shadow-soft"
+                    : "text-gray-600 hover:bg-white/50 hover:text-gray-900"
                 }`}
               >
                 <div className="flex items-center gap-2">
                   <Bot className="h-4 w-4" />
-                  <span className="hidden sm:inline">Automation Rules</span>
-                  <span className="sm:hidden">Automation</span>
+                  <span>Automation Rules</span>
                 </div>
-              </button>
+              </motion.button>
             </nav>
-          </div>
+          </motion.div>
         )}
 
         {/* Tab Content */}
         {activeTab === "tasks" && (
           <>
-            {/* Stats Overview */}
+            {/* Stats Overview with modern styling */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Total Users</p>
-                <p className="text-2xl font-bold">{users.length}</p>
-              </div>
-              <Users className="w-8 h-8 text-gray-400" />
+              {[
+                { label: "Total Users", value: users.length, icon: Users, gradient: "from-blue-500 to-indigo-600" },
+                { label: "Active Tasks", value: tasks.filter(t => t.status !== "completed").length, icon: PlayCircle, gradient: "from-emerald-500 to-teal-600" },
+                { label: "Completed", value: tasks.filter(t => t.status === "completed").length, icon: CheckCircle, gradient: "from-green-500 to-emerald-600" },
+                { label: "Overdue", value: tasks.filter(t => t.status === "overdue").length, icon: AlertCircle, gradient: "from-red-500 to-rose-600" },
+              ].map((stat, index) => {
+                const Icon = stat.icon;
+                return (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="glass-card rounded-2xl p-6 hover-lift group"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-gray-600 font-medium">{stat.label}</p>
+                        <motion.p 
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ delay: 0.2 + index * 0.1, type: "spring" }}
+                          className="text-3xl font-bold text-gray-900 mt-1"
+                        >
+                          {stat.value}
+                        </motion.p>
+                      </div>
+                      <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.gradient} shadow-glow opacity-80 group-hover:opacity-100 transition-opacity`}>
+                        <Icon className="w-6 h-6 text-white" />
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
-          </div>
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Active Tasks</p>
-                <p className="text-2xl font-bold">{tasks.filter(t => t.status !== "completed").length}</p>
-              </div>
-              <PlayCircle className="w-8 h-8 text-blue-500" />
-            </div>
-          </div>
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Completed</p>
-                <p className="text-2xl font-bold">{tasks.filter(t => t.status === "completed").length}</p>
-              </div>
-              <CheckCircle className="w-8 h-8 text-green-500" />
-            </div>
-          </div>
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Overdue</p>
-                <p className="text-2xl font-bold">{tasks.filter(t => t.status === "overdue").length}</p>
-              </div>
-              <AlertCircle className="w-8 h-8 text-red-500" />
-            </div>
-          </div>
-        </div>
 
-        {/* Filters */}
-        <div className="bg-white rounded-lg shadow-sm p-4">
+        {/* Filters with glass morphism */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="glass-card rounded-2xl p-6 shadow-soft"
+        >
           <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <div className="flex-1 relative group">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 transition-colors group-focus-within:text-indigo-600" />
               <input
                 type="text"
                 placeholder="Search by name or email..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                className="w-full pl-12 pr-4 py-3 bg-white/50 border border-white/30 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent focus:bg-white transition-all"
               />
+              {searchTerm && (
+                <motion.button
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => setSearchTerm("")}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 rounded-lg hover:bg-gray-100 transition-colors"
+                >
+                  <X className="w-4 h-4 text-gray-500" />
+                </motion.button>
+              )}
             </div>
-            <div className="flex items-center space-x-2">
-              <Filter className="w-5 h-5 text-gray-400" />
-              <button
-                onClick={() => setFilter("all")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  filter === "all" ? "bg-black text-white" : "text-gray-600 hover:bg-gray-100"
-                }`}
-              >
-                All Users
-              </button>
-              <button
-                onClick={() => setFilter("not_started")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  filter === "not_started" ? "bg-black text-white" : "text-gray-600 hover:bg-gray-100"
-                }`}
-              >
-                Not Started
-              </button>
-              <button
-                onClick={() => setFilter("in_progress")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  filter === "in_progress" ? "bg-black text-white" : "text-gray-600 hover:bg-gray-100"
-                }`}
-              >
-                In Progress
-              </button>
-              <button
-                onClick={() => setFilter("completed")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  filter === "completed" ? "bg-black text-white" : "text-gray-600 hover:bg-gray-100"
-                }`}
-              >
-                Completed
-              </button>
+            <div className="flex items-center gap-2 flex-wrap">
+              <Filter className="w-5 h-5 text-gray-500" />
+              {["all", "not_started", "in_progress", "completed"].map((filterOption) => (
+                <motion.button
+                  key={filterOption}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setFilter(filterOption)}
+                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                    filter === filterOption 
+                      ? "gradient-primary text-white shadow-soft" 
+                      : "bg-white/50 text-gray-600 hover:bg-white hover:text-gray-900"
+                  }`}
+                >
+                  {filterOption === "all" && "All Users"}
+                  {filterOption === "not_started" && "Not Started"}
+                  {filterOption === "in_progress" && "In Progress"}
+                  {filterOption === "completed" && "Completed"}
+                </motion.button>
+              ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* User Progress Cards */}
         {loading ? (
-          <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
+          <div className="text-center py-20">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              className="inline-block w-12 h-12 rounded-full border-4 border-indigo-200 border-t-indigo-600 mx-auto"
+            />
+            <p className="mt-4 text-gray-600">Loading onboarding data...</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {filteredUsers.map((user) => {
-              const userTasks = getTasksByUser(user.id);
-              const progress = getTaskProgress(userTasks);
-              const isExpanded = selectedUser === user.id;
+            <AnimatePresence mode="popLayout">
+              {filteredUsers.map((user, index) => {
+                const userTasks = getTasksByUser(user.id);
+                const progress = getTaskProgress(userTasks);
+                const isExpanded = selectedUser === user.id;
 
-              return (
-                <div
-                  key={user.id}
-                  className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <div
-                    className="p-6 cursor-pointer"
-                    onClick={() => setSelectedUser(isExpanded ? null : user.id)}
+                return (
+                  <motion.div
+                    key={user.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ delay: index * 0.1 }}
+                    layout
+                    className="glass-card rounded-2xl hover-lift overflow-hidden group"
                   >
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center">
-                        <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
-                          <span className="text-white font-medium">
-                            {user.firstName?.[0]}{user.lastName?.[0]}
-                          </span>
-                        </div>
-                        <div className="ml-4">
-                          <h3 className="font-semibold text-gray-900">
-                            {user.firstName} {user.lastName}
-                          </h3>
-                          <p className="text-sm text-gray-500">
-                            {user.position || user.role} • {user.department || "No Department"}
-                          </p>
-                          <p className="text-xs text-gray-400">
-                            Started {user.startDate ? new Date(user.startDate).toLocaleDateString() : "Recently"}
-                          </p>
-                        </div>
-                      </div>
-                      <ChevronRight
-                        className={`w-5 h-5 text-gray-400 transition-transform ${
-                          isExpanded ? "rotate-90" : ""
-                        }`}
-                      />
-                    </div>
-
-                    {/* Progress Bar */}
-                    <div className="mb-4">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm font-medium text-gray-700">
-                          Onboarding Progress
-                        </span>
-                        <span className="text-sm font-medium text-gray-900">
-                          {progress}% ({userTasks.filter(t => t.status === "completed").length}/{userTasks.length} tasks)
-                        </span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div
-                          className="bg-black h-2 rounded-full transition-all duration-300"
-                          style={{ width: `${progress}%` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Task Summary */}
-                    <div className="grid grid-cols-4 gap-2 text-center">
-                      {["pending", "in_progress", "completed", "overdue"].map((status) => {
-                        const count = userTasks.filter(t => t.status === status).length;
-                        return (
-                          <div key={status} className="text-xs">
-                            <div className="font-semibold text-gray-900">{count}</div>
-                            <div className="text-gray-500 capitalize">
-                              {status.replace("_", " ")}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* Expanded Task List */}
-                  {isExpanded && (
-                    <div className="border-t border-gray-200 p-6 space-y-3">
-                      {userTasks.length === 0 ? (
-                        <div className="text-center py-8">
-                          <Circle className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                          <p className="text-gray-500">No tasks assigned yet</p>
-                          {canManageTasks && (
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setTargetUserId(user.id);
-                                setShowAssignModal(true);
-                              }}
-                              className="mt-4 text-black hover:text-gray-700 font-medium text-sm"
-                            >
-                              Assign Tasks →
-                            </button>
-                          )}
-                        </div>
-                      ) : (
-                        userTasks.map((task) => (
-                          <div
-                            key={task.id}
-                            className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                    <motion.div
+                      className="p-6 cursor-pointer"
+                      onClick={() => setSelectedUser(isExpanded ? null : user.id)}
+                    >
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex items-center">
+                          <motion.div 
+                            whileHover={{ scale: 1.1, rotate: 5 }}
+                            className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${getStatusColor(progress === 100 ? "completed" : progress > 0 ? "in_progress" : "pending")} flex items-center justify-center shadow-glow`}
                           >
+                            <span className="text-white font-bold text-lg">
+                              {user.firstName?.[0]}{user.lastName?.[0]}
+                            </span>
+                          </motion.div>
+                          <div className="ml-4">
+                            <h3 className="font-semibold text-gray-900 text-lg group-hover:text-indigo-600 transition-colors">
+                              {user.firstName} {user.lastName}
+                            </h3>
+                            <p className="text-sm text-gray-600">
+                              {user.position || user.role} • {user.department || "No Department"}
+                            </p>
+                            <p className="text-xs text-gray-500 flex items-center gap-1 mt-1">
+                              <Calendar className="w-3 h-3" />
+                              Started {user.startDate ? new Date(user.startDate).toLocaleDateString() : "Recently"}
+                            </p>
+                          </div>
+                        </div>
+                        <motion.div
+                          animate={{ rotate: isExpanded ? 90 : 0 }}
+                          transition={{ type: "spring", stiffness: 300 }}
+                        >
+                          <ChevronRight className="w-5 h-5 text-gray-400" />
+                        </motion.div>
+                      </div>
+
+                      {/* Progress Bar with animations */}
+                      <div className="mb-4">
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="text-sm font-medium text-gray-700">
+                            Onboarding Progress
+                          </span>
+                          <motion.span 
+                            key={progress}
+                            initial={{ scale: 0.8 }}
+                            animate={{ scale: 1 }}
+                            className="text-sm font-bold text-indigo-600"
+                          >
+                            {progress}% ({userTasks.filter(t => t.status === "completed").length}/{userTasks.length} tasks)
+                          </motion.span>
+                        </div>
+                        <div className="w-full bg-gray-200/50 rounded-full h-2.5 overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${progress}%` }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="h-full rounded-full gradient-primary shadow-glow"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Task Summary with modern cards */}
+                      <div className="grid grid-cols-4 gap-2">
+                        {[
+                          { status: "pending", icon: Circle, color: "text-gray-500" },
+                          { status: "in_progress", icon: Clock, color: "text-yellow-500" },
+                          { status: "completed", icon: CheckCircle, color: "text-green-500" },
+                          { status: "overdue", icon: AlertCircle, color: "text-red-500" }
+                        ].map((item) => {
+                          const count = userTasks.filter(t => t.status === item.status).length;
+                          const Icon = item.icon;
+                          return (
+                            <motion.div 
+                              key={item.status} 
+                              whileHover={{ scale: 1.05 }}
+                              className="bg-white/50 rounded-xl p-3 text-center"
+                            >
+                              <Icon className={`w-4 h-4 ${item.color} mx-auto mb-1`} />
+                              <div className="font-bold text-gray-900">{count}</div>
+                              <div className="text-xs text-gray-600 capitalize">
+                                {item.status.replace("_", " ")}
+                              </div>
+                            </motion.div>
+                          );
+                        })}
+                      </div>
+                    </motion.div>
+
+                    {/* Expanded Task List with animations */}
+                    <AnimatePresence>
+                      {isExpanded && (
+                        <motion.div 
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="border-t border-white/20 p-6 space-y-3 overflow-hidden"
+                        >
+                          {userTasks.length === 0 ? (
+                            <motion.div 
+                              initial={{ scale: 0.9 }}
+                              animate={{ scale: 1 }}
+                              className="text-center py-8"
+                            >
+                              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
+                                <Circle className="w-8 h-8 text-gray-400" />
+                              </div>
+                              <p className="text-gray-600 font-medium">No tasks assigned yet</p>
+                              {canManageTasks && (
+                                <motion.button
+                                  whileHover={{ scale: 1.05 }}
+                                  whileTap={{ scale: 0.95 }}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setTargetUserId(user.id);
+                                    setShowAssignModal(true);
+                                  }}
+                                  className="mt-4 text-indigo-600 hover:text-indigo-700 font-medium text-sm flex items-center gap-1 mx-auto"
+                                >
+                                  <Plus className="w-4 h-4" />
+                                  Assign Tasks
+                                </motion.button>
+                              )}
+                            </motion.div>
+                          ) : (
+                            <AnimatePresence>
+                              {userTasks.map((task, taskIndex) => (
+                                <motion.div
+                                  key={task.id}
+                                  initial={{ opacity: 0, x: -20 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  exit={{ opacity: 0, x: 20 }}
+                                  transition={{ delay: taskIndex * 0.05 }}
+                                  className="flex items-center justify-between p-4 bg-white/50 rounded-xl hover:bg-white/70 transition-all group"
+                                >
                             <div className="flex items-start space-x-3 flex-1">
                               <button
                                 onClick={(e) => {
@@ -1243,13 +1322,14 @@ function OnboardingPage({ user }: { user: any }) {
                               </div>
                             </div>
                             <div className="flex items-center space-x-2">
-                              <span
-                                className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
+                              <motion.span
+                                whileHover={{ scale: 1.05 }}
+                                className={`px-3 py-1.5 rounded-xl text-xs font-medium bg-gradient-to-r ${getStatusColor(
                                   task.status || "pending"
-                                )}`}
+                                )} text-white shadow-soft`}
                               >
                                 {task.status}
-                              </span>
+                              </motion.span>
                               {canManageTasks && (
                                 <button
                                   onClick={(e) => {
@@ -1261,15 +1341,18 @@ function OnboardingPage({ user }: { user: any }) {
                                   <Trash2 className="w-4 h-4" />
                                 </button>
                               )}
-                            </div>
-                          </div>
-                        ))
+                                  </div>
+                                </motion.div>
+                              ))}
+                            </AnimatePresence>
+                          )}
+                        </motion.div>
                       )}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+                    </AnimatePresence>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
           </div>
         )}
 

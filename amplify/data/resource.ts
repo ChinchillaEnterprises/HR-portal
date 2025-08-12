@@ -78,6 +78,11 @@ const schema = a.schema({
       assignedRecruiter: a.string(),
       position: a.string().required(),
       source: a.string(),
+      // AI fields
+      aiAnalyzed: a.boolean(),
+      aiMatchScore: a.float(),
+      aiRecommendation: a.enum(["strong_yes", "yes", "maybe", "no", "strong_no"]),
+      aiInsights: a.json(),
     })
     .authorization((allow) => [
       allow.groups(["Admin", "Mentor", "TeamLead"]).to(["create", "read", "update", "delete"]),
@@ -129,6 +134,75 @@ const schema = a.schema({
     })
     .authorization((allow) => [
       allow.groups(["Admin", "Mentor", "TeamLead"]).to(["create", "read", "update", "delete"]),
+    ]),
+
+  // AI-powered models
+  AIResumeAnalysis: a
+    .model({
+      applicantId: a.string().required(),
+      resumeUrl: a.string().required(),
+      extractedData: a.json(), // skills, experience, education, etc.
+      matchScore: a.float(), // 0-100 match with job requirements
+      strengths: a.string().array(),
+      weaknesses: a.string().array(),
+      recommendations: a.string(),
+      analyzedAt: a.datetime().required(),
+      positionRequirements: a.json(),
+      aiConfidence: a.float(),
+    })
+    .authorization((allow) => [
+      allow.groups(["Admin", "Mentor", "TeamLead"]).to(["create", "read", "update", "delete"]),
+    ]),
+
+  AIChat: a
+    .model({
+      userId: a.string().required(),
+      sessionId: a.string().required(),
+      message: a.string().required(),
+      response: a.string(),
+      context: a.enum(["onboarding", "benefits", "policies", "general"]),
+      intent: a.string(), // detected intent from message
+      sentiment: a.enum(["positive", "neutral", "negative"]),
+      resolved: a.boolean(),
+      escalatedTo: a.string(),
+      timestamp: a.datetime().required(),
+    })
+    .authorization((allow) => [
+      allow.owner(),
+      allow.groups(["Admin", "Mentor"]).to(["read", "update"]),
+    ]),
+
+  AIPerformanceInsight: a
+    .model({
+      userId: a.string().required(),
+      period: a.string().required(), // e.g., "2024-Q1"
+      metrics: a.json(), // various performance metrics
+      predictedTrajectory: a.enum(["improving", "stable", "declining"]),
+      riskFactors: a.string().array(),
+      recommendations: a.string().array(),
+      engagementScore: a.float(),
+      retentionProbability: a.float(),
+      generatedAt: a.datetime().required(),
+    })
+    .authorization((allow) => [
+      allow.owner(),
+      allow.groups(["Admin", "Mentor", "TeamLead"]).to(["create", "read", "update", "delete"]),
+    ]),
+
+  AIWorkflowOptimization: a
+    .model({
+      workflowType: a.string().required(),
+      currentProcess: a.json(),
+      optimizedProcess: a.json(),
+      estimatedTimeSaving: a.integer(), // in minutes
+      automationOpportunities: a.string().array(),
+      implementationSteps: a.string().array(),
+      priority: a.enum(["high", "medium", "low"]),
+      status: a.enum(["proposed", "approved", "implemented"]),
+      createdAt: a.datetime().required(),
+    })
+    .authorization((allow) => [
+      allow.groups(["Admin"]).to(["create", "read", "update", "delete"]),
     ]),
 });
 

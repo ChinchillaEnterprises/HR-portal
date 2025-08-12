@@ -1,0 +1,4 @@
+[2025-08-11T17:02:30.710Z] Starting: npx --yes next@14.2.10 dev (Process ID: frontend-with-browser)
+[2025-08-11T17:02:30.710Z] [frontend-with-browser] ✅ Starting development server...
+[2025-08-11T17:02:35.475Z] [frontend-with-browser] [ERROR] sh: next: command not found
+[2025-08-11T17:02:35.485Z] [frontend-with-browser] Process exited with code 127 and signal null
