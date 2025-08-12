@@ -566,26 +566,6 @@ ${interviewData.notes ? `Notes: ${interviewData.notes}` : ''}`;
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-                    {/* AI Match Score if analyzed */}
-                    {applicant.aiAnalyzed && applicant.aiMatchScore !== null && (
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="absolute top-4 right-4 flex items-center gap-2"
-                      >
-                        <div className="text-right">
-                          <p className="text-xs text-gray-500">AI Match</p>
-                          <p className="text-2xl font-bold text-indigo-600">{applicant.aiMatchScore}%</p>
-                        </div>
-                        <div className="p-2 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-glow">
-                          <Sparkles className="w-5 h-5 text-white" />
-                        </div>
-                      </motion.div>
-                    )}
-                  </div>
-                </div>
               </motion.div>
             ))}
           </div>
@@ -1269,7 +1249,7 @@ ${interviewData.notes ? `Notes: ${interviewData.notes}` : ''}`;
 export default function ApplicantsPageWrapper() {
   return (
     <Authenticator>
-      {({ signOut, user }) => <ApplicantsPage user={user} />}
+      {({ user }) => <ApplicantsPage user={user} />}
     </Authenticator>
   );
 }

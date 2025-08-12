@@ -245,3 +245,25 @@ Amplify has not been configured. Please call Amplify.configure() before using th
 [2025-08-12T20:51:19.114Z] [nextjs-dev]  GET /_next/static/chunks/app-pages-internals.js 404 in 73ms
  GET /_next/static/chunks/app/not-found.js 404 in 61ms
 [2025-08-12T21:33:21.846Z] [nextjs-dev]  ✓ Compiled in 2.3s (5072 modules)
+[2025-08-12T21:41:50.144Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T21:41:50.145Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+Amplify has not been configured. Please call Amplify.configure() before using this service.
+Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-12T21:41:50.218Z] [nextjs-dev]  GET / 200 in 254ms
+[2025-08-12T21:41:50.738Z] [nextjs-dev]  ✓ Compiled /_not-found in 456ms (2588 modules)
+[2025-08-12T21:41:50.789Z] [nextjs-dev]  GET /_next/static/css/app/page.css?v=1755034910063 404 in 525ms
+[2025-08-12T21:41:50.792Z] [nextjs-dev]  GET /_next/static/chunks/app/error.js 404 in 499ms
+[2025-08-12T21:41:50.792Z] [nextjs-dev]  GET /_next/static/chunks/app/not-found.js 404 in 497ms
+[2025-08-12T21:41:50.792Z] [nextjs-dev]  GET /_next/static/chunks/app-pages-internals.js 404 in 502ms
+[2025-08-12T21:41:50.793Z] [nextjs-dev]  GET /_next/static/chunks/main-app.js?v=1755034910063 404 in 515ms
+[2025-08-12T21:41:51.296Z] [nextjs-dev]  ✓ Compiled /favicon.ico in 398ms (2619 modules)
+[2025-08-12T21:41:51.338Z] [nextjs-dev]  GET /favicon.ico 200 in 443ms
+[2025-08-12T22:14:44.488Z] [nextjs-dev]  ✓ Compiled in 1336ms (2500 modules)
+[2025-08-12T22:15:54.379Z] [nextjs-dev]  ✓ Compiled in 889ms (2500 modules)
+[2025-08-12T22:19:36.750Z] [nextjs-dev]  ✓ Compiled in 790ms (2500 modules)
+[2025-08-12T22:21:08.662Z] [nextjs-dev]  ✓ Compiled in 721ms (2500 modules)
+[2025-08-12T22:21:45.116Z] [nextjs-dev]  ✓ Compiled in 468ms (2500 modules)
+[2025-08-12T22:22:19.330Z] [nextjs-dev]  ✓ Compiled in 459ms (2500 modules)
+[2025-08-12T22:23:24.297Z] [nextjs-dev]  ✓ Compiled in 491ms (2500 modules)
+[2025-08-12T22:31:43.619Z] [nextjs-dev]  ✓ Compiled in 691ms (2500 modules)
+[2025-08-12T22:32:34.525Z] [nextjs-dev]  ✓ Compiled in 379ms (2500 modules)
