@@ -5,6 +5,7 @@ import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
 import { Authenticator } from "@aws-amplify/ui-react";
 import Layout from "@/components/Layout";
+import AuthWrapper from "@/components/AuthWrapper";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Send,
@@ -241,7 +242,7 @@ function AIAssistantPage({ user }: { user: any }) {
     : quickActions.filter(action => action.category === selectedCategory);
 
   return (
-    <Authenticator>
+    <AuthWrapper>
       {({ user }) => (
         <Layout user={user}>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100vh-12rem)]">
@@ -521,7 +522,7 @@ function AIAssistantPage({ user }: { user: any }) {
           </div>
         </Layout>
       )}
-    </Authenticator>
+    </AuthWrapper>
   );
 }
 

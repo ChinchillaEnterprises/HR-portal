@@ -5,6 +5,7 @@ import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
 import { Authenticator } from "@aws-amplify/ui-react";
 import Layout from "@/components/Layout";
+import AuthWrapper from "@/components/AuthWrapper";
 import { getAuthenticatedUser, hasPermission, type UserRole } from "@/lib/auth";
 import AIResumeAnalyzer from "@/components/AIResumeAnalyzer";
 import { aiService } from "@/lib/ai-service";
@@ -1248,8 +1249,8 @@ ${interviewData.notes ? `Notes: ${interviewData.notes}` : ''}`;
 
 export default function ApplicantsPageWrapper() {
   return (
-    <Authenticator>
+    <AuthWrapper>
       {({ user }) => <ApplicantsPage user={user} />}
-    </Authenticator>
+    </AuthWrapper>
   );
 }

@@ -8,6 +8,7 @@ import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
 import { Authenticator } from "@aws-amplify/ui-react";
 import Layout from "@/components/Layout";
+import AuthWrapper from "@/components/AuthWrapper";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -1613,10 +1614,8 @@ function getRoleIcon(role?: string) {
 
 export default function App() {
   return (
-    <Authenticator>
-      {({ signOut, user }) => (
-        user ? <Dashboard user={user} /> : <div>Loading...</div>
-      )}
-    </Authenticator>
+    <AuthWrapper>
+      {({ user }) => <Dashboard user={user} />}
+    </AuthWrapper>
   );
 }
