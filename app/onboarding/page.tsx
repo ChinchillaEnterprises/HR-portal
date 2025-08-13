@@ -49,7 +49,14 @@ import {
 } from "lucide-react";
 import { getAuthenticatedUser, hasPermission, type UserRole } from "@/lib/auth";
 
-Amplify.configure(outputs);
+// Skip Amplify configuration in production
+try {
+  if (typeof window !== 'undefined' && !window.location.hostname.includes('amplifyapp.com')) {
+    Amplify.configure(outputs);
+  }
+} catch (error) {
+  console.warn('Amplify configuration skipped');
+}
 
 const client = generateClient<Schema>();
 
