@@ -102,8 +102,8 @@ export default function AIFloater() {
       } else if (id === "recent_communications") {
         const comms = await client.models.Communication.list();
         const sorted = comms.data.sort((a,b) => {
-          const dateA = new Date(a.sentAt || a.createdAt).getTime();
-          const dateB = new Date(b.sentAt || b.createdAt).getTime();
+          const dateA = new Date(a.sentDate || a.createdAt).getTime();
+          const dateB = new Date(b.sentDate || b.createdAt).getTime();
           return dateB - dateA;
         });
         setSummary(`${sorted.slice(0,10).length} recent messages`);
