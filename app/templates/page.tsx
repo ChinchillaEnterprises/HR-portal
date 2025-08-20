@@ -699,11 +699,9 @@ function OnboardingTemplatesPage({ user }: { user: any }) {
 
   if (loading) {
     return (
-      <Layout user={user}>
-        <div className="flex items-center justify-center h-96">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
-        </div>
-      </Layout>
+      <div className="flex items-center justify-center h-96">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+      </div>
     );
   }
 
