@@ -68,7 +68,7 @@ export default function ModernReports() {
   const hiringTrendChart = {
     options: {
       chart: { toolbar: { show: false }, sparkline: { enabled: true } },
-      stroke: { curve: "smooth", width: 3 },
+      stroke: { curve: "smooth" as const, width: 3 },
       colors: ["#3B82F6"],
       tooltip: { enabled: true },
     },
@@ -93,7 +93,7 @@ export default function ModernReports() {
       chart: { toolbar: { show: false } },
       labels: ["Completed", "In Progress", "Pending"],
       colors: ["#10B981", "#3B82F6", "#F59E0B"],
-      legend: { position: "bottom" },
+      legend: { position: "bottom" as const },
     },
     series: [
       data.tasks.filter((t: any) => t.status === "COMPLETED").length,

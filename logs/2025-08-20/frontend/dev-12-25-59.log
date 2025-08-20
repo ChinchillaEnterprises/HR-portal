@@ -1,0 +1,24 @@
+[2025-08-20T17:25:59.197Z] Starting: npm run dev (Process ID: hr-portal-dev)
+[2025-08-20T17:25:59.197Z] [hr-portal-dev] ✅ Starting development server...
+[2025-08-20T17:25:59.523Z] [hr-portal-dev] 
+> aws-amplify-gen2@0.1.0 dev
+> next dev
+
+[2025-08-20T17:26:00.186Z] [hr-portal-dev] [ERROR]  ⚠ Port 3000 is in use, trying 3001 instead.
+[2025-08-20T17:26:00.275Z] [hr-portal-dev]   ▲ Next.js 14.2.10
+  - Local:        http://localhost:3001
+
+ ✓ Starting...
+[2025-08-20T17:26:00.278Z] [hr-portal-dev] ✅ Server ready on http://localhost:3001
+[2025-08-20T17:26:00.279Z] [hr-portal-dev] ⏳ Waiting 1000ms before launching browser...
+[2025-08-20T17:26:01.281Z] [hr-portal-dev] ✅ Launching test browser...
+[2025-08-20T17:26:01.316Z] [hr-portal-dev] [ERROR] Failed to launch browser: browserType.launch: Executable doesn't exist at /Users/ricardo/Library/Caches/ms-playwright/chromium-1181/chrome-mac/Chromium.app/Contents/MacOS/Chromium
+╔═════════════════════════════════════════════════════════════════════════╗
+║ Looks like Playwright Test or Playwright was just installed or updated. ║
+║ Please run the following command to download new browsers:              ║
+║                                                                         ║
+║     npx playwright install                                              ║
+║                                                                         ║
+║ <3 Playwright Team                                                      ║
+╚═════════════════════════════════════════════════════════════════════════╝
+[2025-08-20T17:26:03.173Z] [hr-portal-dev]  ✓ Ready in 3s

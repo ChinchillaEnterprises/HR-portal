@@ -1,0 +1,3 @@
+[2025-08-20T17:25:29.281Z] Starting: echo "Testing DevLogger capabilities" (Process ID: test-devlogger)
+[2025-08-20T17:25:29.291Z] [test-devlogger] "Testing DevLogger capabilities"
+[2025-08-20T17:25:29.291Z] [test-devlogger] Process exited with code 0 and signal null

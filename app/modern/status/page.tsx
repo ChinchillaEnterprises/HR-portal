@@ -96,7 +96,7 @@ export default function ModernStatus() {
   const performanceChart = {
     options: {
       chart: { toolbar: { show: false }, sparkline: { enabled: true } },
-      stroke: { curve: "smooth", width: 2 },
+      stroke: { curve: "smooth" as const, width: 2 },
       colors: ["#3B82F6"],
     },
     series: [{

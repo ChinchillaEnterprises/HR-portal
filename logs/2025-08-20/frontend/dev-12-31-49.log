@@ -1,0 +1,11 @@
+[2025-08-20T17:31:49.717Z] Starting: npm run dev (Process ID: frontend-dev)
+[2025-08-20T17:31:49.882Z] [frontend-dev] 
+> aws-amplify-gen2@0.1.0 dev
+> next dev
+
+[2025-08-20T17:31:50.232Z] [frontend-dev] [ERROR]  ⚠ Port 3000 is in use, trying 3001 instead.
+[2025-08-20T17:31:50.298Z] [frontend-dev]   ▲ Next.js 14.2.10
+[2025-08-20T17:31:50.299Z] [frontend-dev]   - Local:        http://localhost:3001
+
+ ✓ Starting...
+[2025-08-20T17:31:51.412Z] [frontend-dev]  ✓ Ready in 1200ms

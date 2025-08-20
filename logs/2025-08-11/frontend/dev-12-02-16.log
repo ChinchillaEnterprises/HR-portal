@@ -1,7 +1,0 @@
-[2025-08-11T17:02:16.349Z] Starting: npm run dev (Process ID: nextjs-npm)
-[2025-08-11T17:02:16.551Z] [nextjs-npm] 
-> aws-amplify-gen2@0.1.0 dev
-> next dev
-
-[2025-08-11T17:02:16.559Z] [nextjs-npm] [ERROR] sh: next: command not found
-[2025-08-11T17:02:16.563Z] [nextjs-npm] Process exited with code 127 and signal null
