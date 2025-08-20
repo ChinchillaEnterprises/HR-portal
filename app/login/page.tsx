@@ -68,7 +68,7 @@ export default function ModernLogin() {
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
             Welcome to the future of
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-              <Typewriter text="Human Resources" delay={100} />
+              <Typewriter texts={["Human Resources"]} speed={100} />
             </span>
           </h2>
           
