@@ -1,1 +1,1 @@
-/Users/ricardo/.config/claude/CLAUDE.md
+# Claude AI Assistant Configuration
