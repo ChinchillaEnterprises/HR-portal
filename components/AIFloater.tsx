@@ -57,7 +57,7 @@ export default function AIFloater() {
         const pending = res.data.filter(u => u.status === "pending").length;
         setSummary(`${total} users • ${active} active • ${pending} pending`);
         setItems(res.data.slice(0, 20).map(u => ({
-          title: u.name || "Unnamed User",
+          title: `${u.firstName || ""} ${u.lastName || ""}`.trim() || "Unnamed User",
           subtitle: u.email,
           meta: `${u.role}${u.department ? " • "+u.department : ""}`,
         })));
