@@ -148,7 +148,7 @@ function TeamPage({ user }: { user: any }) {
     }
   };
 
-  const getRoleColor = (role?: string) => {
+  const getRoleColor = (role?: string | null) => {
     switch (role) {
       case "admin":
         return "from-red-500 to-rose-600";
