@@ -53,8 +53,8 @@ export default function AIFloater() {
       if (id === "workforce_snapshot") {
         const res = await client.models.User.list();
         const total = res.data.length;
-        const active = res.data.filter(u => u.status === "ACTIVE").length;
-        const pending = res.data.filter(u => u.status === "PENDING").length;
+        const active = res.data.filter(u => u.status === "active").length;
+        const pending = res.data.filter(u => u.status === "pending").length;
         setSummary(`${total} users • ${active} active • ${pending} pending`);
         setItems(res.data.slice(0, 20).map(u => ({
           title: u.name || "Unnamed User",
@@ -65,12 +65,12 @@ export default function AIFloater() {
         const tasks = await client.models.OnboardingTask.list();
         const now = new Date();
         const overdue = tasks.data.filter(t => {
-          if (t.status === "COMPLETED") return false;
+          if (t.status === "completed") return false;
           const dueDate = new Date(t.dueDate);
           return dueDate < now;
         });
         const total = tasks.data.length;
-        const completed = tasks.data.filter(t => t.status === "COMPLETED").length;
+        const completed = tasks.data.filter(t => t.status === "completed").length;
         const rate = total ? Math.round((completed/total)*100) : 0;
         setSummary(`${overdue.length} overdue • ${rate}% completion`);
         setItems(overdue.slice(0, 20).map(t => ({
@@ -80,10 +80,10 @@ export default function AIFloater() {
         })));
       } else if (id === "pending_signatures") {
         const docs = await client.models.Document.list();
-        const pending = docs.data.filter(d => d.status === "PENDING" || d.category === "contracts");
+        const pending = docs.data.filter(d => d.signatureRequired && d.signatureStatus === "pending");
         setSummary(`${pending.length} documents requiring attention`);
         setItems(pending.slice(0, 20).map(d => ({
-          title: d.title,
+          title: d.name,
           subtitle: d.description || d.category || "",
           meta: d.uploadedBy ? `By ${d.uploadedBy}` : "System document",
         })));
