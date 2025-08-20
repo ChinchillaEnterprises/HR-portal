@@ -438,22 +438,18 @@ function ProfilePage({ user }: { user: any }) {
 
   if (loading) {
     return (
-      <NeoLayout user={user}>
-        <div className="flex items-center justify-center h-96">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
-        </div>
-      </NeoLayout>
+      <div className="flex items-center justify-center h-96">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+      </div>
     );
   }
 
   if (!userProfile) {
     return (
-      <NeoLayout user={user}>
-        <div className="text-center py-12">
-          <User className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <p className="text-gray-500">Profile not found</p>
-        </div>
-      </NeoLayout>
+      <div className="text-center py-12">
+        <User className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+        <p className="text-gray-500">Profile not found</p>
+      </div>
     );
   }
 
