@@ -66,6 +66,7 @@ export default function AIFloater() {
         const now = new Date();
         const overdue = tasks.data.filter(t => {
           if (t.status === "completed") return false;
+          if (!t.dueDate) return false;
           const dueDate = new Date(t.dueDate);
           return dueDate < now;
         });
@@ -76,7 +77,7 @@ export default function AIFloater() {
         setItems(overdue.slice(0, 20).map(t => ({
           title: t.title,
           subtitle: t.description || "",
-          meta: `Due ${new Date(t.dueDate).toLocaleDateString()}`,
+          meta: t.dueDate ? `Due ${new Date(t.dueDate).toLocaleDateString()}` : "No due date",
         })));
       } else if (id === "pending_signatures") {
         const docs = await client.models.Document.list();
