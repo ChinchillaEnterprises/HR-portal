@@ -74,25 +74,27 @@ export default function NeoLayout({ children }: { children: React.ReactNode }) {
       
       // Search users
       users.data.forEach(user => {
-        if (user.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        const fullName = `${user.firstName || ""} ${user.lastName || ""}`.trim();
+        if (fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
             user.email?.toLowerCase().includes(searchQuery.toLowerCase())) {
-          results.push({ type: "user", data: user, title: user.name, subtitle: user.email });
+          results.push({ type: "user", data: user, title: fullName || "Unnamed User", subtitle: user.email });
         }
       });
 
       // Search documents
       docs.data.forEach(doc => {
-        if (doc.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        if (doc.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
             doc.description?.toLowerCase().includes(searchQuery.toLowerCase())) {
-          results.push({ type: "document", data: doc, title: doc.title, subtitle: doc.description });
+          results.push({ type: "document", data: doc, title: doc.name, subtitle: doc.description });
         }
       });
 
       // Search applicants
       applicants.data.forEach(app => {
-        if (app.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        const fullName = `${app.firstName || ""} ${app.lastName || ""}`.trim();
+        if (fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
             app.position?.toLowerCase().includes(searchQuery.toLowerCase())) {
-          results.push({ type: "applicant", data: app, title: app.name, subtitle: app.position });
+          results.push({ type: "applicant", data: app, title: fullName || "Unnamed Applicant", subtitle: app.position });
         }
       });
 
