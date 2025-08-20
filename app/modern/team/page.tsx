@@ -36,7 +36,7 @@ export default function ModernTeam() {
     user.role?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const departments = [...new Set(users.map(u => u.department).filter(Boolean))];
+  const departments = Array.from(new Set(users.map(u => u.department).filter(Boolean)));
   const stats = {
     total: users.length,
     departments: departments.length,
