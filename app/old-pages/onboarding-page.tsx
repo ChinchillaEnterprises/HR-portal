@@ -43,6 +43,7 @@ import {
   ArrowRight,
   Layers,
   Building,
+  UserCheck,
 } from "lucide-react";
 import { getAuthenticatedUser, hasPermission, type UserRole } from "@/lib/auth";
 
