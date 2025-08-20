@@ -95,7 +95,7 @@ export default function AIFloater() {
         const parts = Object.entries(stages).map(([k,v]) => `${k}: ${v}`);
         setSummary(parts.join(" • "));
         setItems(apps.data.slice(0, 20).map(a => ({
-          title: `${a.name} • ${a.position}`,
+          title: `${a.firstName} ${a.lastName} • ${a.position}`,
           subtitle: a.email,
           meta: a.status || "NEW",
         })));
