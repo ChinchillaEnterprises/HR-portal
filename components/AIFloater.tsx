@@ -109,7 +109,7 @@ export default function AIFloater() {
         setSummary(`${sorted.slice(0,10).length} recent messages`);
         setItems(sorted.slice(0, 10).map(c => ({
           title: c.subject,
-          subtitle: c.message?.slice(0, 80) || "",
+          subtitle: c.content?.slice(0, 80) || "",
           meta: `${c.type} • ${c.status}`,
         })));
       } else if (id === "policy_index") {
