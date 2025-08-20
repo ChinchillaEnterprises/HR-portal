@@ -77,9 +77,9 @@ async function main() {
 
   // Applicants
   const applicants = [
-    { email: 'alice@applicant.com', firstName: 'Alice', lastName: 'Anders', position: 'Frontend Engineer', status: 'screening' },
-    { email: 'bob@applicant.com', firstName: 'Bob', lastName: 'Baker', position: 'Data Analyst', status: 'interview' },
-    { email: 'cara@applicant.com', firstName: 'Cara', lastName: 'Cole', position: 'Program Manager', status: 'applied' },
+    { email: 'alice@applicant.com', firstName: 'Alice', lastName: 'Anders', position: 'Frontend Engineer', status: 'screening' as const },
+    { email: 'bob@applicant.com', firstName: 'Bob', lastName: 'Baker', position: 'Data Analyst', status: 'interview' as const },
+    { email: 'cara@applicant.com', firstName: 'Cara', lastName: 'Cole', position: 'Program Manager', status: 'applied' as const },
   ];
   for (const a of applicants) {
     await client.models.Applicant.create({
