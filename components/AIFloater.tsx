@@ -117,7 +117,7 @@ export default function AIFloater() {
         const policies = docs.data.filter(d => d.category === "policies" || d.category === "handbooks");
         setSummary(`${policies.length} policies in knowledge base`);
         setItems(policies.slice(0, 25).map(d => ({
-          title: d.title,
+          title: d.name,
           subtitle: d.description || d.category || "",
           meta: `Uploaded ${new Date(d.createdAt).toLocaleDateString()}`,
         })));
