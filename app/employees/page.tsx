@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
-import { Authenticator } from "@aws-amplify/ui-react";
-import Layout from "@/components/Layout";
+// Auth via AuthWrapper in wrapper component
+import NeoLayout from "@/components/NeoLayout";
 import {
   Search,
   Filter,
@@ -70,7 +70,7 @@ function EmployeesPage({ user }: { user: any }) {
   };
 
   return (
-    <Layout user={user}>
+    <NeoLayout>
       <div className="space-y-6">
         {/* Header */}
         <div className="flex justify-between items-center">
@@ -194,14 +194,16 @@ function EmployeesPage({ user }: { user: any }) {
           </div>
         )}
       </div>
-    </Layout>
+    </NeoLayout>
   );
 }
 
+import AuthWrapper from "@/components/AuthWrapper";
+
 export default function EmployeesPageWrapper() {
   return (
-    <Authenticator>
-      {({ signOut, user }) => <EmployeesPage user={user} />}
-    </Authenticator>
+    <AuthWrapper>
+      {({ user }) => <EmployeesPage user={user} />}
+    </AuthWrapper>
   );
 }

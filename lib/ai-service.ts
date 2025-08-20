@@ -1,5 +1,15 @@
 import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
+import {
+  createUser,
+  assignOnboardingTasks,
+  sendCommunication,
+  createDocumentPack,
+  scheduleOrientation,
+  escalateIssue,
+  addKnowledgeDoc,
+  type OnboardParams,
+} from "./agent-tools";
 
 const client = generateClient<Schema>();
 
@@ -43,6 +53,27 @@ export interface PerformanceAnalysis {
   predictedTrajectory: "improving" | "stable" | "declining";
   riskFactors: string[];
   recommendations: string[];
+}
+
+export type Intent =
+  | "onboard_person"
+  | "approve_leave"
+  | "create_job_posting"
+  | "schedule_orientation"
+  | "generate_offer"
+  | "policy_qna"
+  | "analyze_retention"
+  | "escalate_sensitive"
+  | "add_kb_doc"
+  | "general";
+
+export interface PlanStep { title: string; status: "pending" | "running" | "done"; details?: string }
+export interface IntentPlan {
+  intent: Intent;
+  params: Record<string, any>;
+  missing: string[];
+  steps: PlanStep[];
+  summary: string;
 }
 
 class AIService {
@@ -372,6 +403,217 @@ class AIService {
     } catch (error) {
       console.error("Task assignment error:", error);
       throw error;
+    }
+  }
+
+  // Intent parsing + planning
+  planIntent(userId: string, message: string): IntentPlan {
+    const parsed = this.parseIntent(message);
+    const { intent, params } = parsed;
+    const missing = this.missingParams(intent, params);
+
+    let steps: PlanStep[] = [];
+    let summary = "";
+
+    switch (intent) {
+      case "onboard_person":
+        steps = [
+          { title: "Create user profile", status: "pending" },
+          { title: "Assign onboarding tasks", status: "pending" },
+          { title: "Send welcome email", status: "pending" },
+          { title: "Schedule orientation", status: "pending" },
+          { title: "Attach starter docs", status: "pending" },
+        ];
+        summary = "Prepare profile, tasks, comms, orientation, and docs.";
+        break;
+      case "approve_leave":
+        steps = [
+          { title: "Notify employee", status: "pending" },
+          { title: "Inform manager", status: "pending" },
+        ];
+        summary = "Send approval notifications.";
+        break;
+      case "schedule_orientation":
+        steps = [
+          { title: "Invite employee", status: "pending" },
+          { title: "Calendar hold", status: "pending" },
+        ];
+        summary = "Schedule orientation and send invite.";
+        break;
+      case "add_kb_doc":
+        steps = [{ title: "Save policy to knowledge base", status: "pending" }];
+        summary = "Add document for grounding answers.";
+        break;
+      default:
+        steps = [{ title: "Draft helpful response", status: "pending" }];
+        summary = "General assistance.";
+    }
+
+    return { intent, params, missing, steps, summary };
+  }
+
+  async executeIntent(userId: string, plan: IntentPlan): Promise<{ outputs: any; steps: PlanStep[] }>{
+    const steps = plan.steps.map(s => ({ ...s }));
+    const outputs: any = {};
+
+    const setStep = (i: number, status: PlanStep["status"], details?: string) => {
+      steps[i].status = status;
+      if (details) steps[i].details = details;
+    };
+
+    switch (plan.intent) {
+      case "onboard_person": {
+        const p = plan.params as Partial<OnboardParams>;
+        // 0. Create user
+        setStep(0, "running");
+        const user = await createUser({
+          firstName: p.firstName!,
+          lastName: p.lastName!,
+          email: p.email!,
+          role: p.role,
+          department: p.department,
+          position: p.position,
+          startDate: p.startDate,
+        });
+        setStep(0, "done", `User ${user?.id}`);
+        outputs.userId = user?.id;
+
+        // 1. Tasks
+        setStep(1, "running");
+        const taskIds = await assignOnboardingTasks(user!.id, p.role, p.department);
+        setStep(1, "done", `${taskIds.length} tasks assigned`);
+        outputs.taskIds = taskIds;
+
+        // 2. Welcome email
+        setStep(2, "running");
+        const welcome = await sendCommunication({
+          recipientId: user!.id,
+          senderId: userId,
+          subject: "Welcome to the team!",
+          content: `Hi ${p.firstName}, welcome aboard! Here are your first steps...`,
+        });
+        setStep(2, "done", `Comm ${welcome?.id}`);
+        outputs.welcomeCommId = welcome?.id;
+
+        // 3. Orientation
+        setStep(3, "running");
+        const when = p.startDate ? new Date(p.startDate) : new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
+        when.setHours(14, 0, 0, 0);
+        const orient = await scheduleOrientation({ userId: user!.id, organizerId: userId, dateTimeISO: when.toISOString() });
+        setStep(3, "done", `Invite ${orient?.id}`);
+        outputs.orientationId = orient?.id;
+
+        // 4. Docs
+        setStep(4, "running");
+        const doc = await createDocumentPack({
+          uploadedBy: userId,
+          userId: user!.id,
+          name: "Starter Pack",
+          url: "https://example.com/starter-pack.pdf",
+          description: "Employee handbook and onboarding forms",
+        });
+        setStep(4, "done", `Doc ${doc?.id}`);
+        outputs.docId = doc?.id;
+        break;
+      }
+
+      case "approve_leave": {
+        setStep(0, "running");
+        const emp = plan.params.employeeId || plan.params.employeeEmail || "UNKNOWN";
+        const appr = await sendCommunication({
+          recipientId: emp,
+          senderId: userId,
+          subject: "Leave Approved",
+          content: "Your leave request has been approved.",
+        });
+        setStep(0, "done", `Comm ${appr?.id}`);
+        setStep(1, "running");
+        const mgr = plan.params.managerId || "MANAGER";
+        const mgrNote = await sendCommunication({
+          recipientId: mgr,
+          senderId: userId,
+          subject: "Leave Approval Notice",
+          content: `Leave approved for ${emp}.`,
+        });
+        setStep(1, "done", `Comm ${mgrNote?.id}`);
+        outputs.commIds = [appr?.id, mgrNote?.id];
+        break;
+      }
+
+      case "schedule_orientation": {
+        setStep(0, "running");
+        const invite = await scheduleOrientation({
+          userId: plan.params.userId,
+          organizerId: userId,
+          dateTimeISO: plan.params.dateTimeISO,
+        });
+        setStep(0, "done", `Invite ${invite?.id}`);
+        setStep(1, "done", "Calendar hold created");
+        outputs.inviteId = invite?.id;
+        break;
+      }
+
+      case "add_kb_doc": {
+        setStep(0, "running");
+        const doc = await addKnowledgeDoc({ title: plan.params.title, url: plan.params.url, userId });
+        setStep(0, "done", `Doc ${doc?.id}`);
+        outputs.docId = doc?.id;
+        break;
+      }
+
+      default: {
+        // No-op for general
+        break;
+      }
+    }
+
+    return { outputs, steps };
+  }
+
+  private parseIntent(message: string): { intent: Intent; params: Record<string, any> } {
+    const m = message.toLowerCase();
+    // Onboard detection and simple param extraction
+    if (/(onboard|hire|bring on)/.test(m)) {
+      const nameMatch = message.match(/onboard\s+(\w+)\s+(\w+)/i);
+      const emailMatch = message.match(/([\w.+-]+@[\w.-]+\.[a-zA-Z]{2,})/);
+      const startMatch = message.match(/start(?:s|ing)?\s+on\s+(\d{4}-\d{2}-\d{2})/i);
+      return {
+        intent: "onboard_person",
+        params: {
+          firstName: nameMatch?.[1],
+          lastName: nameMatch?.[2],
+          email: emailMatch?.[0],
+          startDate: startMatch?.[1],
+        },
+      };
+    }
+    if (/approve\s+(pto|leave|time off)/.test(m)) {
+      return { intent: "approve_leave", params: {} };
+    }
+    if (/schedule\s+orientation/.test(m)) {
+      return { intent: "schedule_orientation", params: {} };
+    }
+    if (/add\s+(policy|kb)\s+doc/.test(m)) {
+      return { intent: "add_kb_doc", params: {} };
+    }
+    if (/(harass|discriminat|bully|threat|assault)/.test(m)) {
+      return { intent: "escalate_sensitive", params: {} };
+    }
+    return { intent: "general", params: {} };
+  }
+
+  private missingParams(intent: Intent, params: Record<string, any>): string[] {
+    switch (intent) {
+      case "onboard_person": {
+        const need = ["firstName", "lastName", "email"];
+        return need.filter(k => !params[k]);
+      }
+      case "schedule_orientation":
+        return ["userId", "dateTimeISO"].filter(k => !params[k]);
+      case "add_kb_doc":
+        return ["title", "url"].filter(k => !params[k]);
+      default:
+        return [];
     }
   }
 }

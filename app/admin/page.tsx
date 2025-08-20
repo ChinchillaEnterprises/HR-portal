@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
-import { Authenticator } from "@aws-amplify/ui-react";
-import Layout from "@/components/Layout";
+import AuthWrapper from "@/components/AuthWrapper";
+import NeoLayout from "@/components/NeoLayout";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import {
   Users,
@@ -288,7 +288,7 @@ function AdminPage({ user }: { user: any }) {
 
   return (
     <ProtectedRoute requiredRole={["admin"]}>
-      <Layout user={user}>
+      <NeoLayout>
         <div className="max-w-7xl mx-auto space-y-6">
           {/* Header */}
           <div className="flex justify-between items-center">
@@ -714,15 +714,15 @@ function AdminPage({ user }: { user: any }) {
             </div>
           )}
         </div>
-      </Layout>
+      </NeoLayout>
     </ProtectedRoute>
   );
 }
 
 export default function AdminPageWrapper() {
   return (
-    <Authenticator>
-      {({ signOut, user }) => <AdminPage user={user} />}
-    </Authenticator>
+    <AuthWrapper>
+      {({ user }) => <AdminPage user={user} />}
+    </AuthWrapper>
   );
 }

@@ -3,8 +3,8 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
-import { Authenticator } from "@aws-amplify/ui-react";
-import Layout from "@/components/Layout";
+import AuthWrapper from "@/components/AuthWrapper";
+import NeoLayout from "@/components/NeoLayout";
 import {
   Plus,
   Edit,
@@ -708,7 +708,7 @@ function OnboardingTemplatesPage({ user }: { user: any }) {
   }
 
   return (
-    <Layout user={user}>
+    <NeoLayout>
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
@@ -1617,14 +1617,14 @@ function OnboardingTemplatesPage({ user }: { user: any }) {
           </div>
         )}
       </div>
-    </Layout>
+    </NeoLayout>
   );
 }
 
 export default function TemplatesPageWrapper() {
   return (
-    <Authenticator>
-      {({ signOut, user }) => <OnboardingTemplatesPage user={user} />}
-    </Authenticator>
+    <AuthWrapper>
+      {({ user }) => <OnboardingTemplatesPage user={user} />}
+    </AuthWrapper>
   );
 }

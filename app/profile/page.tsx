@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
-import { Authenticator } from "@aws-amplify/ui-react";
-import Layout from "@/components/Layout";
+import AuthWrapper from "@/components/AuthWrapper";
+import NeoLayout from "@/components/NeoLayout";
 import {
   User,
   Mail,
@@ -460,7 +460,7 @@ function ProfilePage({ user }: { user: any }) {
   const profileCompleteness = getProfileCompleteness();
 
   return (
-    <Layout user={user}>
+    <NeoLayout>
       <div className="max-w-6xl mx-auto space-y-4 sm:space-y-6">
         {/* Profile Header */}
         <div className="bg-white rounded-lg shadow-sm">
@@ -1304,14 +1304,14 @@ function ProfilePage({ user }: { user: any }) {
           )}
         </div>
       </div>
-    </Layout>
+    </NeoLayout>
   );
 }
 
 export default function ProfilePageWrapper() {
   return (
-    <Authenticator>
-      {({ signOut, user }) => <ProfilePage user={user} />}
-    </Authenticator>
+    <AuthWrapper>
+      {({ user }) => <ProfilePage user={user} />}
+    </AuthWrapper>
   );
 }
