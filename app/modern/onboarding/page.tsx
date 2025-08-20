@@ -87,9 +87,7 @@ export default function ModernOnboarding() {
             transition={{ delay: i * 0.1 }}
             className="glass-light rounded-2xl p-6"
           >
-            <div className="text-3xl font-bold bg-gradient-to-r bg-clip-text text-transparent" 
-                 style={{ backgroundImage: `linear-gradient(to right, var(--tw-gradient-stops))` }}
-                 className={`bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+            <div className={`text-3xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
               {loading ? "..." : stat.value}
             </div>
             <div className="text-sm text-gray-600 mt-1">{stat.label}</div>
