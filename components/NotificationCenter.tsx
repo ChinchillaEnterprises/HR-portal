@@ -67,26 +67,7 @@ export default function NotificationCenter() {
       setLoading(true);
       const allNotifications: Notification[] = [];
 
-      // Fetch tasks assigned to user
-      const { data: tasks } = await client.models.OnboardingTask.list({
-        filter: { userId: { eq: currentUserId } }
-      });
-
-      // Create notifications for pending tasks
-      const taskNotifications = tasks
-        .filter(task => task.status === "pending" && task.dueDate)
-        .map(task => ({
-          id: `task-${task.id}`,
-          type: "task" as const,
-          title: "Task Due Soon",
-          message: `"${task.title}" is due on ${task.dueDate ? new Date(task.dueDate).toLocaleDateString() : "unknown date"}`,
-          timestamp: new Date(task.createdAt),
-          read: false,
-          priority: "medium" as const,
-          actionUrl: "/onboarding",
-          metadata: { taskId: task.id, dueDate: task.dueDate },
-        }));
-      allNotifications.push(...taskNotifications);
+      // Tasks removed - using external task management system
 
       // Fetch documents requiring signature
       const { data: documents } = await client.models.Document.list({

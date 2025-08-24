@@ -22,11 +22,19 @@ import {
   User,
   Settings,
   LogOut,
+  Mail,
+  Shield,
+  Zap,
+  UserPlus,
+  Activity,
 } from "lucide-react";
 import BackgroundEffects from "./BackgroundEffects";
-import AIFloater from "./AIFloater";
+// import AIFloater from "./AIFloater";
 import CommandPalette from "./CommandPalette";
+import NotificationBell from "./NotificationBell";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
+import { PERMISSIONS } from "@/lib/auth/rbac";
 
 const client = generateClient<Schema>();
 
@@ -40,14 +48,32 @@ export default function NeoLayout({ children }: { children: React.ReactNode }) {
   const [darkMode, setDarkMode] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const router = useRouter();
+  const { hasPermission } = useAuth();
 
   const nav = [
     { href: "/", label: "Overview", icon: LayoutGrid },
     { href: "/onboarding", label: "Onboarding", icon: UserCheck },
     { href: "/documents", label: "Documents", icon: FileText },
+    { href: "/people", label: "People", icon: Users },
+    ...(hasPermission(PERMISSIONS.USERS_MANAGE) ? [
+      { href: "/invitations", label: "Invitations", icon: UserPlus }
+    ] : []),
     { href: "/applicants", label: "Applicants", icon: Briefcase },
+    { href: "/communications", label: "Communications", icon: Mail },
     { href: "/reports", label: "Analytics", icon: BarChart3 },
-    { href: "/team", label: "Directory", icon: Users },
+    ...(hasPermission(PERMISSIONS.USER_VIEW) ? [
+      { href: "/users", label: "User Management", icon: Shield }
+    ] : []),
+    ...(hasPermission(PERMISSIONS.INTEGRATION_VIEW) ? [
+      { href: "/integrations", label: "Integrations", icon: Zap }
+    ] : []),
+    ...(hasPermission(PERMISSIONS.SETTINGS_VIEW) ? [
+      { href: "/settings/security", label: "Settings", icon: Settings }
+    ] : []),
+    ...(hasPermission(PERMISSIONS.AUDIT_VIEW) ? [
+      { href: "/audit", label: "Audit Logs", icon: Shield }
+    ] : []),
+    { href: "/diagnostics", label: "Diagnostics", icon: Activity },
   ];
 
   // Global search functionality
@@ -63,11 +89,10 @@ export default function NeoLayout({ children }: { children: React.ReactNode }) {
   const performSearch = async () => {
     setSearching(true);
     try {
-      const [users, docs, applicants, tasks] = await Promise.all([
+      const [users, docs, applicants] = await Promise.all([
         client.models.User.list(),
         client.models.Document.list(),
         client.models.Applicant.list(),
-        client.models.OnboardingTask.list(),
       ]);
 
       const results: any[] = [];
@@ -98,13 +123,7 @@ export default function NeoLayout({ children }: { children: React.ReactNode }) {
         }
       });
 
-      // Search tasks
-      tasks.data.forEach(task => {
-        if (task.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            task.description?.toLowerCase().includes(searchQuery.toLowerCase())) {
-          results.push({ type: "task", data: task, title: task.title, subtitle: task.description });
-        }
-      });
+      // Tasks removed - using external task management system
 
       setSearchResults(results.slice(0, 10));
     } catch (error) {
@@ -130,7 +149,7 @@ export default function NeoLayout({ children }: { children: React.ReactNode }) {
     
     switch (result.type) {
       case "user":
-        router.push("/team");
+        router.push("/people");
         break;
       case "document":
         router.push("/documents");
@@ -178,12 +197,7 @@ export default function NeoLayout({ children }: { children: React.ReactNode }) {
 
             <div className="flex items-center gap-2">
               {/* Notifications */}
-              <button className="relative p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                <Bell className="w-5 h-5 text-gray-600" />
-                {notifications > 0 && (
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                )}
-              </button>
+              <NotificationBell />
 
               {/* Dark mode toggle */}
               <button
@@ -243,7 +257,7 @@ export default function NeoLayout({ children }: { children: React.ReactNode }) {
       </main>
 
       {/* AI quick answers */}
-      <AIFloater />
+      {/* <AIFloater /> */}
       <CommandPalette />
 
       {/* Search Modal */}

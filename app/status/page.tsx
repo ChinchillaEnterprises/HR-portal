@@ -20,7 +20,6 @@ export default function ModernStatus() {
     users: 0,
     applicants: 0,
     documents: 0,
-    tasks: 0,
     communications: 0,
   });
   const [loading, setLoading] = useState(true);
@@ -34,11 +33,10 @@ export default function ModernStatus() {
 
   const loadData = async () => {
     try {
-      const [users, applicants, documents, tasks, communications] = await Promise.all([
+      const [users, applicants, documents, communications] = await Promise.all([
         client.models.User.list(),
         client.models.Applicant.list(),
         client.models.Document.list(),
-        client.models.OnboardingTask.list(),
         client.models.Communication.list(),
       ]);
 
@@ -46,7 +44,6 @@ export default function ModernStatus() {
         users: users.data.length,
         applicants: applicants.data.length,
         documents: documents.data.length,
-        tasks: tasks.data.length,
         communications: communications.data.length,
       });
       setLastUpdate(new Date());
@@ -212,7 +209,6 @@ export default function ModernStatus() {
               { label: "Total Users", value: counts.users, icon: "👥" },
               { label: "Active Applicants", value: counts.applicants, icon: "📋" },
               { label: "Documents", value: counts.documents, icon: "📄" },
-              { label: "Tasks", value: counts.tasks, icon: "✅" },
               { label: "Communications", value: counts.communications, icon: "✉️" },
             ].map((item) => (
               <div key={item.label} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Authenticator } from '@aws-amplify/ui-react';
 import MockAuthenticator from "./MockAuthenticator";
 
 interface AuthWrapperProps {
@@ -18,10 +19,21 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
     return null; // Avoid hydration mismatch
   }
 
-  // Always use mock auth to bypass Cognito issues
+  // Check if we should use mock auth (for development/demo)
+  const useMockAuth = process.env.NEXT_PUBLIC_USE_MOCK_AUTH === 'true';
+
+  if (useMockAuth) {
+    return (
+      <MockAuthenticator>
+        {({ user, signOut }) => children({ user, signOut })}
+      </MockAuthenticator>
+    );
+  }
+
+  // Use real AWS Amplify authentication in production
   return (
-    <MockAuthenticator>
+    <Authenticator>
       {({ user, signOut }) => children({ user, signOut })}
-    </MockAuthenticator>
+    </Authenticator>
   );
 }

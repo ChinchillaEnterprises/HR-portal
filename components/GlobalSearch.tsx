@@ -160,28 +160,7 @@ export default function GlobalSearch() {
           }));
         allResults.push(...commResults.slice(0, 3));
 
-        // Search Tasks
-        const { data: tasks } = await client.models.OnboardingTask.list();
-        const taskResults = tasks
-          .filter(task =>
-            task.title?.toLowerCase().includes(searchLower) ||
-            task.description?.toLowerCase().includes(searchLower) ||
-            task.category?.toLowerCase().includes(searchLower)
-          )
-          .map(task => ({
-            id: task.id,
-            type: "task" as const,
-            title: task.title || "Untitled Task",
-            subtitle: task.category || undefined,
-            description: task.description || undefined,
-            url: `/onboarding`,
-            metadata: {
-              status: task.status,
-              dueDate: task.dueDate,
-              category: task.category,
-            },
-          }));
-        allResults.push(...taskResults.slice(0, 3));
+        // Tasks removed - using external task management system
 
         // Search Applicants
         const { data: applicants } = await client.models.Applicant.list();

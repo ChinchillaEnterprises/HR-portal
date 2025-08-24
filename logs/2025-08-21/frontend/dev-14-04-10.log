@@ -1,0 +1,35 @@
+[2025-08-21T19:04:10.990Z] Starting: npm run dev (Process ID: nextjs-dev)
+[2025-08-21T19:04:11.157Z] [nextjs-dev] 
+> aws-amplify-gen2@0.1.0 dev
+> next dev
+
+[2025-08-21T19:04:11.509Z] [nextjs-dev] [ERROR]  ⚠ Port 3000 is in use, trying 3001 instead.
+[2025-08-21T19:04:11.575Z] [nextjs-dev]   ▲ Next.js 14.2.10
+[2025-08-21T19:04:11.575Z] [nextjs-dev]   - Local:        http://localhost:3001
+
+ ✓ Starting...
+[2025-08-21T19:04:13.007Z] [nextjs-dev]  ✓ Ready in 1514ms
+[2025-08-21T19:04:30.736Z] [nextjs-dev]  ○ Compiling /modern ...
+[2025-08-21T19:04:33.265Z] [nextjs-dev]  ✓ Compiled /modern in 3s (3253 modules)
+[2025-08-21T19:04:33.435Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T19:04:33.441Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T19:04:33.491Z] [nextjs-dev]  GET /modern 200 in 3269ms
+[2025-08-21T19:04:33.693Z] [nextjs-dev]  ✓ Compiled in 331ms (1308 modules)
+[2025-08-21T19:04:46.820Z] [nextjs-dev]  ○ Compiling /login ...
+[2025-08-21T19:04:47.292Z] [nextjs-dev]  ✓ Compiled /login in 1034ms (3591 modules)
+[2025-08-21T19:04:47.562Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T19:04:47.574Z] [nextjs-dev]  GET /login 200 in 1320ms
+[2025-08-21T19:04:47.864Z] [nextjs-dev]  ✓ Compiled /signup in 271ms (3601 modules)
+[2025-08-21T19:04:48.017Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T19:04:48.030Z] [nextjs-dev]  GET /signup 200 in 439ms
+[2025-08-21T19:04:48.268Z] [nextjs-dev]  ✓ Compiled /modern/email in 226ms (3629 modules)
+[2025-08-21T19:04:48.396Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T19:04:48.431Z] [nextjs-dev]  GET /modern/email 200 in 391ms
+[2025-08-21T19:04:48.837Z] [nextjs-dev]  ✓ Compiled /modern/onboarding in 393ms (3657 modules)
+[2025-08-21T19:04:48.960Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T19:04:48.965Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T19:04:49.011Z] [nextjs-dev]  GET /modern/onboarding 200 in 570ms
+[2025-08-21T19:04:49.571Z] [nextjs-dev]  ○ Compiling /test-results ...
+[2025-08-21T19:04:49.578Z] [nextjs-dev]  ✓ Compiled /test-results in 551ms (3669 modules)
+[2025-08-21T19:04:49.744Z] [nextjs-dev] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T19:04:49.761Z] [nextjs-dev]  GET /test-results 200 in 737ms

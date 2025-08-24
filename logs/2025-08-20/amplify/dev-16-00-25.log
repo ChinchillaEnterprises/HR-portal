@@ -1,0 +1,15 @@
+[2025-08-20T21:00:25.937Z] Starting: tail -f /Users/ricardo/.amplify/logs/amplify-*.log 2>/dev/null || echo "No Amplify logs found" (Process ID: amplify-logs)
+[2025-08-20T21:00:25.945Z] [amplify-logs] [ERROR] tail: /Users/ricardo/.amplify/logs/amplify-*.log: No such file or directory
+[2025-08-20T21:00:25.945Z] [amplify-logs] [ERROR] tail: 2>/dev/null: No such file or directory
+tail: ||: No such file or directory
+tail: echo: No such file or directory
+tail: "No: No such file or directory
+tail: found": No such file or directory
+tail: Amplify: Is a directory
+tail: logs: Is a directory
+tail: Amplify: Is a directory
+tail: logs: Is a directory
+[2025-08-20T21:00:25.945Z] [amplify-logs] 
+==> Amplify <==
+
+==> logs <==

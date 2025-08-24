@@ -229,154 +229,6 @@
             "sortKeyFieldNames": []
           }
         },
-        "OnboardingTask": {
-          "name": "OnboardingTask",
-          "fields": {
-            "id": {
-              "name": "id",
-              "isArray": false,
-              "type": "ID",
-              "isRequired": true,
-              "attributes": []
-            },
-            "userId": {
-              "name": "userId",
-              "isArray": false,
-              "type": "String",
-              "isRequired": true,
-              "attributes": []
-            },
-            "title": {
-              "name": "title",
-              "isArray": false,
-              "type": "String",
-              "isRequired": true,
-              "attributes": []
-            },
-            "description": {
-              "name": "description",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "status": {
-              "name": "status",
-              "isArray": false,
-              "type": {
-                "enum": "OnboardingTaskStatus"
-              },
-              "isRequired": false,
-              "attributes": []
-            },
-            "dueDate": {
-              "name": "dueDate",
-              "isArray": false,
-              "type": "AWSDate",
-              "isRequired": false,
-              "attributes": []
-            },
-            "completedDate": {
-              "name": "completedDate",
-              "isArray": false,
-              "type": "AWSDate",
-              "isRequired": false,
-              "attributes": []
-            },
-            "category": {
-              "name": "category",
-              "isArray": false,
-              "type": {
-                "enum": "OnboardingTaskCategory"
-              },
-              "isRequired": false,
-              "attributes": []
-            },
-            "assignedBy": {
-              "name": "assignedBy",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "attachmentUrl": {
-              "name": "attachmentUrl",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "notes": {
-              "name": "notes",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "createdAt": {
-              "name": "createdAt",
-              "isArray": false,
-              "type": "AWSDateTime",
-              "isRequired": false,
-              "attributes": [],
-              "isReadOnly": true
-            },
-            "updatedAt": {
-              "name": "updatedAt",
-              "isArray": false,
-              "type": "AWSDateTime",
-              "isRequired": false,
-              "attributes": [],
-              "isReadOnly": true
-            }
-          },
-          "syncable": true,
-          "pluralName": "OnboardingTasks",
-          "attributes": [
-            {
-              "type": "model",
-              "properties": {}
-            },
-            {
-              "type": "auth",
-              "properties": {
-                "rules": [
-                  {
-                    "provider": "userPools",
-                    "ownerField": "owner",
-                    "allow": "owner",
-                    "identityClaim": "cognito:username",
-                    "operations": [
-                      "create",
-                      "update",
-                      "delete",
-                      "read"
-                    ]
-                  },
-                  {
-                    "groupClaim": "cognito:groups",
-                    "provider": "userPools",
-                    "allow": "groups",
-                    "operations": [
-                      "read",
-                      "update"
-                    ],
-                    "groups": [
-                      "Admin",
-                      "Mentor",
-                      "TeamLead"
-                    ]
-                  }
-                ]
-              }
-            }
-          ],
-          "primaryKeyInfo": {
-            "isCustomPrimaryKey": false,
-            "primaryKeyFieldName": "id",
-            "sortKeyFieldNames": []
-          }
-        },
         "Document": {
           "name": "Document",
           "fields": {
@@ -415,6 +267,27 @@
               "isArray": false,
               "type": "String",
               "isRequired": true,
+              "attributes": []
+            },
+            "fileKey": {
+              "name": "fileKey",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "fileSize": {
+              "name": "fileSize",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "mimeType": {
+              "name": "mimeType",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
               "attributes": []
             },
             "uploadedBy": {
@@ -462,6 +335,20 @@
               "isRequired": false,
               "attributes": []
             },
+            "signedDate": {
+              "name": "signedDate",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "signedBy": {
+              "name": "signedBy",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
             "dropboxSignId": {
               "name": "dropboxSignId",
               "isArray": false,
@@ -471,6 +358,50 @@
             },
             "userId": {
               "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "expirationDate": {
+              "name": "expirationDate",
+              "isArray": false,
+              "type": "AWSDate",
+              "isRequired": false,
+              "attributes": []
+            },
+            "version": {
+              "name": "version",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "parentDocumentId": {
+              "name": "parentDocumentId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "isActive": {
+              "name": "isActive",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "accessLevel": {
+              "name": "accessLevel",
+              "isArray": false,
+              "type": {
+                "enum": "DocumentAccessLevel"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "department": {
+              "name": "department",
               "isArray": false,
               "type": "String",
               "isRequired": false,
@@ -507,21 +438,10 @@
                   {
                     "allow": "private",
                     "operations": [
-                      "read"
-                    ]
-                  },
-                  {
-                    "groupClaim": "cognito:groups",
-                    "provider": "userPools",
-                    "allow": "groups",
-                    "operations": [
                       "create",
                       "read",
                       "update",
                       "delete"
-                    ],
-                    "groups": [
-                      "Admin"
                     ]
                   },
                   {
@@ -722,19 +642,12 @@
               "properties": {
                 "rules": [
                   {
-                    "groupClaim": "cognito:groups",
-                    "provider": "userPools",
-                    "allow": "groups",
+                    "allow": "private",
                     "operations": [
                       "create",
                       "read",
                       "update",
                       "delete"
-                    ],
-                    "groups": [
-                      "Admin",
-                      "Mentor",
-                      "TeamLead"
                     ]
                   }
                 ]
@@ -868,19 +781,12 @@
               "properties": {
                 "rules": [
                   {
-                    "groupClaim": "cognito:groups",
-                    "provider": "userPools",
-                    "allow": "groups",
+                    "allow": "private",
                     "operations": [
                       "create",
                       "read",
                       "update",
                       "delete"
-                    ],
-                    "groups": [
-                      "Admin",
-                      "Mentor",
-                      "TeamLead"
                     ]
                   },
                   {
@@ -995,21 +901,10 @@
                   {
                     "allow": "private",
                     "operations": [
-                      "read"
-                    ]
-                  },
-                  {
-                    "groupClaim": "cognito:groups",
-                    "provider": "userPools",
-                    "allow": "groups",
-                    "operations": [
                       "create",
                       "read",
                       "update",
                       "delete"
-                    ],
-                    "groups": [
-                      "Admin"
                     ]
                   }
                 ]
@@ -1112,19 +1007,12 @@
               "properties": {
                 "rules": [
                   {
-                    "groupClaim": "cognito:groups",
-                    "provider": "userPools",
-                    "allow": "groups",
+                    "allow": "private",
                     "operations": [
                       "create",
                       "read",
                       "update",
                       "delete"
-                    ],
-                    "groups": [
-                      "Admin",
-                      "Mentor",
-                      "TeamLead"
                     ]
                   }
                 ]
@@ -1137,8 +1025,395 @@
             "sortKeyFieldNames": []
           }
         },
-        "AIResumeAnalysis": {
-          "name": "AIResumeAnalysis",
+        "DocumentShare": {
+          "name": "DocumentShare",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "documentId": {
+              "name": "documentId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "sharedWith": {
+              "name": "sharedWith",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "sharedBy": {
+              "name": "sharedBy",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "sharedDate": {
+              "name": "sharedDate",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": true,
+              "attributes": []
+            },
+            "expiresAt": {
+              "name": "expiresAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "accessType": {
+              "name": "accessType",
+              "isArray": false,
+              "type": {
+                "enum": "DocumentShareAccessType"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "accessCount": {
+              "name": "accessCount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "lastAccessed": {
+              "name": "lastAccessed",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "DocumentShares",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "DocumentTemplate": {
+          "name": "DocumentTemplate",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "type": {
+              "name": "type",
+              "isArray": false,
+              "type": {
+                "enum": "DocumentTemplateType"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "templateUrl": {
+              "name": "templateUrl",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "variables": {
+              "name": "variables",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "description": {
+              "name": "description",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "isActive": {
+              "name": "isActive",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdBy": {
+              "name": "createdBy",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "createdDate": {
+              "name": "createdDate",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "lastModified": {
+              "name": "lastModified",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "DocumentTemplates",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Notification": {
+          "name": "Notification",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "type": {
+              "name": "type",
+              "isArray": false,
+              "type": {
+                "enum": "NotificationType"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "title": {
+              "name": "title",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "relatedId": {
+              "name": "relatedId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "relatedType": {
+              "name": "relatedType",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "actionUrl": {
+              "name": "actionUrl",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "priority": {
+              "name": "priority",
+              "isArray": false,
+              "type": {
+                "enum": "NotificationPriority"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "read": {
+              "name": "read",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "readAt": {
+              "name": "readAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "metadata": {
+              "name": "metadata",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Notifications",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ]
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
+                    "identityClaim": "cognito:username",
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Onboarding": {
+          "name": "Onboarding",
           "fields": {
             "id": {
               "name": "id",
@@ -1154,474 +1429,147 @@
               "isRequired": true,
               "attributes": []
             },
-            "resumeUrl": {
-              "name": "resumeUrl",
+            "workflowId": {
+              "name": "workflowId",
               "isArray": false,
               "type": "String",
               "isRequired": true,
               "attributes": []
             },
-            "extractedData": {
-              "name": "extractedData",
-              "isArray": false,
-              "type": "AWSJSON",
-              "isRequired": false,
-              "attributes": []
-            },
-            "matchScore": {
-              "name": "matchScore",
-              "isArray": false,
-              "type": "Float",
-              "isRequired": false,
-              "attributes": []
-            },
-            "strengths": {
-              "name": "strengths",
-              "isArray": true,
-              "type": "String",
-              "isRequired": false,
-              "attributes": [],
-              "isArrayNullable": true
-            },
-            "weaknesses": {
-              "name": "weaknesses",
-              "isArray": true,
-              "type": "String",
-              "isRequired": false,
-              "attributes": [],
-              "isArrayNullable": true
-            },
-            "recommendations": {
-              "name": "recommendations",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "analyzedAt": {
-              "name": "analyzedAt",
-              "isArray": false,
-              "type": "AWSDateTime",
-              "isRequired": true,
-              "attributes": []
-            },
-            "positionRequirements": {
-              "name": "positionRequirements",
-              "isArray": false,
-              "type": "AWSJSON",
-              "isRequired": false,
-              "attributes": []
-            },
-            "aiConfidence": {
-              "name": "aiConfidence",
-              "isArray": false,
-              "type": "Float",
-              "isRequired": false,
-              "attributes": []
-            },
-            "createdAt": {
-              "name": "createdAt",
-              "isArray": false,
-              "type": "AWSDateTime",
-              "isRequired": false,
-              "attributes": [],
-              "isReadOnly": true
-            },
-            "updatedAt": {
-              "name": "updatedAt",
-              "isArray": false,
-              "type": "AWSDateTime",
-              "isRequired": false,
-              "attributes": [],
-              "isReadOnly": true
-            }
-          },
-          "syncable": true,
-          "pluralName": "AIResumeAnalyses",
-          "attributes": [
-            {
-              "type": "model",
-              "properties": {}
-            },
-            {
-              "type": "auth",
-              "properties": {
-                "rules": [
-                  {
-                    "groupClaim": "cognito:groups",
-                    "provider": "userPools",
-                    "allow": "groups",
-                    "operations": [
-                      "create",
-                      "read",
-                      "update",
-                      "delete"
-                    ],
-                    "groups": [
-                      "Admin",
-                      "Mentor",
-                      "TeamLead"
-                    ]
-                  }
-                ]
-              }
-            }
-          ],
-          "primaryKeyInfo": {
-            "isCustomPrimaryKey": false,
-            "primaryKeyFieldName": "id",
-            "sortKeyFieldNames": []
-          }
-        },
-        "AIChat": {
-          "name": "AIChat",
-          "fields": {
-            "id": {
-              "name": "id",
-              "isArray": false,
-              "type": "ID",
-              "isRequired": true,
-              "attributes": []
-            },
-            "userId": {
-              "name": "userId",
+            "workflowName": {
+              "name": "workflowName",
               "isArray": false,
               "type": "String",
               "isRequired": true,
               "attributes": []
             },
-            "sessionId": {
-              "name": "sessionId",
-              "isArray": false,
-              "type": "String",
-              "isRequired": true,
-              "attributes": []
-            },
-            "message": {
-              "name": "message",
-              "isArray": false,
-              "type": "String",
-              "isRequired": true,
-              "attributes": []
-            },
-            "response": {
-              "name": "response",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "context": {
-              "name": "context",
+            "status": {
+              "name": "status",
               "isArray": false,
               "type": {
-                "enum": "AIChatContext"
+                "enum": "OnboardingStatus"
               },
               "isRequired": false,
               "attributes": []
             },
-            "intent": {
-              "name": "intent",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "sentiment": {
-              "name": "sentiment",
-              "isArray": false,
-              "type": {
-                "enum": "AIChatSentiment"
-              },
-              "isRequired": false,
-              "attributes": []
-            },
-            "resolved": {
-              "name": "resolved",
-              "isArray": false,
-              "type": "Boolean",
-              "isRequired": false,
-              "attributes": []
-            },
-            "escalatedTo": {
-              "name": "escalatedTo",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "timestamp": {
-              "name": "timestamp",
+            "startDate": {
+              "name": "startDate",
               "isArray": false,
               "type": "AWSDateTime",
               "isRequired": true,
               "attributes": []
             },
-            "createdAt": {
-              "name": "createdAt",
+            "expectedCompletionDate": {
+              "name": "expectedCompletionDate",
               "isArray": false,
               "type": "AWSDateTime",
               "isRequired": false,
-              "attributes": [],
-              "isReadOnly": true
+              "attributes": []
             },
-            "updatedAt": {
-              "name": "updatedAt",
+            "completedAt": {
+              "name": "completedAt",
               "isArray": false,
               "type": "AWSDateTime",
               "isRequired": false,
-              "attributes": [],
-              "isReadOnly": true
-            }
-          },
-          "syncable": true,
-          "pluralName": "AIChats",
-          "attributes": [
-            {
-              "type": "model",
-              "properties": {}
-            },
-            {
-              "type": "auth",
-              "properties": {
-                "rules": [
-                  {
-                    "provider": "userPools",
-                    "ownerField": "owner",
-                    "allow": "owner",
-                    "identityClaim": "cognito:username",
-                    "operations": [
-                      "create",
-                      "update",
-                      "delete",
-                      "read"
-                    ]
-                  },
-                  {
-                    "groupClaim": "cognito:groups",
-                    "provider": "userPools",
-                    "allow": "groups",
-                    "operations": [
-                      "read",
-                      "update"
-                    ],
-                    "groups": [
-                      "Admin",
-                      "Mentor"
-                    ]
-                  }
-                ]
-              }
-            }
-          ],
-          "primaryKeyInfo": {
-            "isCustomPrimaryKey": false,
-            "primaryKeyFieldName": "id",
-            "sortKeyFieldNames": []
-          }
-        },
-        "AIPerformanceInsight": {
-          "name": "AIPerformanceInsight",
-          "fields": {
-            "id": {
-              "name": "id",
-              "isArray": false,
-              "type": "ID",
-              "isRequired": true,
               "attributes": []
             },
-            "userId": {
-              "name": "userId",
-              "isArray": false,
-              "type": "String",
-              "isRequired": true,
-              "attributes": []
-            },
-            "period": {
-              "name": "period",
-              "isArray": false,
-              "type": "String",
-              "isRequired": true,
-              "attributes": []
-            },
-            "metrics": {
-              "name": "metrics",
-              "isArray": false,
-              "type": "AWSJSON",
-              "isRequired": false,
-              "attributes": []
-            },
-            "predictedTrajectory": {
-              "name": "predictedTrajectory",
-              "isArray": false,
-              "type": {
-                "enum": "AIPerformanceInsightPredictedTrajectory"
-              },
-              "isRequired": false,
-              "attributes": []
-            },
-            "riskFactors": {
-              "name": "riskFactors",
-              "isArray": true,
-              "type": "String",
-              "isRequired": false,
-              "attributes": [],
-              "isArrayNullable": true
-            },
-            "recommendations": {
-              "name": "recommendations",
-              "isArray": true,
-              "type": "String",
-              "isRequired": false,
-              "attributes": [],
-              "isArrayNullable": true
-            },
-            "engagementScore": {
-              "name": "engagementScore",
-              "isArray": false,
-              "type": "Float",
-              "isRequired": false,
-              "attributes": []
-            },
-            "retentionProbability": {
-              "name": "retentionProbability",
-              "isArray": false,
-              "type": "Float",
-              "isRequired": false,
-              "attributes": []
-            },
-            "generatedAt": {
-              "name": "generatedAt",
-              "isArray": false,
-              "type": "AWSDateTime",
-              "isRequired": true,
-              "attributes": []
-            },
-            "createdAt": {
-              "name": "createdAt",
-              "isArray": false,
-              "type": "AWSDateTime",
-              "isRequired": false,
-              "attributes": [],
-              "isReadOnly": true
-            },
-            "updatedAt": {
-              "name": "updatedAt",
-              "isArray": false,
-              "type": "AWSDateTime",
-              "isRequired": false,
-              "attributes": [],
-              "isReadOnly": true
-            }
-          },
-          "syncable": true,
-          "pluralName": "AIPerformanceInsights",
-          "attributes": [
-            {
-              "type": "model",
-              "properties": {}
-            },
-            {
-              "type": "auth",
-              "properties": {
-                "rules": [
-                  {
-                    "provider": "userPools",
-                    "ownerField": "owner",
-                    "allow": "owner",
-                    "identityClaim": "cognito:username",
-                    "operations": [
-                      "create",
-                      "update",
-                      "delete",
-                      "read"
-                    ]
-                  },
-                  {
-                    "groupClaim": "cognito:groups",
-                    "provider": "userPools",
-                    "allow": "groups",
-                    "operations": [
-                      "create",
-                      "read",
-                      "update",
-                      "delete"
-                    ],
-                    "groups": [
-                      "Admin",
-                      "Mentor",
-                      "TeamLead"
-                    ]
-                  }
-                ]
-              }
-            }
-          ],
-          "primaryKeyInfo": {
-            "isCustomPrimaryKey": false,
-            "primaryKeyFieldName": "id",
-            "sortKeyFieldNames": []
-          }
-        },
-        "AIWorkflowOptimization": {
-          "name": "AIWorkflowOptimization",
-          "fields": {
-            "id": {
-              "name": "id",
-              "isArray": false,
-              "type": "ID",
-              "isRequired": true,
-              "attributes": []
-            },
-            "workflowType": {
-              "name": "workflowType",
-              "isArray": false,
-              "type": "String",
-              "isRequired": true,
-              "attributes": []
-            },
-            "currentProcess": {
-              "name": "currentProcess",
-              "isArray": false,
-              "type": "AWSJSON",
-              "isRequired": false,
-              "attributes": []
-            },
-            "optimizedProcess": {
-              "name": "optimizedProcess",
-              "isArray": false,
-              "type": "AWSJSON",
-              "isRequired": false,
-              "attributes": []
-            },
-            "estimatedTimeSaving": {
-              "name": "estimatedTimeSaving",
+            "completionPercentage": {
+              "name": "completionPercentage",
               "isArray": false,
               "type": "Int",
               "isRequired": false,
               "attributes": []
             },
-            "automationOpportunities": {
-              "name": "automationOpportunities",
-              "isArray": true,
-              "type": "String",
+            "metadata": {
+              "name": "metadata",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
               "isRequired": false,
               "attributes": [],
-              "isArrayNullable": true
+              "isReadOnly": true
             },
-            "implementationSteps": {
-              "name": "implementationSteps",
-              "isArray": true,
-              "type": "String",
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
               "isRequired": false,
               "attributes": [],
-              "isArrayNullable": true
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Onboardings",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
             },
-            "priority": {
-              "name": "priority",
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "OnboardingTask": {
+          "name": "OnboardingTask",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "onboardingId": {
+              "name": "onboardingId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "title": {
+              "name": "title",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "description": {
+              "name": "description",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "type": {
+              "name": "type",
               "isArray": false,
               "type": {
-                "enum": "AIWorkflowOptimizationPriority"
+                "enum": "OnboardingTaskType"
               },
               "isRequired": false,
               "attributes": []
@@ -1630,8 +1578,75 @@
               "name": "status",
               "isArray": false,
               "type": {
-                "enum": "AIWorkflowOptimizationStatus"
+                "enum": "OnboardingTaskStatus"
               },
+              "isRequired": false,
+              "attributes": []
+            },
+            "priority": {
+              "name": "priority",
+              "isArray": false,
+              "type": {
+                "enum": "OnboardingTaskPriority"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "assignedRole": {
+              "name": "assignedRole",
+              "isArray": false,
+              "type": {
+                "enum": "OnboardingTaskAssignedRole"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "dueDate": {
+              "name": "dueDate",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "completedAt": {
+              "name": "completedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "completedBy": {
+              "name": "completedBy",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "completionNote": {
+              "name": "completionNote",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "order": {
+              "name": "order",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "dependencies": {
+              "name": "dependencies",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "metadata": {
+              "name": "metadata",
+              "isArray": false,
+              "type": "AWSJSON",
               "isRequired": false,
               "attributes": []
             },
@@ -1639,8 +1654,9 @@
               "name": "createdAt",
               "isArray": false,
               "type": "AWSDateTime",
-              "isRequired": true,
-              "attributes": []
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
             },
             "updatedAt": {
               "name": "updatedAt",
@@ -1652,7 +1668,7 @@
             }
           },
           "syncable": true,
-          "pluralName": "AIWorkflowOptimizations",
+          "pluralName": "OnboardingTasks",
           "attributes": [
             {
               "type": "model",
@@ -1663,17 +1679,344 @@
               "properties": {
                 "rules": [
                   {
-                    "groupClaim": "cognito:groups",
-                    "provider": "userPools",
-                    "allow": "groups",
+                    "allow": "private",
                     "operations": [
                       "create",
                       "read",
                       "update",
                       "delete"
-                    ],
-                    "groups": [
-                      "Admin"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "CalendarEvent": {
+          "name": "CalendarEvent",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "title": {
+              "name": "title",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "description": {
+              "name": "description",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "startTime": {
+              "name": "startTime",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": true,
+              "attributes": []
+            },
+            "endTime": {
+              "name": "endTime",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": true,
+              "attributes": []
+            },
+            "attendees": {
+              "name": "attendees",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "location": {
+              "name": "location",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "type": {
+              "name": "type",
+              "isArray": false,
+              "type": {
+                "enum": "CalendarEventType"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "relatedId": {
+              "name": "relatedId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "relatedType": {
+              "name": "relatedType",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "priority": {
+              "name": "priority",
+              "isArray": false,
+              "type": {
+                "enum": "CalendarEventPriority"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "isAllDay": {
+              "name": "isAllDay",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "recurrence": {
+              "name": "recurrence",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "reminders": {
+              "name": "reminders",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "externalEventId": {
+              "name": "externalEventId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "metadata": {
+              "name": "metadata",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "CalendarEvents",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "UserInvitation": {
+          "name": "UserInvitation",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "firstName": {
+              "name": "firstName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "lastName": {
+              "name": "lastName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": {
+                "enum": "UserInvitationRole"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "department": {
+              "name": "department",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "position": {
+              "name": "position",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "invitationToken": {
+              "name": "invitationToken",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "invitedBy": {
+              "name": "invitedBy",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "invitedAt": {
+              "name": "invitedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": true,
+              "attributes": []
+            },
+            "expiresAt": {
+              "name": "expiresAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": true,
+              "attributes": []
+            },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": {
+                "enum": "UserInvitationStatus"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "acceptedAt": {
+              "name": "acceptedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "reminderSentAt": {
+              "name": "reminderSentAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "note": {
+              "name": "note",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "UserInvitations",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ]
+                  },
+                  {
+                    "allow": "public",
+                    "provider": "iam",
+                    "operations": [
+                      "read"
                     ]
                   }
                 ]
@@ -1706,25 +2049,6 @@
             "pending"
           ]
         },
-        "OnboardingTaskStatus": {
-          "name": "OnboardingTaskStatus",
-          "values": [
-            "pending",
-            "in_progress",
-            "completed",
-            "overdue"
-          ]
-        },
-        "OnboardingTaskCategory": {
-          "name": "OnboardingTaskCategory",
-          "values": [
-            "documentation",
-            "training",
-            "setup",
-            "meeting",
-            "other"
-          ]
-        },
         "DocumentType": {
           "name": "DocumentType",
           "values": [
@@ -1733,7 +2057,10 @@
             "contract",
             "policy",
             "form",
-            "guide"
+            "guide",
+            "resume",
+            "certificate",
+            "other"
           ]
         },
         "DocumentSignatureStatus": {
@@ -1741,7 +2068,17 @@
           "values": [
             "pending",
             "signed",
-            "expired"
+            "expired",
+            "not_required"
+          ]
+        },
+        "DocumentAccessLevel": {
+          "name": "DocumentAccessLevel",
+          "values": [
+            "public",
+            "internal",
+            "confidential",
+            "restricted"
           ]
         },
         "ApplicantStatus": {
@@ -1799,50 +2136,188 @@
             "custom"
           ]
         },
-        "AIChatContext": {
-          "name": "AIChatContext",
+        "DocumentShareAccessType": {
+          "name": "DocumentShareAccessType",
           "values": [
-            "onboarding",
-            "benefits",
-            "policies",
-            "general"
+            "view",
+            "download",
+            "edit"
           ]
         },
-        "AIChatSentiment": {
-          "name": "AIChatSentiment",
+        "DocumentTemplateType": {
+          "name": "DocumentTemplateType",
           "values": [
-            "positive",
-            "neutral",
-            "negative"
+            "offer_letter",
+            "nda",
+            "contract",
+            "policy",
+            "form"
           ]
         },
-        "AIPerformanceInsightPredictedTrajectory": {
-          "name": "AIPerformanceInsightPredictedTrajectory",
+        "NotificationType": {
+          "name": "NotificationType",
           "values": [
-            "improving",
-            "stable",
-            "declining"
+            "new_applicant",
+            "document_shared",
+            "task_assigned",
+            "signature_required",
+            "onboarding_update",
+            "onboarding_started",
+            "onboarding_complete",
+            "system"
           ]
         },
-        "AIWorkflowOptimizationPriority": {
-          "name": "AIWorkflowOptimizationPriority",
+        "NotificationPriority": {
+          "name": "NotificationPriority",
           "values": [
-            "high",
+            "low",
             "medium",
-            "low"
+            "high"
           ]
         },
-        "AIWorkflowOptimizationStatus": {
-          "name": "AIWorkflowOptimizationStatus",
+        "OnboardingStatus": {
+          "name": "OnboardingStatus",
           "values": [
-            "proposed",
-            "approved",
-            "implemented"
+            "not_started",
+            "in_progress",
+            "paused",
+            "completed",
+            "cancelled"
+          ]
+        },
+        "OnboardingTaskType": {
+          "name": "OnboardingTaskType",
+          "values": [
+            "document_upload",
+            "form_completion",
+            "email_send",
+            "approval_required",
+            "system_check"
+          ]
+        },
+        "OnboardingTaskStatus": {
+          "name": "OnboardingTaskStatus",
+          "values": [
+            "pending",
+            "active",
+            "completed",
+            "skipped",
+            "failed"
+          ]
+        },
+        "OnboardingTaskPriority": {
+          "name": "OnboardingTaskPriority",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "OnboardingTaskAssignedRole": {
+          "name": "OnboardingTaskAssignedRole",
+          "values": [
+            "HR",
+            "Manager",
+            "Employee",
+            "System"
+          ]
+        },
+        "CalendarEventType": {
+          "name": "CalendarEventType",
+          "values": [
+            "interview",
+            "onboarding",
+            "meeting",
+            "training",
+            "deadline"
+          ]
+        },
+        "CalendarEventPriority": {
+          "name": "CalendarEventPriority",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "UserInvitationRole": {
+          "name": "UserInvitationRole",
+          "values": [
+            "admin",
+            "mentor",
+            "team_lead",
+            "intern",
+            "staff"
+          ]
+        },
+        "UserInvitationStatus": {
+          "name": "UserInvitationStatus",
+          "values": [
+            "pending",
+            "accepted",
+            "expired",
+            "cancelled"
           ]
         }
       },
       "nonModels": {}
     }
+  },
+  "storage": {
+    "aws_region": "us-east-1",
+    "bucket_name": "amplify-awsamplifygen2-ri-hrportaldocumentsbucketb-daxfdjn9jmxc",
+    "buckets": [
+      {
+        "name": "hrPortalDocuments",
+        "bucket_name": "amplify-awsamplifygen2-ri-hrportaldocumentsbucketb-daxfdjn9jmxc",
+        "aws_region": "us-east-1",
+        "paths": {
+          "documents/*": {
+            "authenticated": [
+              "get",
+              "list",
+              "write",
+              "delete"
+            ],
+            "guest": [
+              "get",
+              "list"
+            ]
+          },
+          "profile-pictures/*": {
+            "authenticated": [
+              "get",
+              "list",
+              "write",
+              "delete"
+            ]
+          },
+          "resumes/*": {
+            "authenticated": [
+              "get",
+              "list",
+              "write",
+              "delete"
+            ]
+          },
+          "contracts/*": {
+            "authenticated": [
+              "get",
+              "list",
+              "write",
+              "delete"
+            ]
+          },
+          "signatures/*": {
+            "authenticated": [
+              "get",
+              "list",
+              "write"
+            ]
+          }
+        }
+      }
+    ]
   },
   "version": "1.4"
 }

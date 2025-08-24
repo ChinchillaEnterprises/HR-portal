@@ -28,27 +28,7 @@ async function main() {
   }
   console.log(`Users: ${createdUsers.length}`);
 
-  // Onboarding tasks for intern
   const internId = createdUsers[3];
-  const tasks = [
-    { title: 'Read Employee Handbook', description: 'Policies and values', status: 'in_progress', category: 'documentation', dueIn: 3 },
-    { title: 'Set up laptop', description: 'Dev environment + accounts', status: 'pending', category: 'setup', dueIn: 2 },
-    { title: 'Meet your mentor', description: '30 min intro', status: 'overdue', category: 'meeting', dueIn: -1 },
-  ];
-  for (const t of tasks) {
-    const due = new Date();
-    due.setDate(due.getDate() + t.dueIn);
-    await client.models.OnboardingTask.create({
-      userId: internId,
-      title: t.title,
-      description: t.description,
-      status: t.status as any,
-      dueDate: due.toISOString().split('T')[0] as any,
-      category: t.category as any,
-      assignedBy: 'SYSTEM',
-    });
-  }
-  console.log('Onboarding tasks: 3');
 
   // Documents
   await client.models.Document.create({

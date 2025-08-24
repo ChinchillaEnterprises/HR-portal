@@ -1,0 +1,1126 @@
+[2025-08-21T16:04:02.912Z] Starting: npm run dev (Process ID: frontend-with-browser)
+[2025-08-21T16:04:02.912Z] [frontend-with-browser] ✅ Starting development server...
+[2025-08-21T16:04:03.073Z] [frontend-with-browser] 
+> aws-amplify-gen2@0.1.0 dev
+> next dev
+
+[2025-08-21T16:04:03.497Z] [frontend-with-browser]   ▲ Next.js 14.2.10
+[2025-08-21T16:04:03.497Z] [frontend-with-browser]   - Local:        http://localhost:3000
+
+ ✓ Starting...
+[2025-08-21T16:04:03.497Z] [frontend-with-browser] ✅ Server ready on http://localhost:3000
+[2025-08-21T16:04:03.497Z] [frontend-with-browser] ⏳ Waiting 3000ms before launching browser...
+[2025-08-21T16:04:05.354Z] [frontend-with-browser]  ✓ Ready in 1940ms
+[2025-08-21T16:04:06.498Z] [frontend-with-browser] ✅ Launching test browser...
+[2025-08-21T16:04:06.515Z] [frontend-with-browser] [ERROR] Failed to launch browser: browserType.launch: Executable doesn't exist at /Users/ricardo/Library/Caches/ms-playwright/chromium-1181/chrome-mac/Chromium.app/Contents/MacOS/Chromium
+╔═════════════════════════════════════════════════════════════════════════╗
+║ Looks like Playwright Test or Playwright was just installed or updated. ║
+║ Please run the following command to download new browsers:              ║
+║                                                                         ║
+║     npx playwright install                                              ║
+║                                                                         ║
+║ <3 Playwright Team                                                      ║
+╚═════════════════════════════════════════════════════════════════════════╝
+[2025-08-21T16:38:13.418Z] [frontend-with-browser]  ○ Compiling / ...
+[2025-08-21T16:38:20.292Z] [frontend-with-browser]  ✓ Compiled / in 7.4s (3258 modules)
+[2025-08-21T16:38:20.538Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:38:20.579Z] [frontend-with-browser]  GET / 200 in 7738ms
+[2025-08-21T16:38:20.796Z] [frontend-with-browser]  GET / 200 in 207ms
+[2025-08-21T16:38:20.888Z] [frontend-with-browser]  ✓ Compiled in 485ms (1300 modules)
+[2025-08-21T16:38:23.774Z] [frontend-with-browser]  ○ Compiling /signup ...
+[2025-08-21T16:38:26.546Z] [frontend-with-browser]  ✓ Compiled /signup in 3.5s (3586 modules)
+[2025-08-21T16:38:26.798Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:38:26.909Z] [frontend-with-browser]  GET /login 200 in 3832ms
+[2025-08-21T16:38:26.911Z] [frontend-with-browser]  GET /login 200 in 3835ms
+[2025-08-21T16:38:26.912Z] [frontend-with-browser]  GET /login 200 in 3839ms
+[2025-08-21T16:38:26.914Z] [frontend-with-browser]  GET /signup 200 in 3837ms
+[2025-08-21T16:38:28.630Z] [frontend-with-browser]  ○ Compiling /api/auth/[...nextauth] ...
+[2025-08-21T16:38:29.210Z] [frontend-with-browser]  ✓ Compiled /modern/email in 1101ms (2352 modules)
+[2025-08-21T16:38:29.791Z] [frontend-with-browser]  ✓ Compiled in 511ms (3851 modules)
+[2025-08-21T16:38:30.035Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:38:30.055Z] [frontend-with-browser]  GET /api/auth/session 200 in 1932ms
+[2025-08-21T16:38:30.178Z] [frontend-with-browser]  GET /signup 200 in 973ms
+[2025-08-21T16:38:30.249Z] [frontend-with-browser]  GET /login 200 in 1594ms
+[2025-08-21T16:38:30.251Z] [frontend-with-browser]  GET /login 200 in 1591ms
+[2025-08-21T16:38:30.272Z] [frontend-with-browser]  GET /modern/email 200 in 1369ms
+[2025-08-21T16:38:30.291Z] [frontend-with-browser]  POST /api/auth/_log 200 in 174ms
+[2025-08-21T16:38:30.336Z] [frontend-with-browser]  POST /api/auth/_log 200 in 174ms
+[2025-08-21T16:38:30.488Z] [frontend-with-browser]  GET /modern/email 200 in 89ms
+[2025-08-21T16:38:31.132Z] [frontend-with-browser] [ERROR] [next-auth][warn][NEXTAUTH_URL] 
+https://next-auth.js.org/warnings#nextauth_url
+[2025-08-21T16:38:31.132Z] [frontend-with-browser] [ERROR] [next-auth][warn][NO_SECRET] 
+https://next-auth.js.org/warnings#no_secret
+[2025-08-21T16:38:31.710Z] [frontend-with-browser]  GET /api/auth/session 200 in 121ms
+ GET /api/auth/session 200 in 124ms
+ GET /api/auth/session 200 in 121ms
+[2025-08-21T16:38:31.863Z] [frontend-with-browser]  GET /api/auth/session 200 in 131ms
+ GET /api/auth/session 200 in 130ms
+ GET /api/auth/session 200 in 130ms
+[2025-08-21T16:38:32.061Z] [frontend-with-browser]  GET /modern/email 200 in 103ms
+[2025-08-21T16:38:32.181Z] [frontend-with-browser]  GET /api/auth/session 200 in 152ms
+[2025-08-21T16:38:32.223Z] [frontend-with-browser]  GET /api/auth/session 200 in 28ms
+[2025-08-21T16:38:32.279Z] [frontend-with-browser]  GET /modern/email 200 in 97ms
+[2025-08-21T16:38:32.444Z] [frontend-with-browser]  GET /modern/email 200 in 39ms
+[2025-08-21T16:38:32.835Z] [frontend-with-browser]  GET /modern/email 200 in 47ms
+[2025-08-21T16:38:33.039Z] [frontend-with-browser]  GET /api/auth/session 200 in 39ms
+[2025-08-21T16:38:33.093Z] [frontend-with-browser]  GET /api/auth/session 200 in 32ms
+[2025-08-21T16:38:33.106Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T16:38:33.142Z] [frontend-with-browser]  GET /api/auth/session 200 in 26ms
+[2025-08-21T16:38:33.279Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T16:38:33.312Z] [frontend-with-browser]  GET /api/auth/session 200 in 31ms
+[2025-08-21T16:38:33.462Z] [frontend-with-browser]  GET /modern/email 200 in 35ms
+[2025-08-21T16:38:33.879Z] [frontend-with-browser]  GET /api/auth/session 200 in 17ms
+[2025-08-21T16:38:33.909Z] [frontend-with-browser]  GET /api/auth/session 200 in 20ms
+[2025-08-21T16:38:34.359Z] [frontend-with-browser]  GET /api/auth/session 200 in 9ms
+[2025-08-21T16:38:34.396Z] [frontend-with-browser]  GET /api/auth/session 200 in 33ms
+[2025-08-21T16:38:34.581Z] [frontend-with-browser]  GET /modern/email 200 in 29ms
+[2025-08-21T16:38:34.913Z] [frontend-with-browser]  GET /modern/email 200 in 33ms
+[2025-08-21T16:38:35.233Z] [frontend-with-browser]  GET /api/auth/session 200 in 20ms
+[2025-08-21T16:38:35.250Z] [frontend-with-browser]  GET /api/auth/session 200 in 4ms
+[2025-08-21T16:38:35.538Z] [frontend-with-browser]  GET /api/auth/session 200 in 12ms
+[2025-08-21T16:38:35.578Z] [frontend-with-browser]  GET /api/auth/session 200 in 30ms
+[2025-08-21T16:38:35.613Z] [frontend-with-browser]  GET /modern/email 200 in 40ms
+[2025-08-21T16:38:36.772Z] [frontend-with-browser]  ○ Compiling /modern/onboarding ...
+[2025-08-21T16:38:40.147Z] [frontend-with-browser]  ✓ Compiled /modern/onboarding in 3.9s (3883 modules)
+[2025-08-21T16:38:40.274Z] [frontend-with-browser] [ERROR] [next-auth][warn][NEXTAUTH_URL] 
+https://next-auth.js.org/warnings#nextauth_url
+[next-auth][warn][NO_SECRET] 
+https://next-auth.js.org/warnings#no_secret
+[2025-08-21T16:38:40.425Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:38:40.444Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:38:40.541Z] [frontend-with-browser]  GET /login 200 in 3878ms
+[2025-08-21T16:38:40.542Z] [frontend-with-browser]  GET /login 200 in 398ms
+[2025-08-21T16:38:40.550Z] [frontend-with-browser]  GET /modern/onboarding 200 in 4300ms
+[2025-08-21T16:38:41.610Z] [frontend-with-browser]  GET /api/auth/session 200 in 128ms
+ GET /api/auth/session 200 in 119ms
+ GET /api/auth/session 200 in 114ms
+[2025-08-21T16:38:42.126Z] [frontend-with-browser]  ○ Compiling /modern ...
+[2025-08-21T16:38:42.957Z] [frontend-with-browser]  ✓ Compiled /modern in 1343ms (3895 modules)
+[2025-08-21T16:38:43.632Z] [frontend-with-browser] [ERROR] [next-auth][warn][NEXTAUTH_URL] 
+https://next-auth.js.org/warnings#nextauth_url
+[next-auth][warn][NO_SECRET] 
+https://next-auth.js.org/warnings#no_secret
+[2025-08-21T16:38:43.642Z] [frontend-with-browser]  GET /api/auth/session 200 in 2012ms
+ GET /api/auth/session 200 in 2011ms
+[2025-08-21T16:38:43.925Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:38:43.966Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:38:44.129Z] [frontend-with-browser]  GET /signup 200 in 1333ms
+[2025-08-21T16:38:44.227Z] [frontend-with-browser]  GET /modern/email 200 in 2383ms
+[2025-08-21T16:38:44.230Z] [frontend-with-browser]  GET /modern 200 in 2665ms
+[2025-08-21T16:38:45.347Z] [frontend-with-browser]  GET /api/auth/session 200 in 50ms
+ GET /api/auth/session 200 in 40ms
+ GET /api/auth/session 200 in 40ms
+[2025-08-21T16:38:45.379Z] [frontend-with-browser]  GET /api/auth/session 200 in 28ms
+[2025-08-21T16:38:45.380Z] [frontend-with-browser]  GET /api/auth/session 200 in 24ms
+ GET /api/auth/session 200 in 23ms
+[2025-08-21T16:38:45.558Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:38:45.581Z] [frontend-with-browser]  GET /modern/onboarding 200 in 51ms
+[2025-08-21T16:38:46.238Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T16:38:46.276Z] [frontend-with-browser]  GET /api/auth/session 200 in 32ms
+[2025-08-21T16:38:46.583Z] [frontend-with-browser]  GET /modern/email 200 in 34ms
+[2025-08-21T16:38:47.487Z] [frontend-with-browser]  ○ Compiling /reports ...
+[2025-08-21T16:38:47.939Z] [frontend-with-browser]  ✓ Compiled /reports in 979ms (3935 modules)
+[2025-08-21T16:38:48.148Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:38:48.220Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:38:48.280Z] [frontend-with-browser]  GET /reports 200 in 1327ms
+[2025-08-21T16:38:49.207Z] [frontend-with-browser] [ERROR] [next-auth][warn][NEXTAUTH_URL] 
+https://next-auth.js.org/warnings#nextauth_url
+[next-auth][warn][NO_SECRET] 
+https://next-auth.js.org/warnings#no_secret
+[2025-08-21T16:38:49.209Z] [frontend-with-browser]  GET /api/auth/session 200 in 112ms
+[2025-08-21T16:38:49.228Z] [frontend-with-browser]  GET /api/auth/session 200 in 9ms
+[2025-08-21T16:38:49.346Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:38:49.370Z] [frontend-with-browser]  GET /modern 200 in 47ms
+[2025-08-21T16:38:49.965Z] [frontend-with-browser]  GET /api/auth/session 200 in 20ms
+[2025-08-21T16:38:49.983Z] [frontend-with-browser]  GET /api/auth/session 200 in 6ms
+[2025-08-21T16:38:54.925Z] [frontend-with-browser]  GET /modern 200 in 73ms
+[2025-08-21T16:38:55.615Z] [frontend-with-browser]  GET /api/auth/session 200 in 34ms
+[2025-08-21T16:38:55.649Z] [frontend-with-browser]  GET /api/auth/session 200 in 23ms
+[2025-08-21T16:39:03.739Z] [frontend-with-browser]  GET /modern 200 in 78ms
+[2025-08-21T16:39:04.547Z] [frontend-with-browser]  GET /api/auth/session 200 in 17ms
+[2025-08-21T16:39:04.560Z] [frontend-with-browser]  GET /api/auth/session 200 in 9ms
+[2025-08-21T16:39:04.709Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:39:04.747Z] [frontend-with-browser]  GET /modern/onboarding 200 in 55ms
+[2025-08-21T16:39:05.346Z] [frontend-with-browser]  GET /api/auth/session 200 in 23ms
+[2025-08-21T16:39:05.359Z] [frontend-with-browser]  GET /api/auth/session 200 in 12ms
+[2025-08-21T16:39:05.530Z] [frontend-with-browser]  GET /modern/onboarding 200 in 32ms
+[2025-08-21T16:39:06.164Z] [frontend-with-browser]  GET /api/auth/session 200 in 18ms
+[2025-08-21T16:39:06.178Z] [frontend-with-browser]  GET /api/auth/session 200 in 10ms
+[2025-08-21T16:39:06.339Z] [frontend-with-browser]  GET /modern/onboarding 200 in 29ms
+[2025-08-21T16:39:07.061Z] [frontend-with-browser]  GET /api/auth/session 200 in 32ms
+[2025-08-21T16:39:07.078Z] [frontend-with-browser]  GET /api/auth/session 200 in 13ms
+[2025-08-21T16:39:07.311Z] [frontend-with-browser]  GET /modern/onboarding 200 in 55ms
+[2025-08-21T16:39:07.939Z] [frontend-with-browser]  GET /api/auth/session 200 in 29ms
+[2025-08-21T16:39:07.947Z] [frontend-with-browser]  GET /api/auth/session 200 in 6ms
+[2025-08-21T16:39:08.145Z] [frontend-with-browser]  GET /modern/onboarding 200 in 37ms
+[2025-08-21T16:39:08.747Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T16:39:08.760Z] [frontend-with-browser]  GET /api/auth/session 200 in 11ms
+[2025-08-21T16:39:08.958Z] [frontend-with-browser]  GET /modern/onboarding 200 in 44ms
+[2025-08-21T16:39:09.536Z] [frontend-with-browser]  GET /api/auth/session 200 in 9ms
+[2025-08-21T16:39:09.547Z] [frontend-with-browser]  GET /api/auth/session 200 in 6ms
+[2025-08-21T16:39:11.176Z] [frontend-with-browser]  GET /modern/onboarding 200 in 35ms
+[2025-08-21T16:39:11.825Z] [frontend-with-browser]  GET /api/auth/session 200 in 45ms
+[2025-08-21T16:39:11.854Z] [frontend-with-browser]  GET /api/auth/session 200 in 24ms
+[2025-08-21T16:39:12.138Z] [frontend-with-browser]  GET /modern/onboarding 200 in 92ms
+[2025-08-21T16:39:12.906Z] [frontend-with-browser]  GET /api/auth/session 200 in 27ms
+[2025-08-21T16:39:12.926Z] [frontend-with-browser]  GET /api/auth/session 200 in 19ms
+[2025-08-21T16:39:13.060Z] [frontend-with-browser]  GET /modern/onboarding 200 in 57ms
+[2025-08-21T16:39:14.573Z] [frontend-with-browser]  GET /modern/onboarding 200 in 195ms
+[2025-08-21T16:39:15.236Z] [frontend-with-browser]  GET /api/auth/session 200 in 50ms
+[2025-08-21T16:39:15.292Z] [frontend-with-browser]  GET /api/auth/session 200 in 46ms
+[2025-08-21T16:39:15.425Z] [frontend-with-browser]  GET /api/auth/session 200 in 12ms
+[2025-08-21T16:39:15.441Z] [frontend-with-browser]  GET /api/auth/session 200 in 12ms
+[2025-08-21T16:39:15.557Z] [frontend-with-browser]  GET /modern/onboarding 200 in 60ms
+[2025-08-21T16:39:15.642Z] [frontend-with-browser]  GET /modern/onboarding 200 in 45ms
+[2025-08-21T16:39:16.640Z] [frontend-with-browser]  GET /api/auth/session 200 in 28ms
+ GET /api/auth/session 200 in 27ms
+[2025-08-21T16:39:16.659Z] [frontend-with-browser]  GET /api/auth/session 200 in 12ms
+[2025-08-21T16:39:16.663Z] [frontend-with-browser]  GET /api/auth/session 200 in 15ms
+[2025-08-21T16:39:16.798Z] [frontend-with-browser]  GET /modern/onboarding 200 in 37ms
+[2025-08-21T16:39:17.379Z] [frontend-with-browser]  GET /api/auth/session 200 in 31ms
+[2025-08-21T16:39:17.406Z] [frontend-with-browser]  GET /api/auth/session 200 in 15ms
+[2025-08-21T16:43:09.850Z] [frontend-with-browser]  GET / 200 in 78ms
+[2025-08-21T16:43:09.874Z] [frontend-with-browser]  GET / 200 in 23ms
+[2025-08-21T16:43:11.558Z] [frontend-with-browser]  GET /signup 200 in 125ms
+[2025-08-21T16:43:11.565Z] [frontend-with-browser]  GET /login 200 in 132ms
+[2025-08-21T16:43:11.566Z] [frontend-with-browser]  GET /login 200 in 133ms
+[2025-08-21T16:43:11.570Z] [frontend-with-browser]  GET /login 200 in 137ms
+[2025-08-21T16:43:12.739Z] [frontend-with-browser]  GET /api/auth/session 200 in 174ms
+ GET /api/auth/session 200 in 170ms
+ GET /api/auth/session 200 in 170ms
+ GET /api/auth/session 200 in 170ms
+[2025-08-21T16:43:12.862Z] [frontend-with-browser]  GET /api/auth/session 200 in 106ms
+ GET /api/auth/session 200 in 105ms
+ GET /api/auth/session 200 in 105ms
+ GET /api/auth/session 200 in 105ms
+[2025-08-21T16:43:13.015Z] [frontend-with-browser]  GET /login 200 in 72ms
+[2025-08-21T16:43:13.034Z] [frontend-with-browser]  GET /login 200 in 83ms
+[2025-08-21T16:43:13.731Z] [frontend-with-browser]  GET /signup 200 in 226ms
+[2025-08-21T16:43:14.083Z] [frontend-with-browser]  GET /modern/email 200 in 135ms
+[2025-08-21T16:43:14.274Z] [frontend-with-browser]  GET /api/auth/session 200 in 56ms
+ GET /api/auth/session 200 in 55ms
+[2025-08-21T16:43:14.279Z] [frontend-with-browser]  GET /modern/email 200 in 237ms
+[2025-08-21T16:43:14.357Z] [frontend-with-browser]  GET /api/auth/session 200 in 65ms
+[2025-08-21T16:43:14.366Z] [frontend-with-browser]  GET /api/auth/session 200 in 78ms
+[2025-08-21T16:43:14.470Z] [frontend-with-browser]  GET /modern/email 200 in 35ms
+[2025-08-21T16:43:15.322Z] [frontend-with-browser]  GET /api/auth/session 200 in 167ms
+ GET /api/auth/session 200 in 132ms
+[2025-08-21T16:43:15.537Z] [frontend-with-browser]  GET /api/auth/session 200 in 181ms
+ GET /api/auth/session 200 in 164ms
+ GET /api/auth/session 200 in 146ms
+[2025-08-21T16:43:15.763Z] [frontend-with-browser]  GET /api/auth/session 200 in 205ms
+[2025-08-21T16:43:15.971Z] [frontend-with-browser]  GET /modern/email 200 in 72ms
+[2025-08-21T16:43:16.072Z] [frontend-with-browser]  GET /modern/email 200 in 134ms
+[2025-08-21T16:43:16.079Z] [frontend-with-browser]  GET /modern/email 200 in 127ms
+[2025-08-21T16:43:16.199Z] [frontend-with-browser]  GET /modern/email 200 in 127ms
+[2025-08-21T16:43:17.305Z] [frontend-with-browser]  GET /api/auth/session 200 in 233ms
+[2025-08-21T16:43:17.332Z] [frontend-with-browser]  GET /api/auth/session 200 in 129ms
+ GET /api/auth/session 200 in 127ms
+ GET /api/auth/session 200 in 126ms
+[2025-08-21T16:43:17.352Z] [frontend-with-browser]  GET /api/auth/session 200 in 34ms
+[2025-08-21T16:43:17.363Z] [frontend-with-browser]  GET /api/auth/session 200 in 24ms
+ GET /api/auth/session 200 in 24ms
+[2025-08-21T16:43:17.363Z] [frontend-with-browser]  GET /api/auth/session 200 in 25ms
+[2025-08-21T16:43:17.719Z] [frontend-with-browser]  GET /modern/email 200 in 90ms
+[2025-08-21T16:43:17.800Z] [frontend-with-browser]  GET /modern/email 200 in 84ms
+[2025-08-21T16:43:18.639Z] [frontend-with-browser]  GET /api/auth/session 200 in 36ms
+[2025-08-21T16:43:18.752Z] [frontend-with-browser]  GET /api/auth/session 200 in 46ms
+[2025-08-21T16:43:18.753Z] [frontend-with-browser]  GET /api/auth/session 200 in 45ms
+[2025-08-21T16:43:18.765Z] [frontend-with-browser]  GET /api/auth/session 200 in 10ms
+[2025-08-21T16:43:19.031Z] [frontend-with-browser]  GET /modern/email 200 in 47ms
+[2025-08-21T16:43:19.255Z] [frontend-with-browser]  GET /modern/onboarding 200 in 21ms
+[2025-08-21T16:43:19.828Z] [frontend-with-browser]  GET /api/auth/session 200 in 34ms
+[2025-08-21T16:43:19.846Z] [frontend-with-browser]  GET /api/auth/session 200 in 11ms
+[2025-08-21T16:43:20.078Z] [frontend-with-browser]  GET /login 200 in 53ms
+[2025-08-21T16:43:20.257Z] [frontend-with-browser]  GET /api/auth/session 200 in 57ms
+[2025-08-21T16:43:20.271Z] [frontend-with-browser]  GET /api/auth/session 200 in 8ms
+[2025-08-21T16:43:20.456Z] [frontend-with-browser]  GET /login 200 in 39ms
+[2025-08-21T16:43:20.857Z] [frontend-with-browser]  GET /api/auth/session 200 in 11ms
+[2025-08-21T16:43:20.890Z] [frontend-with-browser]  GET /api/auth/session 200 in 24ms
+[2025-08-21T16:43:20.907Z] [frontend-with-browser]  GET /modern 200 in 56ms
+[2025-08-21T16:43:21.119Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T16:43:21.152Z] [frontend-with-browser]  GET /api/auth/session 200 in 28ms
+[2025-08-21T16:43:21.670Z] [frontend-with-browser]  GET /api/auth/session 200 in 19ms
+[2025-08-21T16:43:21.683Z] [frontend-with-browser]  GET /api/auth/session 200 in 11ms
+[2025-08-21T16:43:21.836Z] [frontend-with-browser]  GET /modern/email 200 in 33ms
+[2025-08-21T16:43:22.101Z] [frontend-with-browser]  GET /signup 200 in 49ms
+[2025-08-21T16:43:22.865Z] [frontend-with-browser]  GET /api/auth/session 200 in 283ms
+[2025-08-21T16:43:22.933Z] [frontend-with-browser]  GET /api/auth/session 200 in 57ms
+ GET /api/auth/session 200 in 59ms
+[2025-08-21T16:43:22.957Z] [frontend-with-browser]  GET /api/auth/session 200 in 21ms
+[2025-08-21T16:43:24.042Z] [frontend-with-browser]  GET /modern/email 200 in 59ms
+[2025-08-21T16:43:24.092Z] [frontend-with-browser]  GET /modern/onboarding 200 in 101ms
+[2025-08-21T16:43:24.157Z] [frontend-with-browser]  GET /reports 200 in 129ms
+[2025-08-21T16:43:25.155Z] [frontend-with-browser]  GET /api/auth/session 200 in 66ms
+ GET /api/auth/session 200 in 65ms
+[2025-08-21T16:43:25.332Z] [frontend-with-browser]  GET /api/auth/session 200 in 169ms
+ GET /api/auth/session 200 in 166ms
+[2025-08-21T16:43:25.348Z] [frontend-with-browser]  GET /api/auth/session 200 in 23ms
+[2025-08-21T16:43:25.401Z] [frontend-with-browser]  GET /api/auth/session 200 in 34ms
+[2025-08-21T16:43:25.565Z] [frontend-with-browser]  GET /modern 200 in 58ms
+[2025-08-21T16:43:26.233Z] [frontend-with-browser]  GET /api/auth/session 200 in 36ms
+[2025-08-21T16:43:26.238Z] [frontend-with-browser]  GET /api/auth/session 200 in 3ms
+[2025-08-21T16:43:26.458Z] [frontend-with-browser]  GET /modern 200 in 35ms
+[2025-08-21T16:43:27.169Z] [frontend-with-browser]  GET /api/auth/session 200 in 18ms
+[2025-08-21T16:43:27.181Z] [frontend-with-browser]  GET /api/auth/session 200 in 6ms
+[2025-08-21T16:43:28.732Z] [frontend-with-browser]  GET /modern 200 in 30ms
+[2025-08-21T16:43:29.289Z] [frontend-with-browser]  GET /api/auth/session 200 in 17ms
+[2025-08-21T16:43:29.303Z] [frontend-with-browser]  GET /api/auth/session 200 in 8ms
+[2025-08-21T16:43:29.473Z] [frontend-with-browser]  GET /modern/onboarding 200 in 40ms
+[2025-08-21T16:43:30.097Z] [frontend-with-browser]  GET /api/auth/session 200 in 23ms
+[2025-08-21T16:43:30.103Z] [frontend-with-browser]  GET /api/auth/session 200 in 4ms
+[2025-08-21T16:43:30.296Z] [frontend-with-browser]  GET /modern/onboarding 200 in 41ms
+[2025-08-21T16:43:30.873Z] [frontend-with-browser]  GET /api/auth/session 200 in 9ms
+[2025-08-21T16:43:30.890Z] [frontend-with-browser]  GET /api/auth/session 200 in 8ms
+[2025-08-21T16:43:31.103Z] [frontend-with-browser]  GET /modern/onboarding 200 in 35ms
+[2025-08-21T16:43:31.783Z] [frontend-with-browser]  GET /api/auth/session 200 in 18ms
+[2025-08-21T16:43:31.793Z] [frontend-with-browser]  GET /api/auth/session 200 in 7ms
+[2025-08-21T16:43:31.971Z] [frontend-with-browser]  GET /modern/onboarding 200 in 36ms
+[2025-08-21T16:43:32.557Z] [frontend-with-browser]  GET /api/auth/session 200 in 8ms
+[2025-08-21T16:43:32.581Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T16:43:32.771Z] [frontend-with-browser]  GET /modern/onboarding 200 in 32ms
+[2025-08-21T16:43:33.599Z] [frontend-with-browser]  GET /api/auth/session 200 in 119ms
+[2025-08-21T16:43:33.636Z] [frontend-with-browser]  GET /api/auth/session 200 in 34ms
+[2025-08-21T16:43:33.772Z] [frontend-with-browser]  GET /modern/onboarding 200 in 51ms
+[2025-08-21T16:43:34.396Z] [frontend-with-browser]  GET /api/auth/session 200 in 14ms
+[2025-08-21T16:43:34.406Z] [frontend-with-browser]  GET /api/auth/session 200 in 5ms
+[2025-08-21T16:43:35.057Z] [frontend-with-browser]  GET /modern/onboarding 200 in 23ms
+[2025-08-21T16:43:35.618Z] [frontend-with-browser]  GET /api/auth/session 200 in 19ms
+[2025-08-21T16:43:35.639Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T16:43:35.795Z] [frontend-with-browser]  GET /modern/onboarding 200 in 26ms
+[2025-08-21T16:43:36.445Z] [frontend-with-browser]  GET /api/auth/session 200 in 12ms
+[2025-08-21T16:43:36.457Z] [frontend-with-browser]  GET /api/auth/session 200 in 5ms
+[2025-08-21T16:43:37.238Z] [frontend-with-browser]  GET /modern/onboarding 200 in 37ms
+[2025-08-21T16:43:37.881Z] [frontend-with-browser]  GET /api/auth/session 200 in 20ms
+[2025-08-21T16:43:37.888Z] [frontend-with-browser]  GET /api/auth/session 200 in 5ms
+[2025-08-21T16:43:38.034Z] [frontend-with-browser]  GET /modern/onboarding 200 in 30ms
+[2025-08-21T16:43:38.622Z] [frontend-with-browser]  GET /api/auth/session 200 in 19ms
+[2025-08-21T16:43:38.632Z] [frontend-with-browser]  GET /api/auth/session 200 in 8ms
+[2025-08-21T16:43:38.788Z] [frontend-with-browser]  GET /modern/onboarding 200 in 28ms
+[2025-08-21T16:43:39.479Z] [frontend-with-browser]  GET /api/auth/session 200 in 21ms
+[2025-08-21T16:43:39.488Z] [frontend-with-browser]  GET /api/auth/session 200 in 6ms
+[2025-08-21T16:43:39.670Z] [frontend-with-browser]  GET /modern/onboarding 200 in 40ms
+[2025-08-21T16:43:40.297Z] [frontend-with-browser]  GET /api/auth/session 200 in 17ms
+[2025-08-21T16:43:40.305Z] [frontend-with-browser]  GET /api/auth/session 200 in 6ms
+[2025-08-21T16:43:40.484Z] [frontend-with-browser]  GET /modern/onboarding 200 in 26ms
+[2025-08-21T16:43:41.182Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T16:43:41.190Z] [frontend-with-browser]  GET /api/auth/session 200 in 4ms
+[2025-08-21T16:46:02.501Z] [frontend-with-browser]  GET / 200 in 31ms
+[2025-08-21T16:46:02.537Z] [frontend-with-browser]  GET / 200 in 33ms
+[2025-08-21T16:46:03.972Z] [frontend-with-browser]  GET /login 200 in 83ms
+[2025-08-21T16:46:03.972Z] [frontend-with-browser]  GET /login 200 in 83ms
+[2025-08-21T16:46:03.977Z] [frontend-with-browser]  GET /login 200 in 87ms
+[2025-08-21T16:46:03.994Z] [frontend-with-browser]  GET /signup 200 in 104ms
+[2025-08-21T16:46:05.180Z] [frontend-with-browser]  GET /api/auth/session 200 in 57ms
+ GET /api/auth/session 200 in 55ms
+ GET /api/auth/session 200 in 55ms
+ GET /api/auth/session 200 in 54ms
+[2025-08-21T16:46:05.224Z] [frontend-with-browser]  GET /api/auth/session 200 in 34ms
+ GET /api/auth/session 200 in 34ms
+ GET /api/auth/session 200 in 33ms
+ GET /api/auth/session 200 in 33ms
+[2025-08-21T16:46:05.415Z] [frontend-with-browser]  GET /login 200 in 49ms
+[2025-08-21T16:46:05.478Z] [frontend-with-browser]  GET /login 200 in 19ms
+[2025-08-21T16:46:05.988Z] [frontend-with-browser]  GET /api/auth/session 200 in 21ms
+[2025-08-21T16:46:06.005Z] [frontend-with-browser]  GET /api/auth/session 200 in 13ms
+[2025-08-21T16:46:06.028Z] [frontend-with-browser]  GET /api/auth/session 200 in 12ms
+[2025-08-21T16:46:06.038Z] [frontend-with-browser]  GET /api/auth/session 200 in 8ms
+[2025-08-21T16:46:06.113Z] [frontend-with-browser]  GET /signup 200 in 45ms
+[2025-08-21T16:46:06.284Z] [frontend-with-browser]  GET /modern/email 200 in 66ms
+[2025-08-21T16:46:06.431Z] [frontend-with-browser]  GET /modern/email 200 in 54ms
+[2025-08-21T16:46:06.435Z] [frontend-with-browser]  GET /modern/email 200 in 51ms
+[2025-08-21T16:46:07.514Z] [frontend-with-browser]  GET /api/auth/session 200 in 236ms
+ GET /api/auth/session 200 in 200ms
+ GET /api/auth/session 200 in 200ms
+[2025-08-21T16:46:07.741Z] [frontend-with-browser]  GET /api/auth/session 200 in 201ms
+[2025-08-21T16:46:07.750Z] [frontend-with-browser]  GET /api/auth/session 200 in 214ms
+[2025-08-21T16:46:07.754Z] [frontend-with-browser]  GET /api/auth/session 200 in 216ms
+[2025-08-21T16:46:08.049Z] [frontend-with-browser]  GET /modern/email 200 in 238ms
+[2025-08-21T16:46:08.163Z] [frontend-with-browser]  GET /modern/email 200 in 286ms
+[2025-08-21T16:46:08.247Z] [frontend-with-browser]  GET /modern/email 200 in 164ms
+[2025-08-21T16:46:08.344Z] [frontend-with-browser]  GET /modern/email 200 in 211ms
+[2025-08-21T16:46:09.380Z] [frontend-with-browser]  GET /api/auth/session 200 in 310ms
+[2025-08-21T16:46:09.479Z] [frontend-with-browser]  GET /api/auth/session 200 in 337ms
+[2025-08-21T16:46:09.550Z] [frontend-with-browser]  GET /api/auth/session 200 in 251ms
+[2025-08-21T16:46:09.550Z] [frontend-with-browser]  GET /api/auth/session 200 in 235ms
+[2025-08-21T16:46:09.610Z] [frontend-with-browser]  GET /api/auth/session 200 in 160ms
+[2025-08-21T16:46:09.633Z] [frontend-with-browser]  GET /api/auth/session 200 in 103ms
+[2025-08-21T16:46:09.660Z] [frontend-with-browser]  GET /api/auth/session 200 in 65ms
+[2025-08-21T16:46:09.847Z] [frontend-with-browser]  GET /modern/email 200 in 86ms
+[2025-08-21T16:46:09.933Z] [frontend-with-browser]  GET /modern/email 200 in 135ms
+[2025-08-21T16:46:10.094Z] [frontend-with-browser]  GET /modern/email 200 in 102ms
+[2025-08-21T16:46:11.018Z] [frontend-with-browser]  GET /api/auth/session 200 in 73ms
+ GET /api/auth/session 200 in 68ms
+[2025-08-21T16:46:11.035Z] [frontend-with-browser]  GET /api/auth/session 200 in 53ms
+[2025-08-21T16:46:11.068Z] [frontend-with-browser]  GET /api/auth/session 200 in 35ms
+[2025-08-21T16:46:11.069Z] [frontend-with-browser]  GET /api/auth/session 200 in 35ms
+[2025-08-21T16:46:11.078Z] [frontend-with-browser]  GET /api/auth/session 200 in 29ms
+[2025-08-21T16:46:11.298Z] [frontend-with-browser]  GET /modern/onboarding 200 in 73ms
+[2025-08-21T16:46:11.346Z] [frontend-with-browser]  GET /login 200 in 95ms
+[2025-08-21T16:46:11.544Z] [frontend-with-browser]  GET /login 200 in 32ms
+[2025-08-21T16:46:12.140Z] [frontend-with-browser]  GET /api/auth/session 200 in 59ms
+[2025-08-21T16:46:12.148Z] [frontend-with-browser]  GET /api/auth/session 200 in 30ms
+[2025-08-21T16:46:12.167Z] [frontend-with-browser]  GET /api/auth/session 200 in 21ms
+[2025-08-21T16:46:12.180Z] [frontend-with-browser]  GET /api/auth/session 200 in 29ms
+[2025-08-21T16:46:12.222Z] [frontend-with-browser]  GET /modern 200 in 75ms
+[2025-08-21T16:46:12.364Z] [frontend-with-browser]  GET /modern/email 200 in 53ms
+[2025-08-21T16:46:12.565Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T16:46:12.583Z] [frontend-with-browser]  GET /api/auth/session 200 in 13ms
+[2025-08-21T16:46:13.065Z] [frontend-with-browser]  GET /api/auth/session 200 in 21ms
+[2025-08-21T16:46:13.088Z] [frontend-with-browser]  GET /api/auth/session 200 in 18ms
+[2025-08-21T16:46:13.129Z] [frontend-with-browser]  GET /api/auth/session 200 in 19ms
+[2025-08-21T16:46:13.148Z] [frontend-with-browser]  GET /api/auth/session 200 in 15ms
+[2025-08-21T16:46:13.254Z] [frontend-with-browser]  GET /modern/onboarding 200 in 50ms
+[2025-08-21T16:46:13.533Z] [frontend-with-browser]  GET /signup 200 in 49ms
+[2025-08-21T16:46:14.097Z] [frontend-with-browser]  GET /api/auth/session 200 in 54ms
+[2025-08-21T16:46:14.175Z] [frontend-with-browser]  GET /api/auth/session 200 in 65ms
+[2025-08-21T16:46:14.251Z] [frontend-with-browser]  GET /api/auth/session 200 in 13ms
+[2025-08-21T16:46:14.262Z] [frontend-with-browser]  GET /api/auth/session 200 in 5ms
+[2025-08-21T16:46:15.304Z] [frontend-with-browser]  GET /reports 200 in 32ms
+[2025-08-21T16:46:15.390Z] [frontend-with-browser]  GET /modern 200 in 52ms
+[2025-08-21T16:46:15.766Z] [frontend-with-browser]  GET /modern/email 200 in 31ms
+[2025-08-21T16:46:16.131Z] [frontend-with-browser]  GET /api/auth/session 200 in 32ms
+[2025-08-21T16:46:16.182Z] [frontend-with-browser]  GET /api/auth/session 200 in 19ms
+[2025-08-21T16:46:16.182Z] [frontend-with-browser]  GET /api/auth/session 200 in 8ms
+[2025-08-21T16:46:16.194Z] [frontend-with-browser]  GET /api/auth/session 200 in 10ms
+[2025-08-21T16:46:16.732Z] [frontend-with-browser]  ○ Compiling /onboarding ...
+[2025-08-21T16:46:18.773Z] [frontend-with-browser]  ✓ Compiled /onboarding in 2.6s (3943 modules)
+[2025-08-21T16:46:19.832Z] [frontend-with-browser] [ERROR] [next-auth][warn][NEXTAUTH_URL] 
+https://next-auth.js.org/warnings#nextauth_url
+[next-auth][warn][NO_SECRET] 
+https://next-auth.js.org/warnings#no_secret
+[2025-08-21T16:46:19.834Z] [frontend-with-browser]  GET /api/auth/session 200 in 1573ms
+[2025-08-21T16:46:20.051Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:46:20.140Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:46:20.229Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:46:20.332Z] [frontend-with-browser]  GET /onboarding 200 in 4118ms
+[2025-08-21T16:46:20.399Z] [frontend-with-browser]  GET /modern 200 in 3808ms
+[2025-08-21T16:46:20.435Z] [frontend-with-browser]  GET /api/auth/session 200 in 177ms
+[2025-08-21T16:46:20.494Z] [frontend-with-browser]  GET /modern 200 in 297ms
+[2025-08-21T16:46:21.358Z] [frontend-with-browser]  GET /api/auth/session 200 in 19ms
+ GET /api/auth/session 200 in 18ms
+ GET /api/auth/session 200 in 18ms
+[2025-08-21T16:46:21.390Z] [frontend-with-browser]  GET /api/auth/session 200 in 12ms
+[2025-08-21T16:46:21.399Z] [frontend-with-browser]  GET /api/auth/session 200 in 20ms
+ GET /api/auth/session 200 in 21ms
+[2025-08-21T16:46:21.580Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:46:21.623Z] [frontend-with-browser]  GET /modern/onboarding 200 in 66ms
+[2025-08-21T16:46:22.251Z] [frontend-with-browser]  GET /api/auth/session 200 in 20ms
+[2025-08-21T16:46:22.275Z] [frontend-with-browser]  GET /api/auth/session 200 in 10ms
+[2025-08-21T16:46:22.432Z] [frontend-with-browser]  GET /modern/onboarding 200 in 34ms
+[2025-08-21T16:46:23.073Z] [frontend-with-browser]  GET /api/auth/session 200 in 22ms
+[2025-08-21T16:46:23.081Z] [frontend-with-browser]  GET /api/auth/session 200 in 5ms
+[2025-08-21T16:46:23.319Z] [frontend-with-browser]  GET /modern/onboarding 200 in 35ms
+[2025-08-21T16:46:23.984Z] [frontend-with-browser]  GET /api/auth/session 200 in 9ms
+[2025-08-21T16:46:24.001Z] [frontend-with-browser]  GET /api/auth/session 200 in 6ms
+[2025-08-21T16:46:24.218Z] [frontend-with-browser]  GET /modern/onboarding 200 in 39ms
+[2025-08-21T16:46:24.824Z] [frontend-with-browser]  GET /api/auth/session 200 in 21ms
+[2025-08-21T16:46:24.849Z] [frontend-with-browser]  GET /api/auth/session 200 in 19ms
+[2025-08-21T16:46:25.049Z] [frontend-with-browser]  GET /modern/onboarding 200 in 36ms
+[2025-08-21T16:46:25.631Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T16:46:25.646Z] [frontend-with-browser]  GET /api/auth/session 200 in 12ms
+[2025-08-21T16:46:25.834Z] [frontend-with-browser]  GET /modern/onboarding 200 in 36ms
+[2025-08-21T16:46:26.428Z] [frontend-with-browser]  GET /api/auth/session 200 in 14ms
+[2025-08-21T16:46:26.434Z] [frontend-with-browser]  GET /api/auth/session 200 in 3ms
+[2025-08-21T16:46:27.059Z] [frontend-with-browser]  GET /modern/onboarding 200 in 29ms
+[2025-08-21T16:46:27.626Z] [frontend-with-browser]  GET /api/auth/session 200 in 28ms
+[2025-08-21T16:46:27.641Z] [frontend-with-browser]  GET /api/auth/session 200 in 11ms
+[2025-08-21T16:46:27.841Z] [frontend-with-browser]  GET /modern/onboarding 200 in 29ms
+[2025-08-21T16:46:28.433Z] [frontend-with-browser]  GET /api/auth/session 200 in 20ms
+[2025-08-21T16:46:28.459Z] [frontend-with-browser]  GET /api/auth/session 200 in 19ms
+[2025-08-21T16:46:29.058Z] [frontend-with-browser]  GET /modern/onboarding 200 in 28ms
+[2025-08-21T16:46:29.600Z] [frontend-with-browser]  GET /api/auth/session 200 in 7ms
+[2025-08-21T16:46:29.623Z] [frontend-with-browser]  GET /api/auth/session 200 in 12ms
+[2025-08-21T16:46:29.789Z] [frontend-with-browser]  GET /modern/onboarding 200 in 24ms
+[2025-08-21T16:46:30.376Z] [frontend-with-browser]  GET /api/auth/session 200 in 13ms
+[2025-08-21T16:46:30.384Z] [frontend-with-browser]  GET /api/auth/session 200 in 4ms
+[2025-08-21T16:46:30.544Z] [frontend-with-browser]  GET /modern/onboarding 200 in 30ms
+[2025-08-21T16:46:31.114Z] [frontend-with-browser]  GET /api/auth/session 200 in 17ms
+[2025-08-21T16:46:31.129Z] [frontend-with-browser]  GET /api/auth/session 200 in 6ms
+[2025-08-21T16:46:31.297Z] [frontend-with-browser]  GET /modern/onboarding 200 in 20ms
+[2025-08-21T16:46:31.979Z] [frontend-with-browser]  GET /api/auth/session 200 in 23ms
+[2025-08-21T16:46:31.984Z] [frontend-with-browser]  GET /api/auth/session 200 in 4ms
+[2025-08-21T16:46:32.210Z] [frontend-with-browser]  GET /modern/onboarding 200 in 37ms
+[2025-08-21T16:46:32.783Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T16:46:32.796Z] [frontend-with-browser]  GET /api/auth/session 200 in 6ms
+[2025-08-21T16:50:12.339Z] [frontend-with-browser]  GET / 200 in 100ms
+[2025-08-21T16:50:12.375Z] [frontend-with-browser]  GET / 200 in 31ms
+[2025-08-21T16:50:13.990Z] [frontend-with-browser]  GET /modern 200 in 448ms
+[2025-08-21T16:50:15.152Z] [frontend-with-browser]  GET /api/auth/session 200 in 68ms
+[2025-08-21T16:50:15.185Z] [frontend-with-browser]  GET /api/auth/session 200 in 27ms
+[2025-08-21T16:50:15.385Z] [frontend-with-browser]  GET /onboarding 200 in 146ms
+[2025-08-21T16:50:17.097Z] [frontend-with-browser]  GET /api/auth/session 200 in 98ms
+[2025-08-21T16:50:17.108Z] [frontend-with-browser]  GET /api/auth/session 200 in 9ms
+[2025-08-21T16:51:18.166Z] [frontend-with-browser]  GET / 200 in 58ms
+[2025-08-21T16:51:18.189Z] [frontend-with-browser]  GET / 200 in 24ms
+[2025-08-21T16:51:19.696Z] [frontend-with-browser]  GET /login 200 in 162ms
+[2025-08-21T16:51:19.699Z] [frontend-with-browser]  GET /login 200 in 163ms
+ GET /login 200 in 164ms
+[2025-08-21T16:51:19.704Z] [frontend-with-browser]  GET /signup 200 in 171ms
+[2025-08-21T16:51:21.092Z] [frontend-with-browser]  GET /api/auth/session 200 in 121ms
+ GET /api/auth/session 200 in 117ms
+ GET /api/auth/session 200 in 117ms
+ GET /api/auth/session 200 in 116ms
+[2025-08-21T16:51:21.139Z] [frontend-with-browser]  GET /api/auth/session 200 in 37ms
+ GET /api/auth/session 200 in 37ms
+ GET /api/auth/session 200 in 37ms
+ GET /api/auth/session 200 in 37ms
+[2025-08-21T16:51:21.324Z] [frontend-with-browser]  GET /login 200 in 39ms
+[2025-08-21T16:51:21.357Z] [frontend-with-browser]  GET /login 200 in 44ms
+[2025-08-21T16:51:22.242Z] [frontend-with-browser]  GET /api/auth/session 200 in 99ms
+[2025-08-21T16:51:22.267Z] [frontend-with-browser]  GET /api/auth/session 200 in 102ms
+[2025-08-21T16:51:22.311Z] [frontend-with-browser]  GET /signup 200 in 383ms
+[2025-08-21T16:51:22.321Z] [frontend-with-browser]  GET /api/auth/session 200 in 47ms
+[2025-08-21T16:51:22.373Z] [frontend-with-browser]  GET /modern/email 200 in 71ms
+[2025-08-21T16:51:22.470Z] [frontend-with-browser]  GET /modern/email 200 in 114ms
+[2025-08-21T16:51:22.657Z] [frontend-with-browser]  GET /modern/email 200 in 48ms
+[2025-08-21T16:51:23.268Z] [frontend-with-browser]  GET /api/auth/session 200 in 54ms
+[2025-08-21T16:51:23.341Z] [frontend-with-browser]  GET /modern/email 200 in 133ms
+[2025-08-21T16:51:23.499Z] [frontend-with-browser]  GET /api/auth/session 200 in 184ms
+ GET /api/auth/session 200 in 174ms
+[2025-08-21T16:51:23.631Z] [frontend-with-browser]  GET /api/auth/session 200 in 155ms
+[2025-08-21T16:51:23.643Z] [frontend-with-browser]  GET /api/auth/session 200 in 138ms
+[2025-08-21T16:51:23.655Z] [frontend-with-browser]  GET /api/auth/session 200 in 15ms
+[2025-08-21T16:51:23.804Z] [frontend-with-browser]  GET /modern/email 200 in 54ms
+[2025-08-21T16:51:23.908Z] [frontend-with-browser]  GET /modern/email 200 in 35ms
+[2025-08-21T16:51:24.308Z] [frontend-with-browser]  GET /modern/email 200 in 90ms
+[2025-08-21T16:51:24.959Z] [frontend-with-browser]  GET /api/auth/session 200 in 105ms
+[2025-08-21T16:51:25.068Z] [frontend-with-browser]  GET /api/auth/session 200 in 60ms
+ GET /api/auth/session 200 in 58ms
+ GET /api/auth/session 200 in 58ms
+[2025-08-21T16:51:25.119Z] [frontend-with-browser]  GET /api/auth/session 200 in 21ms
+[2025-08-21T16:51:25.119Z] [frontend-with-browser]  GET /api/auth/session 200 in 21ms
+[2025-08-21T16:51:25.456Z] [frontend-with-browser]  GET /modern/email 200 in 74ms
+[2025-08-21T16:51:25.566Z] [frontend-with-browser]  GET /modern/email 200 in 62ms
+[2025-08-21T16:51:25.649Z] [frontend-with-browser]  GET /api/auth/session 200 in 14ms
+[2025-08-21T16:51:25.685Z] [frontend-with-browser]  GET /modern/email 200 in 50ms
+[2025-08-21T16:51:25.773Z] [frontend-with-browser]  GET /api/auth/session 200 in 104ms
+[2025-08-21T16:51:25.890Z] [frontend-with-browser]  GET /modern/onboarding 200 in 27ms
+[2025-08-21T16:51:26.722Z] [frontend-with-browser]  GET /api/auth/session 200 in 98ms
+ GET /api/auth/session 200 in 75ms
+ GET /api/auth/session 200 in 48ms
+[2025-08-21T16:51:26.875Z] [frontend-with-browser]  GET /api/auth/session 200 in 150ms
+[2025-08-21T16:51:26.877Z] [frontend-with-browser]  GET /api/auth/session 200 in 150ms
+[2025-08-21T16:51:26.887Z] [frontend-with-browser]  GET /api/auth/session 200 in 73ms
+[2025-08-21T16:51:26.917Z] [frontend-with-browser]  GET /api/auth/session 200 in 25ms
+[2025-08-21T16:51:27.221Z] [frontend-with-browser]  GET /login 200 in 312ms
+[2025-08-21T16:51:27.425Z] [frontend-with-browser]  GET /login 200 in 173ms
+[2025-08-21T16:51:27.460Z] [frontend-with-browser]  GET /modern/email 200 in 140ms
+[2025-08-21T16:51:27.558Z] [frontend-with-browser]  GET /modern/onboarding 200 in 206ms
+[2025-08-21T16:51:28.672Z] [frontend-with-browser]  GET /api/auth/session 200 in 155ms
+ GET /api/auth/session 200 in 154ms
+ GET /api/auth/session 200 in 148ms
+[2025-08-21T16:51:28.772Z] [frontend-with-browser]  GET /api/auth/session 200 in 156ms
+ GET /api/auth/session 200 in 65ms
+ GET /api/auth/session 200 in 65ms
+ GET /api/auth/session 200 in 64ms
+[2025-08-21T16:51:29.093Z] [frontend-with-browser]  GET /modern 200 in 493ms
+[2025-08-21T16:51:29.122Z] [frontend-with-browser]  GET /api/auth/session 200 in 305ms
+[2025-08-21T16:51:29.190Z] [frontend-with-browser]  GET /login 200 in 372ms
+[2025-08-21T16:51:29.668Z] [frontend-with-browser]  GET /signup 200 in 43ms
+[2025-08-21T16:51:30.204Z] [frontend-with-browser]  GET /api/auth/session 200 in 36ms
+ GET /api/auth/session 200 in 35ms
+[2025-08-21T16:51:30.224Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T16:51:30.231Z] [frontend-with-browser]  GET /api/auth/session 200 in 20ms
+[2025-08-21T16:51:30.324Z] [frontend-with-browser]  GET /modern/email 200 in 36ms
+[2025-08-21T16:51:30.514Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:51:30.562Z] [frontend-with-browser]  GET /reports 200 in 142ms
+[2025-08-21T16:51:31.182Z] [frontend-with-browser]  GET /api/auth/session 200 in 21ms
+[2025-08-21T16:51:31.195Z] [frontend-with-browser]  GET /api/auth/session 200 in 9ms
+[2025-08-21T16:51:31.433Z] [frontend-with-browser]  GET /modern 200 in 76ms
+[2025-08-21T16:51:31.642Z] [frontend-with-browser]  GET /api/auth/session 200 in 60ms
+[2025-08-21T16:51:31.750Z] [frontend-with-browser]  GET /api/auth/session 200 in 44ms
+ GET /api/auth/session 200 in 43ms
+[2025-08-21T16:51:31.764Z] [frontend-with-browser]  GET /api/auth/session 200 in 11ms
+[2025-08-21T16:51:31.974Z] [frontend-with-browser]  GET /modern 200 in 50ms
+[2025-08-21T16:51:32.298Z] [frontend-with-browser]  GET /modern 200 in 20ms
+[2025-08-21T16:51:32.591Z] [frontend-with-browser]  GET /api/auth/session 200 in 118ms
+[2025-08-21T16:51:32.752Z] [frontend-with-browser]  GET /api/auth/session 200 in 66ms
+[2025-08-21T16:51:32.753Z] [frontend-with-browser]  GET /api/auth/session 200 in 48ms
+[2025-08-21T16:51:32.774Z] [frontend-with-browser]  GET /api/auth/session 200 in 18ms
+[2025-08-21T16:51:33.323Z] [frontend-with-browser]  GET /modern/onboarding 200 in 50ms
+[2025-08-21T16:51:33.334Z] [frontend-with-browser]  GET /api/auth/session 200 in 33ms
+[2025-08-21T16:51:33.365Z] [frontend-with-browser]  GET /api/auth/session 200 in 25ms
+[2025-08-21T16:51:33.487Z] [frontend-with-browser]  GET /modern/onboarding 200 in 37ms
+[2025-08-21T16:51:34.823Z] [frontend-with-browser]  GET /api/auth/session 200 in 178ms
+[2025-08-21T16:51:34.842Z] [frontend-with-browser]  GET /api/auth/session 200 in 34ms
+[2025-08-21T16:51:34.875Z] [frontend-with-browser]  GET /api/auth/session 200 in 48ms
+[2025-08-21T16:51:34.914Z] [frontend-with-browser]  GET /api/auth/session 200 in 55ms
+[2025-08-21T16:51:35.068Z] [frontend-with-browser]  GET /modern/onboarding 200 in 62ms
+[2025-08-21T16:51:35.139Z] [frontend-with-browser]  GET /modern/onboarding 200 in 86ms
+[2025-08-21T16:51:35.835Z] [frontend-with-browser]  GET /api/auth/session 200 in 40ms
+ GET /api/auth/session 200 in 38ms
+[2025-08-21T16:51:35.873Z] [frontend-with-browser]  GET /api/auth/session 200 in 23ms
+ GET /api/auth/session 200 in 22ms
+[2025-08-21T16:51:36.107Z] [frontend-with-browser]  GET /modern/onboarding 200 in 53ms
+[2025-08-21T16:51:36.108Z] [frontend-with-browser]  GET /modern/onboarding 200 in 52ms
+[2025-08-21T16:51:36.973Z] [frontend-with-browser]  GET /api/auth/session 200 in 58ms
+ GET /api/auth/session 200 in 56ms
+[2025-08-21T16:51:37.067Z] [frontend-with-browser]  GET /api/auth/session 200 in 59ms
+[2025-08-21T16:51:37.170Z] [frontend-with-browser]  GET /modern/onboarding 200 in 29ms
+[2025-08-21T16:51:37.853Z] [frontend-with-browser]  GET /modern/onboarding 200 in 110ms
+[2025-08-21T16:51:38.388Z] [frontend-with-browser]  GET /api/auth/session 200 in 33ms
+[2025-08-21T16:51:38.410Z] [frontend-with-browser]  GET /api/auth/session 200 in 10ms
+[2025-08-21T16:51:38.621Z] [frontend-with-browser]  GET /modern/onboarding 200 in 56ms
+[2025-08-21T16:51:38.773Z] [frontend-with-browser]  GET /api/auth/session 200 in 32ms
+[2025-08-21T16:51:38.800Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T16:51:39.375Z] [frontend-with-browser]  GET /api/auth/session 200 in 23ms
+[2025-08-21T16:51:39.398Z] [frontend-with-browser]  GET /api/auth/session 200 in 9ms
+[2025-08-21T16:51:39.503Z] [frontend-with-browser]  GET /modern/onboarding 200 in 45ms
+[2025-08-21T16:51:39.588Z] [frontend-with-browser]  GET /modern/onboarding 200 in 30ms
+[2025-08-21T16:51:40.649Z] [frontend-with-browser]  GET /api/auth/session 200 in 89ms
+[2025-08-21T16:51:40.666Z] [frontend-with-browser]  GET /api/auth/session 200 in 58ms
+[2025-08-21T16:51:40.672Z] [frontend-with-browser]  GET /api/auth/session 200 in 20ms
+[2025-08-21T16:51:40.688Z] [frontend-with-browser]  GET /api/auth/session 200 in 18ms
+[2025-08-21T16:51:40.891Z] [frontend-with-browser]  GET /modern/onboarding 200 in 61ms
+[2025-08-21T16:51:40.897Z] [frontend-with-browser]  GET /modern/onboarding 200 in 62ms
+[2025-08-21T16:51:41.609Z] [frontend-with-browser]  GET /api/auth/session 200 in 9ms
+[2025-08-21T16:51:41.611Z] [frontend-with-browser]  GET /api/auth/session 200 in 8ms
+[2025-08-21T16:51:41.623Z] [frontend-with-browser]  GET /api/auth/session 200 in 8ms
+ GET /api/auth/session 200 in 9ms
+[2025-08-21T16:53:13.760Z] [frontend-with-browser]  GET / 200 in 33ms
+[2025-08-21T16:53:13.782Z] [frontend-with-browser]  GET / 200 in 20ms
+[2025-08-21T16:53:15.266Z] [frontend-with-browser]  GET /login 200 in 107ms
+[2025-08-21T16:53:15.267Z] [frontend-with-browser]  GET /login 200 in 106ms
+[2025-08-21T16:53:15.270Z] [frontend-with-browser]  GET /login 200 in 96ms
+[2025-08-21T16:53:15.300Z] [frontend-with-browser]  GET /signup 200 in 126ms
+[2025-08-21T16:53:16.448Z] [frontend-with-browser]  GET /api/auth/session 200 in 95ms
+ GET /api/auth/session 200 in 89ms
+ GET /api/auth/session 200 in 88ms
+ GET /api/auth/session 200 in 88ms
+[2025-08-21T16:53:16.505Z] [frontend-with-browser]  GET /api/auth/session 200 in 43ms
+ GET /api/auth/session 200 in 42ms
+ GET /api/auth/session 200 in 41ms
+ GET /api/auth/session 200 in 42ms
+[2025-08-21T16:53:16.661Z] [frontend-with-browser]  GET /login 200 in 46ms
+[2025-08-21T16:53:16.767Z] [frontend-with-browser]  GET /login 200 in 28ms
+[2025-08-21T16:53:17.579Z] [frontend-with-browser]  GET /signup 200 in 287ms
+[2025-08-21T16:53:17.611Z] [frontend-with-browser]  GET /api/auth/session 200 in 36ms
+[2025-08-21T16:53:17.671Z] [frontend-with-browser]  GET /api/auth/session 200 in 42ms
+[2025-08-21T16:53:17.735Z] [frontend-with-browser]  GET /modern/email 200 in 112ms
+[2025-08-21T16:53:17.940Z] [frontend-with-browser]  GET /modern/email 200 in 58ms
+[2025-08-21T16:53:18.166Z] [frontend-with-browser]  GET /api/auth/session 200 in 36ms
+[2025-08-21T16:53:18.189Z] [frontend-with-browser]  GET /api/auth/session 200 in 18ms
+[2025-08-21T16:53:18.384Z] [frontend-with-browser]  GET /modern/email 200 in 50ms
+[2025-08-21T16:53:18.792Z] [frontend-with-browser]  GET /modern/email 200 in 46ms
+[2025-08-21T16:53:19.062Z] [frontend-with-browser]  GET /api/auth/session 200 in 141ms
+ GET /api/auth/session 200 in 107ms
+[2025-08-21T16:53:19.169Z] [frontend-with-browser]  GET /api/auth/session 200 in 66ms
+ GET /api/auth/session 200 in 64ms
+[2025-08-21T16:53:19.432Z] [frontend-with-browser]  GET /modern/email 200 in 70ms
+[2025-08-21T16:53:19.510Z] [frontend-with-browser]  GET /modern/email 200 in 118ms
+[2025-08-21T16:53:19.620Z] [frontend-with-browser]  GET /api/auth/session 200 in 24ms
+[2025-08-21T16:53:19.652Z] [frontend-with-browser]  GET /api/auth/session 200 in 25ms
+[2025-08-21T16:53:20.367Z] [frontend-with-browser]  GET /api/auth/session 200 in 117ms
+[2025-08-21T16:53:20.519Z] [frontend-with-browser]  GET /api/auth/session 200 in 140ms
+[2025-08-21T16:53:20.745Z] [frontend-with-browser]  GET /modern/email 200 in 424ms
+[2025-08-21T16:53:20.822Z] [frontend-with-browser]  GET /api/auth/session 200 in 86ms
+[2025-08-21T16:53:20.826Z] [frontend-with-browser]  GET /api/auth/session 200 in 30ms
+[2025-08-21T16:53:20.950Z] [frontend-with-browser]  GET /modern/email 200 in 164ms
+[2025-08-21T16:53:20.981Z] [frontend-with-browser]  GET /api/auth/session 200 in 146ms
+ GET /api/auth/session 200 in 145ms
+[2025-08-21T16:53:21.108Z] [frontend-with-browser]  GET /modern/email 200 in 41ms
+[2025-08-21T16:53:21.177Z] [frontend-with-browser]  GET /modern/email 200 in 82ms
+[2025-08-21T16:53:22.210Z] [frontend-with-browser]  GET /api/auth/session 200 in 21ms
+ GET /api/auth/session 200 in 18ms
+[2025-08-21T16:53:22.270Z] [frontend-with-browser]  GET /api/auth/session 200 in 36ms
+ GET /api/auth/session 200 in 35ms
+[2025-08-21T16:53:22.714Z] [frontend-with-browser]  GET /modern/onboarding 200 in 273ms
+[2025-08-21T16:53:22.833Z] [frontend-with-browser]  GET /api/auth/session 200 in 87ms
+ GET /api/auth/session 200 in 70ms
+[2025-08-21T16:53:22.900Z] [frontend-with-browser]  GET /login 200 in 155ms
+[2025-08-21T16:53:22.926Z] [frontend-with-browser]  GET /api/auth/session 200 in 78ms
+[2025-08-21T16:53:22.932Z] [frontend-with-browser]  GET /api/auth/session 200 in 83ms
+[2025-08-21T16:53:23.054Z] [frontend-with-browser]  GET /login 200 in 49ms
+[2025-08-21T16:53:23.099Z] [frontend-with-browser]  GET /modern/email 200 in 67ms
+[2025-08-21T16:53:23.780Z] [frontend-with-browser]  GET /api/auth/session 200 in 81ms
+[2025-08-21T16:53:23.943Z] [frontend-with-browser]  GET /api/auth/session 200 in 141ms
+[2025-08-21T16:53:23.978Z] [frontend-with-browser]  GET /api/auth/session 200 in 195ms
+[2025-08-21T16:53:24.000Z] [frontend-with-browser]  GET /api/auth/session 200 in 64ms
+ GET /api/auth/session 200 in 62ms
+[2025-08-21T16:53:24.031Z] [frontend-with-browser]  GET /api/auth/session 200 in 42ms
+[2025-08-21T16:53:24.071Z] [frontend-with-browser]  GET /modern 200 in 280ms
+[2025-08-21T16:53:24.094Z] [frontend-with-browser]  GET /api/auth/session 200 in 73ms
+[2025-08-21T16:53:24.119Z] [frontend-with-browser]  GET /api/auth/session 200 in 100ms
+[2025-08-21T16:53:24.121Z] [frontend-with-browser]  POST /api/auth/_log 200 in 62ms
+[2025-08-21T16:53:24.172Z] [frontend-with-browser]  GET /login 200 in 95ms
+[2025-08-21T16:53:24.192Z] [frontend-with-browser]  GET /modern/onboarding 200 in 130ms
+[2025-08-21T16:53:24.954Z] [frontend-with-browser]  GET /api/auth/session 200 in 103ms
+ GET /api/auth/session 200 in 98ms
+[2025-08-21T16:53:24.999Z] [frontend-with-browser]  GET /api/auth/session 200 in 99ms
+[2025-08-21T16:53:25.011Z] [frontend-with-browser]  GET /api/auth/session 200 in 26ms
+[2025-08-21T16:53:25.034Z] [frontend-with-browser]  GET /api/auth/session 200 in 32ms
+[2025-08-21T16:53:25.054Z] [frontend-with-browser]  GET /signup 200 in 67ms
+[2025-08-21T16:53:25.114Z] [frontend-with-browser]  GET /modern/email 200 in 37ms
+[2025-08-21T16:53:25.622Z] [frontend-with-browser]  GET /reports 200 in 57ms
+[2025-08-21T16:53:26.033Z] [frontend-with-browser]  GET /api/auth/session 200 in 14ms
+[2025-08-21T16:53:26.034Z] [frontend-with-browser]  GET /api/auth/session 200 in 26ms
+[2025-08-21T16:53:26.061Z] [frontend-with-browser]  GET /api/auth/session 200 in 14ms
+ GET /api/auth/session 200 in 14ms
+[2025-08-21T16:53:26.130Z] [frontend-with-browser]  GET /modern 200 in 45ms
+[2025-08-21T16:53:26.721Z] [frontend-with-browser]  GET /api/auth/session 200 in 19ms
+[2025-08-21T16:53:26.755Z] [frontend-with-browser]  GET /api/auth/session 200 in 29ms
+[2025-08-21T16:53:26.949Z] [frontend-with-browser]  GET /api/auth/session 200 in 81ms
+[2025-08-21T16:53:26.977Z] [frontend-with-browser]  GET /api/auth/session 200 in 22ms
+[2025-08-21T16:53:26.999Z] [frontend-with-browser]  GET /modern 200 in 27ms
+[2025-08-21T16:53:27.148Z] [frontend-with-browser]  GET /modern 200 in 19ms
+[2025-08-21T16:53:27.538Z] [frontend-with-browser]  GET /modern/onboarding 200 in 35ms
+[2025-08-21T16:53:27.643Z] [frontend-with-browser]  GET /api/auth/session 200 in 15ms
+[2025-08-21T16:53:27.664Z] [frontend-with-browser]  GET /api/auth/session 200 in 17ms
+[2025-08-21T16:53:28.202Z] [frontend-with-browser]  ○ Compiling /documents ...
+[2025-08-21T16:53:30.383Z] [frontend-with-browser]  ✓ Compiled /documents in 2.7s (3953 modules)
+[2025-08-21T16:53:30.546Z] [frontend-with-browser] [ERROR] [next-auth][warn][NEXTAUTH_URL] 
+https://next-auth.js.org/warnings#nextauth_url
+[next-auth][warn][NO_SECRET] 
+https://next-auth.js.org/warnings#no_secret
+[2025-08-21T16:53:30.630Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:53:30.635Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:53:30.771Z] [frontend-with-browser]  GET /modern/onboarding 200 in 2508ms
+[2025-08-21T16:53:30.774Z] [frontend-with-browser]  GET /modern/onboarding 200 in 2724ms
+[2025-08-21T16:53:30.829Z] [frontend-with-browser]  GET /modern/onboarding 200 in 541ms
+[2025-08-21T16:53:32.231Z] [frontend-with-browser]  GET /api/auth/session 200 in 209ms
+[2025-08-21T16:53:32.234Z] [frontend-with-browser]  GET /api/auth/session 200 in 211ms
+[2025-08-21T16:53:32.245Z] [frontend-with-browser]  GET /api/auth/session 200 in 215ms
+[2025-08-21T16:53:32.668Z] [frontend-with-browser]  ○ Compiling /applicants ...
+[2025-08-21T16:53:33.616Z] [frontend-with-browser]  ✓ Compiled /applicants in 1562ms (3965 modules)
+[2025-08-21T16:53:33.709Z] [frontend-with-browser] [ERROR] [next-auth][warn][NEXTAUTH_URL] 
+https://next-auth.js.org/warnings#nextauth_url
+[next-auth][warn][NO_SECRET] 
+https://next-auth.js.org/warnings#no_secret
+[2025-08-21T16:53:33.800Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:53:33.808Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:53:33.935Z] [frontend-with-browser]  GET /modern/onboarding 200 in 1567ms
+[2025-08-21T16:53:33.943Z] [frontend-with-browser]  GET /modern/onboarding 200 in 1578ms
+ GET /modern/onboarding 200 in 1572ms
+[2025-08-21T16:53:36.077Z] [frontend-with-browser]  GET /api/auth/session 200 in 303ms
+ GET /api/auth/session 200 in 301ms
+ GET /api/auth/session 200 in 286ms
+[2025-08-21T16:53:36.302Z] [frontend-with-browser]  GET /modern/onboarding 200 in 97ms
+[2025-08-21T16:53:36.309Z] [frontend-with-browser]  GET /modern/onboarding 200 in 90ms
+[2025-08-21T16:53:36.427Z] [frontend-with-browser]  GET /modern/onboarding 200 in 158ms
+[2025-08-21T16:53:37.125Z] [frontend-with-browser]  ○ Compiling /team ...
+[2025-08-21T16:53:38.531Z] [frontend-with-browser]  ✓ Compiled /team in 1929ms (3979 modules)
+[2025-08-21T16:53:38.997Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:53:39.002Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:53:39.092Z] [frontend-with-browser]  GET /modern/onboarding 200 in 237ms
+[2025-08-21T16:53:39.838Z] [frontend-with-browser]  GET /modern/onboarding 200 in 68ms
+[2025-08-21T16:53:39.947Z] [frontend-with-browser]  GET /modern/onboarding 200 in 128ms
+[2025-08-21T16:53:41.074Z] [frontend-with-browser] [ERROR] [next-auth][warn][NEXTAUTH_URL] 
+https://next-auth.js.org/warnings#nextauth_url
+[next-auth][warn][NO_SECRET] 
+https://next-auth.js.org/warnings#no_secret
+[2025-08-21T16:53:41.080Z] [frontend-with-browser]  GET /api/auth/session 200 in 386ms
+[2025-08-21T16:53:41.117Z] [frontend-with-browser]  GET /api/auth/session 200 in 17ms
+[2025-08-21T16:53:41.152Z] [frontend-with-browser]  GET /api/auth/session 200 in 40ms
+[2025-08-21T16:53:41.169Z] [frontend-with-browser]  GET /api/auth/session 200 in 23ms
+[2025-08-21T16:53:41.181Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T16:54:15.070Z] [frontend-with-browser]  GET / 200 in 66ms
+[2025-08-21T16:54:15.089Z] [frontend-with-browser]  GET / 200 in 19ms
+[2025-08-21T16:54:17.776Z] [frontend-with-browser]  GET /login 200 in 360ms
+ GET /login 200 in 371ms
+[2025-08-21T16:54:17.778Z] [frontend-with-browser]  GET /login 200 in 370ms
+[2025-08-21T16:54:17.800Z] [frontend-with-browser]  GET /signup 200 in 389ms
+[2025-08-21T16:54:19.440Z] [frontend-with-browser]  GET /api/auth/session 200 in 163ms
+ GET /api/auth/session 200 in 154ms
+ GET /api/auth/session 200 in 152ms
+ GET /api/auth/session 200 in 149ms
+[2025-08-21T16:54:19.501Z] [frontend-with-browser]  GET /api/auth/session 200 in 53ms
+ GET /api/auth/session 200 in 51ms
+ GET /api/auth/session 200 in 51ms
+ GET /api/auth/session 200 in 52ms
+[2025-08-21T16:54:19.649Z] [frontend-with-browser]  GET /login 200 in 38ms
+[2025-08-21T16:54:19.694Z] [frontend-with-browser]  GET /login 200 in 44ms
+[2025-08-21T16:54:22.477Z] [frontend-with-browser]  GET /signup 200 in 1420ms
+[2025-08-21T16:54:22.831Z] [frontend-with-browser]  GET /api/auth/session 200 in 1322ms
+[2025-08-21T16:54:23.162Z] [frontend-with-browser]  GET /modern/email 200 in 592ms
+[2025-08-21T16:54:23.358Z] [frontend-with-browser]  GET /api/auth/session 200 in 142ms
+[2025-08-21T16:54:23.408Z] [frontend-with-browser]  GET /modern/email 200 in 353ms
+ GET /modern/email 200 in 393ms
+[2025-08-21T16:54:23.691Z] [frontend-with-browser]  GET /modern/email 200 in 145ms
+[2025-08-21T16:54:25.848Z] [frontend-with-browser]  GET /api/auth/session 200 in 573ms
+[2025-08-21T16:54:25.890Z] [frontend-with-browser]  GET /api/auth/session 200 in 356ms
+ GET /api/auth/session 200 in 354ms
+[2025-08-21T16:54:26.113Z] [frontend-with-browser]  GET /api/auth/session 200 in 38ms
+[2025-08-21T16:54:26.201Z] [frontend-with-browser]  GET /api/auth/session 200 in 56ms
+[2025-08-21T16:54:26.320Z] [frontend-with-browser]  GET /api/auth/session 200 in 90ms
+[2025-08-21T16:54:26.458Z] [frontend-with-browser]  GET /modern/email 200 in 267ms
+[2025-08-21T16:54:26.514Z] [frontend-with-browser]  GET /modern/email 200 in 275ms
+[2025-08-21T16:54:26.579Z] [frontend-with-browser]  GET /modern/email 200 in 269ms
+[2025-08-21T16:54:26.728Z] [frontend-with-browser]  GET /modern/email 200 in 65ms
+[2025-08-21T16:54:29.062Z] [frontend-with-browser]  GET /api/auth/session 200 in 456ms
+ GET /api/auth/session 200 in 428ms
+ GET /api/auth/session 200 in 426ms
+[2025-08-21T16:54:29.202Z] [frontend-with-browser]  GET /api/auth/session 200 in 119ms
+ GET /api/auth/session 200 in 119ms
+[2025-08-21T16:54:29.498Z] [frontend-with-browser]  GET /api/auth/session 200 in 84ms
+[2025-08-21T16:54:29.519Z] [frontend-with-browser]  GET /modern/email 200 in 198ms
+[2025-08-21T16:54:29.609Z] [frontend-with-browser]  GET /api/auth/session 200 in 95ms
+[2025-08-21T16:54:29.714Z] [frontend-with-browser]  GET /modern/email 200 in 204ms
+[2025-08-21T16:54:29.807Z] [frontend-with-browser]  GET /modern/onboarding 200 in 218ms
+[2025-08-21T16:54:30.091Z] [frontend-with-browser]  GET /login 200 in 44ms
+[2025-08-21T16:54:30.988Z] [frontend-with-browser]  GET /api/auth/session 200 in 222ms
+ GET /api/auth/session 200 in 218ms
+[2025-08-21T16:54:31.355Z] [frontend-with-browser]  GET /api/auth/session 200 in 391ms
+[2025-08-21T16:54:31.368Z] [frontend-with-browser]  GET /api/auth/session 200 in 279ms
+[2025-08-21T16:54:31.426Z] [frontend-with-browser]  GET /api/auth/session 200 in 223ms
+[2025-08-21T16:54:31.560Z] [frontend-with-browser]  GET /login 200 in 82ms
+[2025-08-21T16:54:31.588Z] [frontend-with-browser]  GET /modern/email 200 in 107ms
+[2025-08-21T16:54:31.748Z] [frontend-with-browser]  GET /modern/onboarding 200 in 170ms
+[2025-08-21T16:54:32.229Z] [frontend-with-browser]  GET /api/auth/session 200 in 29ms
+[2025-08-21T16:54:32.249Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:54:32.265Z] [frontend-with-browser]  GET /api/auth/session 200 in 31ms
+[2025-08-21T16:54:32.280Z] [frontend-with-browser]  GET /modern 200 in 79ms
+[2025-08-21T16:54:32.327Z] [frontend-with-browser]  POST /api/auth/_log 200 in 55ms
+[2025-08-21T16:54:34.746Z] [frontend-with-browser]  GET /api/auth/session 200 in 220ms
+ GET /api/auth/session 200 in 224ms
+[2025-08-21T16:54:34.930Z] [frontend-with-browser]  GET /api/auth/session 200 in 307ms
+[2025-08-21T16:54:34.985Z] [frontend-with-browser]  GET /api/auth/session 200 in 157ms
+[2025-08-21T16:54:35.098Z] [frontend-with-browser]  GET /api/auth/session 200 in 283ms
+ GET /api/auth/session 200 in 182ms
+[2025-08-21T16:54:35.295Z] [frontend-with-browser]  GET /api/auth/session 200 in 330ms
+[2025-08-21T16:54:35.328Z] [frontend-with-browser]  GET /login 200 in 385ms
+[2025-08-21T16:54:35.567Z] [frontend-with-browser]  GET /modern/email 200 in 49ms
+[2025-08-21T16:54:35.720Z] [frontend-with-browser]  GET /signup 200 in 74ms
+[2025-08-21T16:54:36.009Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T16:54:36.037Z] [frontend-with-browser]  GET /reports 200 in 52ms
+[2025-08-21T16:54:36.458Z] [frontend-with-browser]  GET /api/auth/session 200 in 31ms
+[2025-08-21T16:54:36.495Z] [frontend-with-browser]  GET /api/auth/session 200 in 33ms
+[2025-08-21T16:54:36.568Z] [frontend-with-browser]  GET /api/auth/session 200 in 32ms
+[2025-08-21T16:54:36.619Z] [frontend-with-browser]  GET /api/auth/session 200 in 24ms
+ GET /api/auth/session 200 in 22ms
+[2025-08-21T16:54:36.637Z] [frontend-with-browser]  GET /api/auth/session 200 in 11ms
+[2025-08-21T16:54:37.265Z] [frontend-with-browser]  GET /api/auth/session 200 in 17ms
+[2025-08-21T16:54:37.278Z] [frontend-with-browser]  GET /api/auth/session 200 in 8ms
+[2025-08-21T16:54:37.494Z] [frontend-with-browser]  GET /modern 200 in 35ms
+[2025-08-21T16:54:37.609Z] [frontend-with-browser]  GET /modern 200 in 91ms
+[2025-08-21T16:54:37.733Z] [frontend-with-browser]  GET /modern 200 in 36ms
+[2025-08-21T16:54:37.800Z] [frontend-with-browser]  GET /modern/onboarding 200 in 40ms
+[2025-08-21T16:54:39.929Z] [frontend-with-browser]  GET /api/auth/session 200 in 169ms
+[2025-08-21T16:54:40.301Z] [frontend-with-browser]  GET /modern/onboarding 200 in 541ms
+ GET /modern/onboarding 200 in 526ms
+[2025-08-21T16:54:40.325Z] [frontend-with-browser]  GET /api/auth/session 200 in 380ms
+[2025-08-21T16:54:40.529Z] [frontend-with-browser]  GET /api/auth/session 200 in 139ms
+[2025-08-21T16:54:40.559Z] [frontend-with-browser]  GET /api/auth/session 200 in 24ms
+[2025-08-21T16:54:40.698Z] [frontend-with-browser]  GET /modern/onboarding 200 in 48ms
+[2025-08-21T16:54:41.424Z] [frontend-with-browser]  GET /api/auth/session 200 in 103ms
+ GET /api/auth/session 200 in 101ms
+[2025-08-21T16:54:41.585Z] [frontend-with-browser]  GET /api/auth/session 200 in 87ms
+[2025-08-21T16:54:41.610Z] [frontend-with-browser]  GET /api/auth/session 200 in 109ms
+[2025-08-21T16:54:41.679Z] [frontend-with-browser]  GET /api/auth/session 200 in 47ms
+[2025-08-21T16:54:41.707Z] [frontend-with-browser]  GET /api/auth/session 200 in 15ms
+[2025-08-21T16:54:42.076Z] [frontend-with-browser]  GET /modern/onboarding 200 in 335ms
+[2025-08-21T16:54:42.076Z] [frontend-with-browser]  GET /modern/onboarding 200 in 345ms
+[2025-08-21T16:54:42.204Z] [frontend-with-browser]  GET /modern/onboarding 200 in 166ms
+[2025-08-21T16:54:42.931Z] [frontend-with-browser]  GET /modern/onboarding 200 in 45ms
+[2025-08-21T16:54:43.479Z] [frontend-with-browser]  GET /api/auth/session 200 in 111ms
+[2025-08-21T16:54:43.480Z] [frontend-with-browser]  GET /api/auth/session 200 in 31ms
+[2025-08-21T16:54:43.499Z] [frontend-with-browser]  GET /api/auth/session 200 in 43ms
+[2025-08-21T16:54:43.511Z] [frontend-with-browser]  GET /api/auth/session 200 in 17ms
+[2025-08-21T16:54:43.516Z] [frontend-with-browser]  GET /api/auth/session 200 in 20ms
+[2025-08-21T16:54:43.527Z] [frontend-with-browser]  GET /api/auth/session 200 in 22ms
+[2025-08-21T16:54:43.756Z] [frontend-with-browser]  GET /modern/onboarding 200 in 84ms
+[2025-08-21T16:54:43.874Z] [frontend-with-browser]  GET /modern/onboarding 200 in 210ms
+[2025-08-21T16:54:43.966Z] [frontend-with-browser]  GET /api/auth/session 200 in 33ms
+[2025-08-21T16:54:43.995Z] [frontend-with-browser]  GET /api/auth/session 200 in 26ms
+[2025-08-21T16:54:44.090Z] [frontend-with-browser]  GET /modern/onboarding 200 in 38ms
+[2025-08-21T16:54:45.110Z] [frontend-with-browser]  GET /api/auth/session 200 in 221ms
+ GET /api/auth/session 200 in 221ms
+[2025-08-21T16:54:45.209Z] [frontend-with-browser]  GET /api/auth/session 200 in 79ms
+[2025-08-21T16:54:45.213Z] [frontend-with-browser]  GET /api/auth/session 200 in 77ms
+[2025-08-21T16:54:45.398Z] [frontend-with-browser]  GET /api/auth/session 200 in 38ms
+[2025-08-21T16:54:45.436Z] [frontend-with-browser]  GET /modern/onboarding 200 in 81ms
+[2025-08-21T16:54:45.457Z] [frontend-with-browser]  GET /api/auth/session 200 in 34ms
+[2025-08-21T16:54:46.192Z] [frontend-with-browser]  GET /api/auth/session 200 in 41ms
+[2025-08-21T16:54:46.207Z] [frontend-with-browser]  GET /api/auth/session 200 in 11ms
+[2025-08-21T16:54:46.268Z] [frontend-with-browser]  GET /modern/onboarding 200 in 36ms
+[2025-08-21T16:54:48.035Z] [frontend-with-browser]  GET /api/auth/session 200 in 18ms
+[2025-08-21T16:54:48.048Z] [frontend-with-browser]  GET /api/auth/session 200 in 9ms
+[2025-08-21T16:55:16.252Z] [frontend-with-browser]  GET / 200 in 58ms
+[2025-08-21T16:55:16.279Z] [frontend-with-browser]  GET / 200 in 28ms
+[2025-08-21T16:55:17.688Z] [frontend-with-browser]  GET /login 200 in 77ms
+[2025-08-21T16:55:17.689Z] [frontend-with-browser]  GET /login 200 in 77ms
+[2025-08-21T16:55:17.695Z] [frontend-with-browser]  GET /login 200 in 84ms
+[2025-08-21T16:55:17.698Z] [frontend-with-browser]  GET /signup 200 in 87ms
+[2025-08-21T16:55:18.723Z] [frontend-with-browser]  GET /api/auth/session 200 in 76ms
+ GET /api/auth/session 200 in 75ms
+ GET /api/auth/session 200 in 75ms
+ GET /api/auth/session 200 in 75ms
+[2025-08-21T16:55:18.794Z] [frontend-with-browser]  GET /api/auth/session 200 in 48ms
+ GET /api/auth/session 200 in 47ms
+ GET /api/auth/session 200 in 46ms
+ GET /api/auth/session 200 in 46ms
+[2025-08-21T16:55:19.011Z] [frontend-with-browser]  GET /login 200 in 49ms
+[2025-08-21T16:55:19.058Z] [frontend-with-browser]  GET /login 200 in 70ms
+[2025-08-21T16:55:19.691Z] [frontend-with-browser]  GET /signup 200 in 122ms
+[2025-08-21T16:55:19.972Z] [frontend-with-browser]  GET /api/auth/session 200 in 30ms
+[2025-08-21T16:55:20.022Z] [frontend-with-browser]  GET /api/auth/session 200 in 34ms
+[2025-08-21T16:55:20.041Z] [frontend-with-browser]  GET /api/auth/session 200 in 13ms
+[2025-08-21T16:55:20.065Z] [frontend-with-browser]  GET /api/auth/session 200 in 18ms
+[2025-08-21T16:55:20.108Z] [frontend-with-browser]  GET /modern/email 200 in 49ms
+[2025-08-21T16:55:20.290Z] [frontend-with-browser]  GET /modern/email 200 in 178ms
+[2025-08-21T16:55:20.396Z] [frontend-with-browser]  GET /modern/email 200 in 35ms
+[2025-08-21T16:55:23.271Z] [frontend-with-browser]  GET /api/auth/session 200 in 490ms
+ GET /api/auth/session 200 in 436ms
+ GET /api/auth/session 200 in 191ms
+[2025-08-21T16:55:23.333Z] [frontend-with-browser]  GET /api/auth/session 200 in 44ms
+[2025-08-21T16:55:23.624Z] [frontend-with-browser]  GET /modern/email 200 in 350ms
+[2025-08-21T16:55:23.932Z] [frontend-with-browser]  GET /modern/email 200 in 370ms
+[2025-08-21T16:55:23.934Z] [frontend-with-browser]  GET /modern/email 200 in 363ms
+[2025-08-21T16:55:24.038Z] [frontend-with-browser]  GET /modern/email 200 in 252ms
+[2025-08-21T16:55:26.957Z] [frontend-with-browser]  GET /api/auth/session 200 in 419ms
+ GET /api/auth/session 200 in 381ms
+[2025-08-21T16:55:26.997Z] [frontend-with-browser]  GET /api/auth/session 200 in 21ms
+[2025-08-21T16:55:27.157Z] [frontend-with-browser]  GET /modern/email 200 in 209ms
+[2025-08-21T16:55:27.340Z] [frontend-with-browser]  GET /modern/email 200 in 233ms
+[2025-08-21T16:55:27.403Z] [frontend-with-browser]  GET /api/auth/session 200 in 102ms
+[2025-08-21T16:55:27.478Z] [frontend-with-browser]  GET /modern/email 200 in 187ms
+[2025-08-21T16:55:27.508Z] [frontend-with-browser]  GET /api/auth/session 200 in 94ms
+[2025-08-21T16:55:27.677Z] [frontend-with-browser]  GET /modern/onboarding 200 in 75ms
+[2025-08-21T16:55:28.514Z] [frontend-with-browser]  GET /api/auth/session 200 in 130ms
+ GET /api/auth/session 200 in 116ms
+[2025-08-21T16:55:28.566Z] [frontend-with-browser]  GET /api/auth/session 200 in 99ms
+[2025-08-21T16:55:28.604Z] [frontend-with-browser]  GET /api/auth/session 200 in 54ms
+[2025-08-21T16:55:28.626Z] [frontend-with-browser]  GET /api/auth/session 200 in 77ms
+[2025-08-21T16:55:28.633Z] [frontend-with-browser]  GET /api/auth/session 200 in 54ms
+[2025-08-21T16:55:28.874Z] [frontend-with-browser]  GET /login 200 in 86ms
+[2025-08-21T16:55:30.468Z] [frontend-with-browser]  GET /api/auth/session 200 in 119ms
+[2025-08-21T16:55:30.552Z] [frontend-with-browser]  GET /login 200 in 259ms
+[2025-08-21T16:55:30.732Z] [frontend-with-browser]  GET /modern/email 200 in 139ms
+[2025-08-21T16:55:30.848Z] [frontend-with-browser]  GET /modern/onboarding 200 in 190ms
+[2025-08-21T16:55:33.507Z] [frontend-with-browser]  GET /api/auth/session 200 in 640ms
+[2025-08-21T16:55:33.527Z] [frontend-with-browser]  GET /api/auth/session 200 in 152ms
+[2025-08-21T16:55:33.527Z] [frontend-with-browser]  GET /api/auth/session 200 in 147ms
+ GET /api/auth/session 200 in 146ms
+[2025-08-21T16:55:33.846Z] [frontend-with-browser]  GET /api/auth/session 200 in 331ms
+[2025-08-21T16:55:33.918Z] [frontend-with-browser]  GET /api/auth/session 200 in 185ms
+[2025-08-21T16:55:33.927Z] [frontend-with-browser]  GET /modern 200 in 625ms
+[2025-08-21T16:55:33.971Z] [frontend-with-browser]  GET /api/auth/session 200 in 240ms
+ GET /api/auth/session 200 in 239ms
+[2025-08-21T16:55:34.028Z] [frontend-with-browser]  POST /api/auth/_log 200 in 140ms
+[2025-08-21T16:55:34.151Z] [frontend-with-browser]  GET /login 200 in 334ms
+[2025-08-21T16:55:34.157Z] [frontend-with-browser]  GET /signup 200 in 308ms
+[2025-08-21T16:55:34.363Z] [frontend-with-browser]  GET /modern/email 200 in 331ms
+[2025-08-21T16:55:35.347Z] [frontend-with-browser]  GET /api/auth/session 200 in 68ms
+ GET /api/auth/session 200 in 66ms
+ GET /api/auth/session 200 in 65ms
+[2025-08-21T16:55:35.362Z] [frontend-with-browser]  GET /api/auth/session 200 in 31ms
+[2025-08-21T16:55:35.391Z] [frontend-with-browser]  GET /api/auth/session 200 in 38ms
+ GET /api/auth/session 200 in 34ms
+ GET /api/auth/session 200 in 34ms
+[2025-08-21T16:55:35.394Z] [frontend-with-browser]  GET /api/auth/session 200 in 19ms
+[2025-08-21T16:55:35.592Z] [frontend-with-browser]  GET /reports 200 in 34ms
+[2025-08-21T16:55:36.329Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T16:55:36.366Z] [frontend-with-browser]  GET /api/auth/session 200 in 34ms
+[2025-08-21T16:55:36.557Z] [frontend-with-browser]  GET /modern 200 in 76ms
+[2025-08-21T16:55:36.566Z] [frontend-with-browser]  GET /modern 200 in 77ms
+[2025-08-21T16:55:36.642Z] [frontend-with-browser]  GET /modern 200 in 84ms
+[2025-08-21T16:55:37.691Z] [frontend-with-browser]  GET /api/auth/session 200 in 44ms
+ GET /api/auth/session 200 in 33ms
+ GET /api/auth/session 200 in 33ms
+[2025-08-21T16:55:37.714Z] [frontend-with-browser]  GET /api/auth/session 200 in 21ms
+ GET /api/auth/session 200 in 20ms
+ GET /api/auth/session 200 in 20ms
+[2025-08-21T16:55:37.897Z] [frontend-with-browser]  GET /modern/onboarding 200 in 80ms
+[2025-08-21T16:55:37.907Z] [frontend-with-browser]  GET /modern/onboarding 200 in 85ms
+[2025-08-21T16:55:38.298Z] [frontend-with-browser]  GET /modern/onboarding 200 in 57ms
+[2025-08-21T16:55:41.058Z] [frontend-with-browser]  GET /api/auth/session 200 in 115ms
+ GET /api/auth/session 200 in 116ms
+[2025-08-21T16:55:41.333Z] [frontend-with-browser]  GET /modern/onboarding 200 in 105ms
+[2025-08-21T16:55:41.840Z] [frontend-with-browser]  GET /modern/onboarding 200 in 561ms
+[2025-08-21T16:55:42.279Z] [frontend-with-browser]  GET /api/auth/session 200 in 84ms
+[2025-08-21T16:55:42.408Z] [frontend-with-browser]  GET /api/auth/session 200 in 101ms
+[2025-08-21T16:55:42.612Z] [frontend-with-browser]  GET /modern/onboarding 200 in 49ms
+[2025-08-21T16:55:43.340Z] [frontend-with-browser]  GET /modern/onboarding 200 in 130ms
+[2025-08-21T16:55:43.400Z] [frontend-with-browser]  GET /api/auth/session 200 in 86ms
+ GET /api/auth/session 200 in 85ms
+[2025-08-21T16:55:43.462Z] [frontend-with-browser]  GET /api/auth/session 200 in 35ms
+[2025-08-21T16:55:43.605Z] [frontend-with-browser]  GET /modern/onboarding 200 in 76ms
+[2025-08-21T16:55:43.748Z] [frontend-with-browser]  GET /modern/onboarding 200 in 160ms
+[2025-08-21T16:55:44.042Z] [frontend-with-browser]  GET /api/auth/session 200 in 313ms
+[2025-08-21T16:55:44.091Z] [frontend-with-browser]  GET /api/auth/session 200 in 34ms
+[2025-08-21T16:55:44.582Z] [frontend-with-browser]  GET /modern/onboarding 200 in 103ms
+[2025-08-21T16:55:45.141Z] [frontend-with-browser]  GET /api/auth/session 200 in 59ms
+[2025-08-21T16:55:45.231Z] [frontend-with-browser]  GET /api/auth/session 200 in 50ms
+[2025-08-21T16:55:45.366Z] [frontend-with-browser]  GET /api/auth/session 200 in 51ms
+[2025-08-21T16:55:45.481Z] [frontend-with-browser]  GET /api/auth/session 200 in 105ms
+[2025-08-21T16:55:45.496Z] [frontend-with-browser]  GET /api/auth/session 200 in 34ms
+[2025-08-21T16:55:45.516Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T16:55:45.580Z] [frontend-with-browser]  GET /modern/onboarding 200 in 41ms
+[2025-08-21T16:55:45.758Z] [frontend-with-browser]  GET /modern/onboarding 200 in 80ms
+[2025-08-21T16:55:46.228Z] [frontend-with-browser]  GET /api/auth/session 200 in 17ms
+[2025-08-21T16:55:46.242Z] [frontend-with-browser]  GET /api/auth/session 200 in 10ms
+[2025-08-21T16:55:46.592Z] [frontend-with-browser]  GET /modern/onboarding 200 in 74ms
+[2025-08-21T16:55:46.898Z] [frontend-with-browser]  GET /api/auth/session 200 in 181ms
+[2025-08-21T16:55:46.944Z] [frontend-with-browser]  GET /api/auth/session 200 in 80ms
+[2025-08-21T16:55:46.963Z] [frontend-with-browser]  GET /api/auth/session 200 in 37ms
+[2025-08-21T16:55:47.001Z] [frontend-with-browser]  GET /api/auth/session 200 in 49ms
+[2025-08-21T16:55:47.580Z] [frontend-with-browser]  GET /api/auth/session 200 in 11ms
+[2025-08-21T16:55:47.595Z] [frontend-with-browser]  GET /api/auth/session 200 in 13ms
+[2025-08-21T16:58:07.651Z] [frontend-with-browser]  ✓ Compiled in 980ms (1552 modules)
+[2025-08-21T19:02:12.577Z] [frontend-with-browser]  GET / 200 in 55ms
+[2025-08-21T19:02:12.619Z] [frontend-with-browser]  GET / 200 in 39ms
+[2025-08-21T19:02:14.028Z] [frontend-with-browser]  GET /signup 200 in 99ms
+[2025-08-21T19:02:14.041Z] [frontend-with-browser]  GET /login 200 in 111ms
+[2025-08-21T19:02:14.042Z] [frontend-with-browser]  GET /login 200 in 111ms
+[2025-08-21T19:02:14.045Z] [frontend-with-browser]  GET /login 200 in 114ms
+[2025-08-21T19:02:15.045Z] [frontend-with-browser]  GET /api/auth/session 200 in 69ms
+ GET /api/auth/session 200 in 67ms
+ GET /api/auth/session 200 in 67ms
+ GET /api/auth/session 200 in 67ms
+[2025-08-21T19:02:15.094Z] [frontend-with-browser]  GET /api/auth/session 200 in 22ms
+[2025-08-21T19:02:15.094Z] [frontend-with-browser]  GET /api/auth/session 200 in 22ms
+ GET /api/auth/session 200 in 22ms
+ GET /api/auth/session 200 in 22ms
+[2025-08-21T19:02:15.256Z] [frontend-with-browser]  GET /login 200 in 28ms
+[2025-08-21T19:02:15.384Z] [frontend-with-browser]  GET /login 200 in 27ms
+[2025-08-21T19:02:15.867Z] [frontend-with-browser]  GET /api/auth/session 200 in 21ms
+[2025-08-21T19:02:15.881Z] [frontend-with-browser]  GET /api/auth/session 200 in 10ms
+[2025-08-21T19:02:15.949Z] [frontend-with-browser]  GET /signup 200 in 55ms
+[2025-08-21T19:02:16.083Z] [frontend-with-browser]  GET /api/auth/session 200 in 37ms
+[2025-08-21T19:02:16.108Z] [frontend-with-browser]  GET /api/auth/session 200 in 22ms
+[2025-08-21T19:02:16.278Z] [frontend-with-browser]  GET /modern/email 200 in 66ms
+[2025-08-21T19:02:16.326Z] [frontend-with-browser]  GET /modern/email 200 in 100ms
+[2025-08-21T19:02:16.369Z] [frontend-with-browser]  GET /modern/email 200 in 132ms
+[2025-08-21T19:02:17.021Z] [frontend-with-browser]  GET /modern/email 200 in 50ms
+[2025-08-21T19:02:17.284Z] [frontend-with-browser]  GET /api/auth/session 200 in 62ms
+ GET /api/auth/session 200 in 61ms
+ GET /api/auth/session 200 in 59ms
+[2025-08-21T19:02:17.304Z] [frontend-with-browser]  GET /api/auth/session 200 in 14ms
+ GET /api/auth/session 200 in 14ms
+ GET /api/auth/session 200 in 14ms
+[2025-08-21T19:02:17.504Z] [frontend-with-browser]  GET /modern/email 200 in 53ms
+[2025-08-21T19:02:17.529Z] [frontend-with-browser]  GET /modern/email 200 in 66ms
+[2025-08-21T19:02:17.877Z] [frontend-with-browser]  GET /modern/email 200 in 22ms
+[2025-08-21T19:02:17.988Z] [frontend-with-browser]  GET /api/auth/session 200 in 21ms
+[2025-08-21T19:02:18.032Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T19:02:18.254Z] [frontend-with-browser]  GET /api/auth/session 200 in 33ms
+[2025-08-21T19:02:18.281Z] [frontend-with-browser]  GET /api/auth/session 200 in 35ms
+[2025-08-21T19:02:18.290Z] [frontend-with-browser]  GET /api/auth/session 200 in 21ms
+[2025-08-21T19:02:18.294Z] [frontend-with-browser]  GET /api/auth/session 200 in 9ms
+[2025-08-21T19:02:18.403Z] [frontend-with-browser]  GET /modern/email 200 in 71ms
+[2025-08-21T19:02:18.623Z] [frontend-with-browser]  GET /modern/email 200 in 45ms
+[2025-08-21T19:02:18.735Z] [frontend-with-browser]  GET /modern/email 200 in 32ms
+[2025-08-21T19:02:18.857Z] [frontend-with-browser]  GET /api/auth/session 200 in 14ms
+[2025-08-21T19:02:18.885Z] [frontend-with-browser]  GET /api/auth/session 200 in 25ms
+[2025-08-21T19:02:19.265Z] [frontend-with-browser]  GET /modern/onboarding 200 in 182ms
+[2025-08-21T19:02:19.410Z] [frontend-with-browser]  GET /api/auth/session 200 in 33ms
+[2025-08-21T19:02:19.427Z] [frontend-with-browser]  GET /api/auth/session 200 in 11ms
+[2025-08-21T19:02:19.775Z] [frontend-with-browser]  GET /api/auth/session 200 in 26ms
+[2025-08-21T19:02:19.866Z] [frontend-with-browser]  GET /api/auth/session 200 in 72ms
+[2025-08-21T19:02:19.893Z] [frontend-with-browser]  GET /api/auth/session 200 in 42ms
+[2025-08-21T19:02:19.937Z] [frontend-with-browser]  GET /api/auth/session 200 in 20ms
+[2025-08-21T19:02:20.026Z] [frontend-with-browser]  GET /login 200 in 47ms
+[2025-08-21T19:02:20.143Z] [frontend-with-browser]  GET /login 200 in 48ms
+[2025-08-21T19:02:20.190Z] [frontend-with-browser]  GET /modern/email 200 in 64ms
+[2025-08-21T19:02:20.352Z] [frontend-with-browser]  GET /api/auth/session 200 in 48ms
+[2025-08-21T19:02:20.393Z] [frontend-with-browser]  GET /api/auth/session 200 in 23ms
+[2025-08-21T19:02:20.583Z] [frontend-with-browser]  GET /modern/onboarding 200 in 68ms
+[2025-08-21T19:02:20.965Z] [frontend-with-browser]  GET /api/auth/session 200 in 26ms
+[2025-08-21T19:02:21.009Z] [frontend-with-browser]  GET /api/auth/session 200 in 41ms
+[2025-08-21T19:02:21.035Z] [frontend-with-browser]  GET /modern 200 in 93ms
+[2025-08-21T19:02:21.064Z] [frontend-with-browser]  GET /api/auth/session 200 in 50ms
+[2025-08-21T19:02:21.077Z] [frontend-with-browser]  POST /api/auth/_log 200 in 58ms
+[2025-08-21T19:02:21.084Z] [frontend-with-browser]  GET /api/auth/session 200 in 46ms
+[2025-08-21T19:02:21.101Z] [frontend-with-browser]  GET /api/auth/session 200 in 26ms
+[2025-08-21T19:02:21.108Z] [frontend-with-browser]  GET /api/auth/session 200 in 15ms
+[2025-08-21T19:02:21.238Z] [frontend-with-browser]  GET /login 200 in 55ms
+[2025-08-21T19:02:21.437Z] [frontend-with-browser]  GET /api/auth/session 200 in 25ms
+[2025-08-21T19:02:21.450Z] [frontend-with-browser]  GET /api/auth/session 200 in 9ms
+[2025-08-21T19:02:21.760Z] [frontend-with-browser]  GET /api/auth/session 200 in 13ms
+[2025-08-21T19:02:21.770Z] [frontend-with-browser]  GET /api/auth/session 200 in 7ms
+[2025-08-21T19:02:21.827Z] [frontend-with-browser]  GET /api/auth/session 200 in 18ms
+[2025-08-21T19:02:21.844Z] [frontend-with-browser]  GET /api/auth/session 200 in 12ms
+[2025-08-21T19:02:21.911Z] [frontend-with-browser]  GET /modern/email 200 in 25ms
+[2025-08-21T19:02:22.005Z] [frontend-with-browser]  GET /signup 200 in 60ms
+[2025-08-21T19:02:22.088Z] [frontend-with-browser]  GET /reports 200 in 38ms
+[2025-08-21T19:02:22.638Z] [frontend-with-browser]  GET /api/auth/session 200 in 32ms
+ GET /api/auth/session 200 in 24ms
+[2025-08-21T19:02:22.858Z] [frontend-with-browser]  GET /api/auth/session 200 in 191ms
+ GET /api/auth/session 200 in 184ms
+[2025-08-21T19:02:22.858Z] [frontend-with-browser]  GET /api/auth/session 200 in 190ms
+[2025-08-21T19:02:23.019Z] [frontend-with-browser]  GET /modern 200 in 45ms
+[2025-08-21T19:02:23.027Z] [frontend-with-browser]  GET /modern 200 in 50ms
+[2025-08-21T19:02:23.624Z] [frontend-with-browser]  GET /api/auth/session 200 in 14ms
+[2025-08-21T19:02:23.634Z] [frontend-with-browser]  GET /api/auth/session 200 in 22ms
+[2025-08-21T19:02:23.640Z] [frontend-with-browser]  GET /api/auth/session 200 in 14ms
+[2025-08-21T19:02:23.643Z] [frontend-with-browser]  GET /api/auth/session 200 in 7ms
+[2025-08-21T19:02:23.734Z] [frontend-with-browser]  GET /modern 200 in 20ms
+[2025-08-21T19:02:24.268Z] [frontend-with-browser]  GET /modern/onboarding 200 in 34ms
+[2025-08-21T19:02:24.325Z] [frontend-with-browser]  GET /api/auth/session 200 in 18ms
+[2025-08-21T19:02:24.333Z] [frontend-with-browser]  GET /api/auth/session 200 in 6ms
+[2025-08-21T19:02:24.447Z] [frontend-with-browser]  GET /modern/onboarding 200 in 19ms
+[2025-08-21T19:02:24.904Z] [frontend-with-browser]  GET /modern/onboarding 200 in 32ms
+[2025-08-21T19:02:25.005Z] [frontend-with-browser]  GET /api/auth/session 200 in 23ms
+[2025-08-21T19:02:25.025Z] [frontend-with-browser]  GET /api/auth/session 200 in 16ms
+[2025-08-21T19:02:25.204Z] [frontend-with-browser]  GET /api/auth/session 200 in 22ms
+[2025-08-21T19:02:25.233Z] [frontend-with-browser]  GET /api/auth/session 200 in 27ms
+[2025-08-21T19:02:25.242Z] [frontend-with-browser]  GET /modern/onboarding 200 in 50ms
+[2025-08-21T19:02:25.325Z] [frontend-with-browser]  GET /modern/onboarding 200 in 33ms
+[2025-08-21T19:02:25.409Z] [frontend-with-browser]  GET /modern/onboarding 200 in 40ms
+[2025-08-21T19:02:25.853Z] [frontend-with-browser]  GET /api/auth/session 200 in 31ms
+[2025-08-21T19:02:25.870Z] [frontend-with-browser]  GET /api/auth/session 200 in 13ms
+[2025-08-21T19:02:26.161Z] [frontend-with-browser]  GET /modern/onboarding 200 in 146ms
+[2025-08-21T19:02:26.242Z] [frontend-with-browser]  GET /api/auth/session 200 in 142ms
+[2025-08-21T19:02:26.253Z] [frontend-with-browser]  GET /api/auth/session 200 in 63ms
+[2025-08-21T19:02:26.258Z] [frontend-with-browser]  GET /api/auth/session 200 in 24ms
+[2025-08-21T19:02:26.268Z] [frontend-with-browser]  GET /api/auth/session 200 in 17ms
+[2025-08-21T19:02:26.271Z] [frontend-with-browser]  GET /api/auth/session 200 in 15ms
+[2025-08-21T19:02:26.274Z] [frontend-with-browser]  GET /api/auth/session 200 in 10ms
+[2025-08-21T19:02:26.454Z] [frontend-with-browser]  GET /modern/onboarding 200 in 46ms
+[2025-08-21T19:02:26.455Z] [frontend-with-browser]  GET /modern/onboarding 200 in 46ms
+[2025-08-21T19:02:26.749Z] [frontend-with-browser]  GET /modern/onboarding 200 in 22ms
+[2025-08-21T19:02:27.133Z] [frontend-with-browser]  GET /api/auth/session 200 in 39ms
+[2025-08-21T19:02:27.150Z] [frontend-with-browser]  GET /api/auth/session 200 in 14ms
+[2025-08-21T19:02:27.270Z] [frontend-with-browser]  GET /api/auth/session 200 in 46ms
+[2025-08-21T19:02:27.294Z] [frontend-with-browser]  GET /api/auth/session 200 in 29ms
+[2025-08-21T19:02:27.318Z] [frontend-with-browser]  GET /api/auth/session 200 in 44ms
+[2025-08-21T19:02:27.325Z] [frontend-with-browser]  GET /api/auth/session 200 in 17ms
+[2025-08-21T19:02:27.392Z] [frontend-with-browser]  GET /modern/onboarding 200 in 39ms
+[2025-08-21T19:02:27.465Z] [frontend-with-browser]  GET /modern/onboarding 200 in 71ms
+[2025-08-21T19:02:27.648Z] [frontend-with-browser]  GET /api/auth/session 200 in 27ms
+[2025-08-21T19:02:27.655Z] [frontend-with-browser]  GET /api/auth/session 200 in 5ms
+[2025-08-21T19:02:27.802Z] [frontend-with-browser]  GET /modern/onboarding 200 in 29ms
+[2025-08-21T19:02:28.184Z] [frontend-with-browser]  GET /api/auth/session 200 in 42ms
+[2025-08-21T19:02:28.191Z] [frontend-with-browser]  GET /api/auth/session 200 in 18ms
+[2025-08-21T19:02:28.199Z] [frontend-with-browser]  GET /api/auth/session 200 in 13ms
+[2025-08-21T19:02:28.202Z] [frontend-with-browser]  GET /api/auth/session 200 in 8ms
+[2025-08-21T19:02:28.417Z] [frontend-with-browser]  GET /api/auth/session 200 in 10ms
+[2025-08-21T19:02:28.429Z] [frontend-with-browser]  GET /api/auth/session 200 in 8ms
+[2025-08-21T19:21:15.921Z] [frontend-with-browser]  ○ Compiling /_not-found ...
+[2025-08-21T19:21:16.466Z] [frontend-with-browser]  ✓ Compiled /_not-found in 1127ms (3721 modules)
+[2025-08-21T19:21:16.741Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T19:21:16.759Z] [frontend-with-browser]  GET /account 404 in 136ms
+[2025-08-21T19:21:17.998Z] [frontend-with-browser]  ○ Compiling /api/auth/[...nextauth] ...
+[2025-08-21T19:21:18.215Z] [frontend-with-browser]  ✓ Compiled /api/auth/[...nextauth] in 840ms (2199 modules)
+[2025-08-21T19:21:18.474Z] [frontend-with-browser]  ✓ Compiled (2429 modules)
+[2025-08-21T19:21:18.584Z] [frontend-with-browser] [ERROR] [next-auth][warn][NEXTAUTH_URL] 
+https://next-auth.js.org/warnings#nextauth_url
+[next-auth][warn][NO_SECRET] 
+https://next-auth.js.org/warnings#no_secret
+[2025-08-21T19:21:18.586Z] [frontend-with-browser]  GET /api/auth/session 200 in 1192ms
+[2025-08-21T19:21:18.593Z] [frontend-with-browser]  GET /favicon.ico 200 in 1222ms
+[2025-08-21T19:21:18.603Z] [frontend-with-browser]  GET /api/auth/session 200 in 5ms
+[2025-08-21T19:22:59.548Z] [frontend-with-browser]  ○ Compiling / ...
+[2025-08-21T19:22:59.577Z] [frontend-with-browser]  ✓ Compiled / in 758ms (2170 modules)
+[2025-08-21T19:23:00.015Z] [frontend-with-browser]  ✓ Compiled /_not-found in 311ms (2172 modules)
+[2025-08-21T19:23:00.135Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T19:23:00.149Z] [frontend-with-browser]  GET /_next/static/chunks/app/page.js 404 in 446ms
+[2025-08-21T19:23:00.187Z] [frontend-with-browser]  GET / 200 in 28ms
+[2025-08-21T19:23:00.246Z] [frontend-with-browser]  GET /_next/static/chunks/app/page.js 404 in 27ms
+[2025-08-21T19:32:01.233Z] [frontend-with-browser]  GET / 200 in 39ms
+[2025-08-21T19:32:01.281Z] [frontend-with-browser]  GET / 200 in 30ms
+[2025-08-21T19:32:05.328Z] [frontend-with-browser]  ○ Compiling /signup ...
+[2025-08-21T19:32:06.129Z] [frontend-with-browser]  ✓ Compiled /signup in 1327ms (2176 modules)
+[2025-08-21T19:32:06.324Z] [frontend-with-browser] [ERROR] Amplify has not been configured. Please call Amplify.configure() before using this service.
+[2025-08-21T19:32:06.341Z] [frontend-with-browser]  GET /signup 200 in 1546ms
+[2025-08-21T19:32:07.587Z] [frontend-with-browser]  ○ Compiling /api/auth/[...nextauth] ...
+[2025-08-21T19:32:07.653Z] [frontend-with-browser]  ✓ Compiled /api/auth/[...nextauth] in 691ms (2207 modules)
+[2025-08-21T19:32:08.125Z] [frontend-with-browser]  ✓ Compiled (2437 modules)
+[2025-08-21T19:32:08.252Z] [frontend-with-browser] [ERROR] [next-auth][warn][NEXTAUTH_URL] 
+https://next-auth.js.org/warnings#nextauth_url
+[next-auth][warn][NO_SECRET] 
+https://next-auth.js.org/warnings#no_secret
+[2025-08-21T19:32:08.256Z] [frontend-with-browser]  GET /api/auth/session 200 in 1300ms
+[2025-08-21T19:32:08.275Z] [frontend-with-browser]  GET /favicon.ico 200 in 1331ms
+[2025-08-21T19:32:08.306Z] [frontend-with-browser]  GET /api/auth/session 200 in 24ms
+[2025-08-21T19:32:47.915Z] [frontend-with-browser] Process exited with code 0 and signal null

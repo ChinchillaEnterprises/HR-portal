@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
 import { motion } from "framer-motion";
-import { Briefcase, User, Mail, Phone, Calendar, MapPin, Search, Filter, Plus } from "lucide-react";
+import { Briefcase, User, Mail, Phone, Calendar, MapPin, Search, Filter, Plus, Brain } from "lucide-react";
+import AIInsightsPanel from "@/components/AIInsightsPanel";
 
 const client = generateClient<Schema>();
 
@@ -13,6 +14,7 @@ export default function ModernApplicants() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("all");
+  const [showAIInsights, setShowAIInsights] = useState(false);
 
   useEffect(() => {
     loadApplicants();
@@ -68,10 +70,23 @@ export default function ModernApplicants() {
           </h1>
           <p className="text-gray-600 mt-1">Manage your recruitment pipeline</p>
         </div>
-        <button className="px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-xl hover:shadow-lg transition-shadow flex items-center gap-2">
-          <Plus className="w-4 h-4" />
-          Add Applicant
-        </button>
+        <div className="flex items-center gap-3">
+          <button 
+            onClick={() => setShowAIInsights(!showAIInsights)}
+            className={`px-4 py-2 rounded-xl hover:shadow-lg transition-all flex items-center gap-2 ${
+              showAIInsights 
+                ? "bg-gradient-to-r from-purple-500 to-indigo-600 text-white" 
+                : "bg-white text-purple-600 border border-purple-200"
+            }`}
+          >
+            <Brain className="w-4 h-4" />
+            AI Insights
+          </button>
+          <button className="px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-xl hover:shadow-lg transition-shadow flex items-center gap-2">
+            <Plus className="w-4 h-4" />
+            Add Applicant
+          </button>
+        </div>
       </div>
 
       {/* Stats Cards */}
@@ -103,6 +118,20 @@ export default function ModernApplicants() {
           </motion.div>
         ))}
       </div>
+
+      {/* AI Insights Panel */}
+      {showAIInsights && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+        >
+          <AIInsightsPanel 
+            position="Software Engineer" 
+            applicants={applicants}
+          />
+        </motion.div>
+      )}
 
       {/* Search and Filters */}
       <div className="glass-light rounded-2xl p-4 space-y-4">

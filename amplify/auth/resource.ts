@@ -23,4 +23,15 @@ export const auth = defineAuth({
     },
   },
   groups: ["Admin", "Mentor", "TeamLead", "Intern", "Staff"],
+  multifactor: {
+    mode: "optional", // Users can choose to enable MFA
+    totp: true, // Enable Time-based One-Time Password
+  },
+  passwordPolicy: {
+    minimumLength: 8,
+    requireLowercase: true,
+    requireNumbers: true,
+    requireSymbols: true,
+    requireUppercase: true,
+  },
 });

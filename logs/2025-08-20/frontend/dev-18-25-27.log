@@ -1,0 +1,28 @@
+[2025-08-20T23:25:27.466Z] Starting: npm run dev (Process ID: frontend-with-browser)
+[2025-08-20T23:25:27.467Z] [frontend-with-browser] ✅ Starting development server...
+[2025-08-20T23:25:27.667Z] [frontend-with-browser] 
+> aws-amplify-gen2@0.1.0 dev
+> next dev
+
+[2025-08-20T23:25:28.113Z] [frontend-with-browser] [ERROR]  ⚠ Port 3000 is in use, trying 3001 instead.
+[2025-08-20T23:25:28.113Z] [frontend-with-browser] [ERROR]  ⚠ Port 3001 is in use, trying 3002 instead.
+ ⚠ Port 3002 is in use, trying 3003 instead.
+[2025-08-20T23:25:28.178Z] [frontend-with-browser]   ▲ Next.js 14.2.10
+[2025-08-20T23:25:28.179Z] [frontend-with-browser]   - Local:        http://localhost:3003
+
+ ✓ Starting...
+[2025-08-20T23:25:28.179Z] [frontend-with-browser] ✅ Server ready on http://localhost:3000
+[2025-08-20T23:25:28.179Z] [frontend-with-browser] ⏳ Waiting 1000ms before launching browser...
+[2025-08-20T23:25:29.180Z] [frontend-with-browser] ✅ Launching test browser...
+[2025-08-20T23:25:29.210Z] [frontend-with-browser] [ERROR] Failed to launch browser: browserType.launch: Executable doesn't exist at /Users/ricardo/Library/Caches/ms-playwright/chromium-1181/chrome-mac/Chromium.app/Contents/MacOS/Chromium
+╔═════════════════════════════════════════════════════════════════════════╗
+║ Looks like Playwright Test or Playwright was just installed or updated. ║
+║ Please run the following command to download new browsers:              ║
+║                                                                         ║
+║     npx playwright install                                              ║
+║                                                                         ║
+║ <3 Playwright Team                                                      ║
+╚═════════════════════════════════════════════════════════════════════════╝
+[2025-08-20T23:25:29.451Z] [frontend-with-browser]  ✓ Ready in 1359ms
+[2025-08-21T15:38:07.931Z] [frontend-with-browser] [?25h
+[2025-08-21T15:38:07.985Z] [frontend-with-browser] Process exited with code 0 and signal null

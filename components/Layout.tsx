@@ -27,12 +27,12 @@ import {
   Layers,
   Rocket,
   ChevronRight,
+  FlaskConical,
 } from "lucide-react";
 import { getAuthenticatedUser, type UserRole } from "@/lib/auth";
 import GlobalSearch from "./GlobalSearch";
 import NotificationCenter from "./NotificationCenter";
 import BackgroundEffects from "./BackgroundEffects";
-import AIFloater from "./AIFloater";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -66,15 +66,14 @@ export default function Layout({ children, user }: LayoutProps) {
   };
 
   const navigation = [
-    { name: "Dashboard", href: "/modern", icon: Home, roles: ["admin", "mentor", "team_lead", "intern", "staff"], gradient: "from-blue-500 to-indigo-600" },
-    { name: "Onboarding", href: "/onboarding", icon: UserCheck, roles: ["admin", "mentor", "team_lead", "intern", "staff"], gradient: "from-emerald-500 to-teal-600" },
-    { name: "Templates", href: "/templates", icon: BookOpen, roles: ["admin", "mentor", "team_lead"], gradient: "from-purple-500 to-pink-600" },
-    { name: "Document Vault", href: "/documents", icon: FileText, roles: ["admin", "mentor", "team_lead", "intern", "staff"], gradient: "from-amber-500 to-orange-600" },
-    { name: "Communications", href: "/communications", icon: Mail, roles: ["admin", "mentor", "team_lead"], gradient: "from-red-500 to-rose-600" },
-    { name: "Applicants", href: "/applicants", icon: Briefcase, roles: ["admin", "mentor", "team_lead"], gradient: "from-cyan-500 to-blue-600" },
-    { name: "Team Directory", href: "/team", icon: Users, roles: ["admin", "mentor", "team_lead", "staff"], gradient: "from-violet-500 to-purple-600" },
-    { name: "Reports", href: "/reports", icon: BarChart3, roles: ["admin", "mentor", "team_lead"], gradient: "from-green-500 to-emerald-600" },
-    { name: "Admin Panel", href: "/admin", icon: Shield, roles: ["admin"], gradient: "from-gray-600 to-gray-900" },
+    { name: "Dashboard", href: "/modern", icon: Home, roles: ["admin", "mentor", "team_lead", "intern", "staff"], gradient: "from-gray-800 to-gray-900" },
+    { name: "Onboarding Tracker", href: "/onboarding", icon: UserCheck, roles: ["admin", "mentor", "team_lead", "intern", "staff"], gradient: "from-gray-700 to-gray-800" },
+    { name: "Document Vault", href: "/documents", icon: FileText, roles: ["admin", "mentor", "team_lead", "intern", "staff"], gradient: "from-gray-700 to-gray-800" },
+    { name: "Email & Communication", href: "/communications", icon: Mail, roles: ["admin", "mentor", "team_lead"], gradient: "from-gray-700 to-gray-800" },
+    { name: "Applicant Tracker", href: "/applicants", icon: Briefcase, roles: ["admin", "mentor", "team_lead"], gradient: "from-gray-700 to-gray-800" },
+    { name: "Team Directory", href: "/team", icon: Users, roles: ["admin", "mentor", "team_lead", "staff"], gradient: "from-gray-700 to-gray-800" },
+    { name: "Reports & Analytics", href: "/reports", icon: BarChart3, roles: ["admin", "mentor", "team_lead"], gradient: "from-gray-700 to-gray-800" },
+    { name: "Test Results", href: "/test-results", icon: FlaskConical, roles: ["admin", "mentor", "team_lead", "intern", "staff"], gradient: "from-gray-600 to-gray-700" },
   ].filter(item => item.roles.includes(userRole));
 
   const handleSignOut = async () => {
@@ -87,7 +86,7 @@ export default function Layout({ children, user }: LayoutProps) {
   };
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="min-h-screen bg-gray-50 text-gray-900">
       {/* Background effects inspired by marketing site */}
       <BackgroundEffects />
       
@@ -148,12 +147,12 @@ export default function Layout({ children, user }: LayoutProps) {
               className="flex items-center gap-3"
             >
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl blur-lg opacity-75 animate-pulse-slow" />
-                <div className="relative bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl p-2">
-                  <Sparkles className="w-8 h-8 text-white" />
+                <div className="absolute inset-0 bg-gray-900 rounded-xl blur-lg opacity-75" />
+                <div className="relative bg-gray-900 rounded-xl p-2">
+                  <Layers className="w-8 h-8 text-white" />
                 </div>
               </div>
-              <h1 className="text-2xl font-bold text-white">Chinchilla Flow</h1>
+              <h1 className="text-2xl font-bold text-gray-900">Chinchilla Flow</h1>
             </motion.div>
           </div>
 
@@ -303,8 +302,6 @@ export default function Layout({ children, user }: LayoutProps) {
             {children}
           </motion.div>
         </main>
-        {/* Floating AI widget */}
-        <AIFloater />
       </div>
     </div>
   );

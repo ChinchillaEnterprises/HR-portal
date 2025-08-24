@@ -22,42 +22,35 @@ const schema = a.schema({
       allow.owner(),
     ]),
 
-  OnboardingTask: a
-    .model({
-      userId: a.string().required(),
-      title: a.string().required(),
-      description: a.string(),
-      status: a.enum(["pending", "in_progress", "completed", "overdue"]),
-      dueDate: a.date(),
-      completedDate: a.date(),
-      category: a.enum(["documentation", "training", "setup", "meeting", "other"]),
-      assignedBy: a.string(),
-      attachmentUrl: a.string(),
-      notes: a.string(),
-    })
-    .authorization((allow) => [
-      allow.owner(),
-      allow.groups(["Admin", "Mentor", "TeamLead"]).to(["read", "update"]),
-    ]),
 
   Document: a
     .model({
       name: a.string().required(),
-      type: a.enum(["offer_letter", "nda", "contract", "policy", "form", "guide"]),
+      type: a.enum(["offer_letter", "nda", "contract", "policy", "form", "guide", "resume", "certificate", "other"]),
       category: a.string(),
       fileUrl: a.string().required(),
+      fileKey: a.string().required(), // S3 key
+      fileSize: a.integer(), // in bytes
+      mimeType: a.string(),
       uploadedBy: a.string().required(),
       uploadDate: a.datetime(),
       description: a.string(),
       tags: a.string().array(),
       signatureRequired: a.boolean(),
-      signatureStatus: a.enum(["pending", "signed", "expired"]),
+      signatureStatus: a.enum(["pending", "signed", "expired", "not_required"]),
+      signedDate: a.datetime(),
+      signedBy: a.string(),
       dropboxSignId: a.string(),
       userId: a.string(),
+      expirationDate: a.date(),
+      version: a.integer(),
+      parentDocumentId: a.string(), // for versioning
+      isActive: a.boolean(),
+      accessLevel: a.enum(["public", "internal", "confidential", "restricted"]),
+      department: a.string(),
     })
     .authorization((allow) => [
-      allow.authenticated().to(["read"]),
-      allow.groups(["Admin"]).to(["create", "read", "update", "delete"]),
+      allow.authenticated().to(["create", "read", "update", "delete"]),
       allow.owner(),
     ]),
 
@@ -85,7 +78,7 @@ const schema = a.schema({
       aiInsights: a.json(),
     })
     .authorization((allow) => [
-      allow.groups(["Admin", "Mentor", "TeamLead"]).to(["create", "read", "update", "delete"]),
+      allow.authenticated().to(["create", "read", "update", "delete"]),
     ]),
 
   Communication: a
@@ -103,7 +96,7 @@ const schema = a.schema({
       attachments: a.string().array(),
     })
     .authorization((allow) => [
-      allow.groups(["Admin", "Mentor", "TeamLead"]).to(["create", "read", "update", "delete"]),
+      allow.authenticated().to(["create", "read", "update", "delete"]),
       allow.owner().to(["read"]),
     ]),
 
@@ -118,8 +111,7 @@ const schema = a.schema({
       participantCount: a.integer(),
     })
     .authorization((allow) => [
-      allow.authenticated().to(["read"]),
-      allow.groups(["Admin"]).to(["create", "read", "update", "delete"]),
+      allow.authenticated().to(["create", "read", "update", "delete"]),
     ]),
 
   Report: a
@@ -133,77 +125,140 @@ const schema = a.schema({
       cohortId: a.string(),
     })
     .authorization((allow) => [
-      allow.groups(["Admin", "Mentor", "TeamLead"]).to(["create", "read", "update", "delete"]),
+      allow.authenticated().to(["create", "read", "update", "delete"]),
     ]),
 
-  // AI-powered models
-  AIResumeAnalysis: a
+  DocumentShare: a
+    .model({
+      documentId: a.string().required(),
+      sharedWith: a.string().required(), // user email or id
+      sharedBy: a.string().required(),
+      sharedDate: a.datetime().required(),
+      expiresAt: a.datetime(),
+      accessType: a.enum(["view", "download", "edit"]),
+      accessCount: a.integer(),
+      lastAccessed: a.datetime(),
+    })
+    .authorization((allow) => [
+      allow.authenticated().to(["create", "read", "update", "delete"]),
+    ]),
+
+  DocumentTemplate: a
+    .model({
+      name: a.string().required(),
+      type: a.enum(["offer_letter", "nda", "contract", "policy", "form"]),
+      templateUrl: a.string().required(),
+      variables: a.json(), // template variables
+      description: a.string(),
+      isActive: a.boolean(),
+      createdBy: a.string().required(),
+      createdDate: a.datetime(),
+      lastModified: a.datetime(),
+    })
+    .authorization((allow) => [
+      allow.authenticated().to(["create", "read", "update", "delete"]),
+    ]),
+
+  Notification: a
+    .model({
+      type: a.enum(["new_applicant", "document_shared", "task_assigned", "signature_required", "onboarding_update", "onboarding_started", "onboarding_complete", "system"]),
+      title: a.string().required(),
+      message: a.string().required(),
+      userId: a.string().required(),
+      relatedId: a.string(), // ID of related entity (applicant, document, etc.)
+      relatedType: a.string(), // Type of related entity
+      actionUrl: a.string(), // URL to navigate to
+      priority: a.enum(["low", "medium", "high"]),
+      read: a.boolean(),
+      readAt: a.datetime(),
+      metadata: a.json(), // Additional data
+    })
+    .authorization((allow) => [
+      allow.authenticated().to(["create", "read", "update", "delete"]),
+      allow.owner(),
+    ]),
+
+  Onboarding: a
     .model({
       applicantId: a.string().required(),
-      resumeUrl: a.string().required(),
-      extractedData: a.json(), // skills, experience, education, etc.
-      matchScore: a.float(), // 0-100 match with job requirements
-      strengths: a.string().array(),
-      weaknesses: a.string().array(),
-      recommendations: a.string(),
-      analyzedAt: a.datetime().required(),
-      positionRequirements: a.json(),
-      aiConfidence: a.float(),
+      workflowId: a.string().required(),
+      workflowName: a.string().required(),
+      status: a.enum(["not_started", "in_progress", "paused", "completed", "cancelled"]),
+      startDate: a.datetime().required(),
+      expectedCompletionDate: a.datetime(),
+      completedAt: a.datetime(),
+      completionPercentage: a.integer(),
+      metadata: a.json(), // Additional workflow data
     })
     .authorization((allow) => [
-      allow.groups(["Admin", "Mentor", "TeamLead"]).to(["create", "read", "update", "delete"]),
+      allow.authenticated().to(["create", "read", "update", "delete"]),
     ]),
 
-  AIChat: a
+  OnboardingTask: a
     .model({
-      userId: a.string().required(),
-      sessionId: a.string().required(),
-      message: a.string().required(),
-      response: a.string(),
-      context: a.enum(["onboarding", "benefits", "policies", "general"]),
-      intent: a.string(), // detected intent from message
-      sentiment: a.enum(["positive", "neutral", "negative"]),
-      resolved: a.boolean(),
-      escalatedTo: a.string(),
-      timestamp: a.datetime().required(),
+      onboardingId: a.string().required(),
+      title: a.string().required(),
+      description: a.string(),
+      type: a.enum(["document_upload", "form_completion", "email_send", "approval_required", "system_check"]),
+      status: a.enum(["pending", "active", "completed", "skipped", "failed"]),
+      priority: a.enum(["low", "medium", "high"]),
+      assignedRole: a.enum(["HR", "Manager", "Employee", "System"]),
+      dueDate: a.datetime(),
+      completedAt: a.datetime(),
+      completedBy: a.string(),
+      completionNote: a.string(),
+      order: a.integer(), // Task order in workflow
+      dependencies: a.json(), // Array of task titles this depends on
+      metadata: a.json(), // Task-specific data (documents, email templates, etc.)
     })
     .authorization((allow) => [
-      allow.owner(),
-      allow.groups(["Admin", "Mentor"]).to(["read", "update"]),
+      allow.authenticated().to(["create", "read", "update", "delete"]),
     ]),
 
-  AIPerformanceInsight: a
+  CalendarEvent: a
     .model({
-      userId: a.string().required(),
-      period: a.string().required(), // e.g., "2024-Q1"
-      metrics: a.json(), // various performance metrics
-      predictedTrajectory: a.enum(["improving", "stable", "declining"]),
-      riskFactors: a.string().array(),
-      recommendations: a.string().array(),
-      engagementScore: a.float(),
-      retentionProbability: a.float(),
-      generatedAt: a.datetime().required(),
+      title: a.string().required(),
+      description: a.string(),
+      startTime: a.datetime().required(),
+      endTime: a.datetime().required(),
+      attendees: a.json(), // Array of attendee emails/IDs
+      location: a.string(),
+      type: a.enum(["interview", "onboarding", "meeting", "training", "deadline"]),
+      relatedId: a.string(), // Link to applicant, onboarding, etc.
+      relatedType: a.string(), // Type of related entity
+      priority: a.enum(["low", "medium", "high"]),
+      isAllDay: a.boolean(),
+      recurrence: a.json(), // Recurrence rules
+      reminders: a.json(), // Reminder settings
+      externalEventId: a.string(), // Google/Outlook event ID
+      metadata: a.json(), // Additional event data
     })
     .authorization((allow) => [
-      allow.owner(),
-      allow.groups(["Admin", "Mentor", "TeamLead"]).to(["create", "read", "update", "delete"]),
+      allow.authenticated().to(["create", "read", "update", "delete"]),
     ]),
 
-  AIWorkflowOptimization: a
+  UserInvitation: a
     .model({
-      workflowType: a.string().required(),
-      currentProcess: a.json(),
-      optimizedProcess: a.json(),
-      estimatedTimeSaving: a.integer(), // in minutes
-      automationOpportunities: a.string().array(),
-      implementationSteps: a.string().array(),
-      priority: a.enum(["high", "medium", "low"]),
-      status: a.enum(["proposed", "approved", "implemented"]),
-      createdAt: a.datetime().required(),
+      email: a.string().required(),
+      firstName: a.string().required(),
+      lastName: a.string().required(),
+      role: a.enum(["admin", "mentor", "team_lead", "intern", "staff"]),
+      department: a.string(),
+      position: a.string(),
+      invitationToken: a.string().required(),
+      invitedBy: a.string().required(),
+      invitedAt: a.datetime().required(),
+      expiresAt: a.datetime().required(),
+      status: a.enum(["pending", "accepted", "expired", "cancelled"]),
+      acceptedAt: a.datetime(),
+      reminderSentAt: a.datetime(),
+      note: a.string(),
     })
     .authorization((allow) => [
-      allow.groups(["Admin"]).to(["create", "read", "update", "delete"]),
+      allow.authenticated().to(["create", "read", "update", "delete"]),
+      allow.guest().to(["read"]), // Allow unauthenticated users to read invitations during signup
     ]),
+
 });
 
 export type Schema = ClientSchema<typeof schema>;

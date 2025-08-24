@@ -1,6 +1,6 @@
 import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
-import { aiService } from "./ai-service";
+// import { aiService } from "./ai-service"; // AI service removed
 
 const client = generateClient<Schema>();
 
@@ -29,7 +29,9 @@ export async function createUser(profile: OnboardParams) {
 }
 
 export async function assignOnboardingTasks(userId: string, role?: string, department?: string) {
-  return aiService.assignTasksIntelligently(userId, (role as any) || "staff", department);
+  // Task assignment removed - using external task management system
+  console.log("Task assignment moved to external system");
+  return [];
 }
 
 export async function sendCommunication(params: {

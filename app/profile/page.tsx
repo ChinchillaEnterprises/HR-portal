@@ -50,7 +50,6 @@ function ProfilePage({ user }: { user: any }) {
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [tasks, setTasks] = useState<Array<Schema["OnboardingTask"]["type"]>>([]);
   const [documents, setDocuments] = useState<Array<Schema["Document"]["type"]>>([]);
   const [activeTab, setActiveTab] = useState("overview");
   const [formData, setFormData] = useState({
@@ -179,16 +178,10 @@ function ProfilePage({ user }: { user: any }) {
         if (storedPreferences) setPreferences({ ...preferences, ...JSON.parse(storedPreferences) });
         
         // Fetch related data
-        const [tasksResponse, docsResponse] = await Promise.all([
-          client.models.OnboardingTask.list({
-            filter: { userId: { eq: users[0].id } }
-          }),
-          client.models.Document.list({
-            filter: { userId: { eq: users[0].id } }
-          }),
-        ]);
+        const docsResponse = await client.models.Document.list({
+          filter: { userId: { eq: users[0].id } }
+        });
         
-        setTasks(tasksResponse.data);
         setDocuments(docsResponse.data);
       }
     } catch (error) {
@@ -425,16 +418,14 @@ function ProfilePage({ user }: { user: any }) {
     }
   };
 
-  const taskStats = {
-    total: tasks.length,
-    completed: tasks.filter(t => t.status === "completed").length,
-    pending: tasks.filter(t => t.status === "pending").length,
-    inProgress: tasks.filter(t => t.status === "in_progress").length,
+  const documentStats = {
+    total: documents.length,
+    signed: documents.filter(d => d.signatureStatus === "signed").length,
+    pending: documents.filter(d => d.signatureStatus === "pending").length,
+    policies: documents.filter(d => d.type === "policy").length,
   };
 
-  const onboardingProgress = taskStats.total > 0 
-    ? Math.round((taskStats.completed / taskStats.total) * 100) 
-    : 0;
+  const onboardingProgress = user?.onboardingCompleted ? 100 : 50;
 
   if (loading) {
     return (
@@ -767,7 +758,7 @@ function ProfilePage({ user }: { user: any }) {
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-2xl font-bold text-gray-900">{onboardingProgress}%</span>
                   <a href="/onboarding" className="text-black hover:text-gray-700 text-sm font-medium flex items-center">
-                    View Tasks <ChevronRight className="w-4 h-4 ml-1" />
+                    View Progress <ChevronRight className="w-4 h-4 ml-1" />
                   </a>
                 </div>
                 
@@ -782,20 +773,20 @@ function ProfilePage({ user }: { user: any }) {
                 
                 <div className="grid grid-cols-4 gap-4 text-center">
                   <div>
-                    <p className="text-2xl font-bold text-gray-900">{taskStats.total}</p>
-                    <p className="text-sm text-gray-500">Total</p>
+                    <p className="text-2xl font-bold text-gray-900">{documentStats.total}</p>
+                    <p className="text-sm text-gray-500">Documents</p>
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-green-600">{taskStats.completed}</p>
+                    <p className="text-2xl font-bold text-green-600">{documentStats.signed}</p>
                     <p className="text-sm text-gray-500">Completed</p>
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-yellow-600">{taskStats.inProgress}</p>
+                    <p className="text-2xl font-bold text-yellow-600">{documentStats.pending}</p>
                     <p className="text-sm text-gray-500">In Progress</p>
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-gray-600">{taskStats.pending}</p>
-                    <p className="text-sm text-gray-500">Pending</p>
+                    <p className="text-2xl font-bold text-gray-600">{documentStats.policies}</p>
+                    <p className="text-sm text-gray-500">Policies</p>
                   </div>
                 </div>
               </div>

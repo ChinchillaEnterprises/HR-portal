@@ -4,6 +4,10 @@ import "./globals.css";
 import "../styles/mobile.css";
 import { ensureAmplifyConfigured } from "@/lib/amplifyClient";
 import LayoutWrapper from "@/components/LayoutWrapper";
+import NextAuthSessionProvider from "@/components/SessionProvider";
+import { NotificationProvider } from "@/contexts/NotificationContext";
+import { AuthProvider } from "@/contexts/AuthContext";
+import ErrorBoundaryWrapper from "@/components/ErrorBoundary";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,7 +41,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <LayoutWrapper>{children}</LayoutWrapper>
+        <ErrorBoundaryWrapper>
+          <NextAuthSessionProvider>
+            <AuthProvider>
+              <NotificationProvider>
+                <LayoutWrapper>{children}</LayoutWrapper>
+              </NotificationProvider>
+            </AuthProvider>
+          </NextAuthSessionProvider>
+        </ErrorBoundaryWrapper>
       </body>
     </html>
   );

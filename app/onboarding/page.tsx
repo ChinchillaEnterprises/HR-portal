@@ -1,160 +1,276 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Plus, Search, Filter, Users, Clock, CheckCircle } from "lucide-react";
+import OnboardingDashboard from "@/components/OnboardingDashboard";
 import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
-import { motion } from "framer-motion";
-import { UserCheck, Clock, CheckCircle2, AlertCircle, Plus, Search } from "lucide-react";
+import { OnboardingService } from "@/lib/onboardingService";
 
 const client = generateClient<Schema>();
 
-export default function ModernOnboarding() {
-  const [tasks, setTasks] = useState<any[]>([]);
-  const [users, setUsers] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+type Applicant = Schema["Applicant"]["type"];
+
+export default function OnboardingPage() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [showNewOnboardingModal, setShowNewOnboardingModal] = useState(false);
+  const [applicants, setApplicants] = useState<Applicant[]>([]);
+  const [selectedApplicant, setSelectedApplicant] = useState<string>("");
+  const [selectedWorkflow, setSelectedWorkflow] = useState<string>("");
+  const [stats, setStats] = useState({
+    total: 0,
+    inProgress: 0,
+    completed: 0,
+    notStarted: 0,
+  });
 
   useEffect(() => {
-    loadData();
+    loadApplicants();
+    loadStats();
   }, []);
 
-  const loadData = async () => {
+  const loadApplicants = async () => {
     try {
-      const [tasksRes, usersRes] = await Promise.all([
-        client.models.OnboardingTask.list(),
-        client.models.User.list(),
-      ]);
-      setTasks(tasksRes.data);
-      setUsers(usersRes.data);
+      const result = await client.models.Applicant.list({
+        filter: {
+          status: { eq: "hired" }, // Only show hired applicants
+        },
+      });
+      setApplicants(result.data || []);
     } catch (error) {
-      console.error("Error loading data:", error);
-    } finally {
-      setLoading(false);
+      console.error("Error loading applicants:", error);
     }
   };
 
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case "COMPLETED":
-        return <CheckCircle2 className="w-5 h-5 text-green-500" />;
-      case "IN_PROGRESS":
-        return <Clock className="w-5 h-5 text-blue-500" />;
-      default:
-        return <AlertCircle className="w-5 h-5 text-amber-500" />;
+  const loadStats = async () => {
+    try {
+      const onboardings = await client.models.Onboarding.list();
+      const data = onboardings.data || [];
+      
+      setStats({
+        total: data.length,
+        inProgress: data.filter(o => o.status === "in_progress").length,
+        completed: data.filter(o => o.status === "completed").length,
+        notStarted: data.filter(o => o.status === "not_started").length,
+      });
+    } catch (error) {
+      console.error("Error loading stats:", error);
     }
   };
 
-  const filteredTasks = tasks.filter(task =>
-    task.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    task.description?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleStartOnboarding = async () => {
+    if (!selectedApplicant) return;
+    
+    try {
+      const result = await OnboardingService.startOnboarding(
+        selectedApplicant, 
+        selectedWorkflow || undefined
+      );
 
-  const stats = {
-    total: tasks.length,
-    completed: tasks.filter(t => t.status === "COMPLETED").length,
-    inProgress: tasks.filter(t => t.status === "IN_PROGRESS").length,
-    pending: tasks.filter(t => t.status === "PENDING").length,
+      if (result.success) {
+        await loadStats();
+        setShowNewOnboardingModal(false);
+        setSelectedApplicant("");
+        setSelectedWorkflow("");
+      } else {
+        alert(result.error || "Failed to start onboarding");
+      }
+    } catch (error) {
+      alert("Failed to start onboarding");
+    }
   };
+
+  const availableWorkflows = OnboardingService.getAvailableWorkflows();
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-            Onboarding Hub
-          </h1>
-          <p className="text-gray-600 mt-1">Manage employee onboarding tasks and progress</p>
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Header */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Onboarding Management</h1>
+              <p className="text-gray-600 mt-2">
+                Manage and track employee onboarding workflows
+              </p>
+            </div>
+            <button
+              onClick={() => setShowNewOnboardingModal(true)}
+              className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors flex items-center gap-2"
+            >
+              <Plus className="w-4 h-4" />
+              Start Onboarding
+            </button>
+          </div>
         </div>
-        <button className="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl hover:shadow-lg transition-shadow flex items-center gap-2">
-          <Plus className="w-4 h-4" />
-          New Task
-        </button>
-      </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {[
-          { label: "Total Tasks", value: stats.total, color: "from-gray-500 to-gray-600" },
-          { label: "Completed", value: stats.completed, color: "from-green-500 to-emerald-600" },
-          { label: "In Progress", value: stats.inProgress, color: "from-blue-500 to-cyan-600" },
-          { label: "Pending", value: stats.pending, color: "from-amber-500 to-orange-600" },
-        ].map((stat, i) => (
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <motion.div
-            key={stat.label}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
-            className="glass-light rounded-2xl p-6"
+            className="bg-white p-6 rounded-lg border border-gray-200"
           >
-            <div className={`text-3xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
-              {loading ? "..." : stat.value}
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Total Onboardings</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">{stats.total}</p>
+              </div>
+              <Users className="w-8 h-8 text-gray-400" />
             </div>
-            <div className="text-sm text-gray-600 mt-1">{stat.label}</div>
           </motion.div>
-        ))}
-      </div>
 
-      {/* Search Bar */}
-      <div className="glass-light rounded-2xl p-4">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Search tasks..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-white/50 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="bg-white p-6 rounded-lg border border-gray-200"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">In Progress</p>
+                <p className="text-2xl font-bold text-blue-600 mt-1">{stats.inProgress}</p>
+              </div>
+              <Clock className="w-8 h-8 text-blue-400" />
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-white p-6 rounded-lg border border-gray-200"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Completed</p>
+                <p className="text-2xl font-bold text-green-600 mt-1">{stats.completed}</p>
+              </div>
+              <CheckCircle className="w-8 h-8 text-green-400" />
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="bg-white p-6 rounded-lg border border-gray-200"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Not Started</p>
+                <p className="text-2xl font-bold text-gray-600 mt-1">{stats.notStarted}</p>
+              </div>
+              <Users className="w-8 h-8 text-gray-400" />
+            </div>
+          </motion.div>
         </div>
-      </div>
 
-      {/* Tasks List */}
-      <div className="space-y-4">
-        {loading ? (
-          <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        {/* Filters */}
+        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
+          <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex-1">
+              <div className="relative">
+                <Search className="w-4 h-4 absolute left-3 top-3 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search by applicant name..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+                />
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <Filter className="w-4 h-4 text-gray-400" />
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+              >
+                <option value="all">All Status</option>
+                <option value="not_started">Not Started</option>
+                <option value="in_progress">In Progress</option>
+                <option value="completed">Completed</option>
+                <option value="paused">Paused</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
           </div>
-        ) : filteredTasks.length === 0 ? (
-          <div className="text-center py-12 glass-light rounded-2xl">
-            <UserCheck className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-600">No tasks found</p>
-          </div>
-        ) : (
-          filteredTasks.map((task, index) => (
+        </div>
+
+        {/* Onboarding Dashboard */}
+        <OnboardingDashboard showAll={true} />
+
+        {/* New Onboarding Modal */}
+        {showNewOnboardingModal && (
+          <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
             <motion.div
-              key={task.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.05 }}
-              className="glass-light rounded-2xl p-6 hover:shadow-lg transition-shadow"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-white rounded-lg p-6 w-full max-w-md"
             >
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3">
-                    {getStatusIcon(task.status)}
-                    <h3 className="text-lg font-semibold text-gray-900">{task.title}</h3>
-                  </div>
-                  <p className="text-gray-600 mt-2">{task.description}</p>
-                  <div className="flex items-center gap-4 mt-4 text-sm text-gray-500">
-                    <span>Due: {new Date(task.dueDate).toLocaleDateString()}</span>
-                    {task.assignedTo && (
-                      <span>Assigned to: {users.find(u => u.id === task.assignedTo)?.name || "Unknown"}</span>
-                    )}
-                  </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                Start New Onboarding
+              </h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Select Applicant
+                  </label>
+                  <select 
+                    value={selectedApplicant}
+                    onChange={(e) => setSelectedApplicant(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+                  >
+                    <option value="">Choose an applicant...</option>
+                    {applicants.map((applicant) => (
+                      <option key={applicant.id} value={applicant.id}>
+                        {applicant.fullName} - {applicant.position}
+                      </option>
+                    ))}
+                  </select>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    task.status === "COMPLETED" ? "bg-green-100 text-green-700" :
-                    task.status === "IN_PROGRESS" ? "bg-blue-100 text-blue-700" :
-                    "bg-amber-100 text-amber-700"
-                  }`}>
-                    {task.status}
-                  </span>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Workflow Type
+                  </label>
+                  <select 
+                    value={selectedWorkflow}
+                    onChange={(e) => setSelectedWorkflow(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+                  >
+                    <option value="">Auto-select based on role</option>
+                    {availableWorkflows.map((workflow) => (
+                      <option key={workflow.id} value={workflow.id}>
+                        {workflow.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
+
+              <div className="flex items-center justify-end gap-4 mt-6">
+                <button
+                  onClick={() => setShowNewOnboardingModal(false)}
+                  className="px-4 py-2 text-gray-700 hover:text-gray-900 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleStartOnboarding}
+                  disabled={!selectedApplicant}
+                  className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50"
+                >
+                  Start Onboarding
+                </button>
+              </div>
             </motion.div>
-          ))
+          </div>
         )}
       </div>
     </div>
